@@ -761,6 +761,11 @@ def table_checks(page, label):
     cards = page.eval_on_selector_all(".card", "els => [...new Set(els.map(e => getComputedStyle(e).backgroundColor))]")
     side = page.eval_on_selector("ds-sidebar", "e => getComputedStyle(e.shadowRoot.querySelector('.sidebar')).backgroundColor")
     check(f"{label}: tarjetas y menú blancos", cards == ["rgb(255, 255, 255)"] and side == "rgb(255, 255, 255)", f"{cards} {side}")
+    try:  # si el cursor estaba sobre una fila, su fondo vuelve con transición: esperar al color final
+        page.wait_for_function("getComputedStyle(document.querySelectorAll(\"[data-list='contratos'] li > a\")[1])"
+                               ".backgroundColor.includes('221, 252, 255')", timeout=2000)
+    except Exception:
+        pass  # el check de abajo reporta la falla
     zebra = page.eval_on_selector_all("[data-list='contratos'] li > a", "els => els.slice(0, 2).map(e => getComputedStyle(e).backgroundColor)")
     check(f"{label}: cebra en filas pares", zebra[0] != zebra[1] and "221, 252, 255" in zebra[1], str(zebra))
     if label != "escritorio":
@@ -784,6 +789,7 @@ def field_checks(page, label):
     goto_route(page, "consulta")
     page.wait_for_selector("input[data-filter='q']")
     ref = page.eval_on_selector("input[data-filter='q']", FIELD_LOOK_JS)
+    ref_box = ref_radius(page)
     for name in ("responsable", "estado"):
         sel = f"ds-dropdown[data-filter='{name}']"
         look = page.eval_on_selector(sel, TRIGGER_LOOK_JS)
@@ -797,6 +803,45 @@ def field_checks(page, label):
         host = page.eval_on_selector(sel, HOST_BORDER_JS)
         check(f"{label}: fecha {sel.split('[')[1][:-1]} con el mismo borde que la caja de texto",
               look == ref and host == "0px", f"{look} vs {ref}; borde extra {host}")
+
+    # Estilo de Cotizaciones_simple: esquinas de 8 px, borde 1,5 px e íconos de trazo de 16 px
+    box = page.eval_on_selector("textarea", "e => { const s = getComputedStyle(e); return [s.borderTopLeftRadius, s.borderTopStyle]; }")
+    check(f"{label}: campos con esquinas de 8 px y borde de 1,5 px", ref_box == ["8px", "1.5px"]
+          and box == ["8px", "solid"], f"{ref_box} / textarea {box}")
+    icon_js = """(e, part) => { const i = e.shadowRoot.querySelector(`[part~='${part}']`); const s = getComputedStyle(i);
+        const r = i.getBoundingClientRect(); return { w: Math.round(r.width), h: Math.round(r.height), font: s.fontSize,
+        mask: (s.maskImage || s.webkitMaskImage).startsWith('url('), color: s.backgroundColor }; }"""
+    accent = page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()")
+    for sel, part in (("ds-datepicker[data-date='perdida_competencia']", "icon"),):
+        ic = page.eval_on_selector(sel, icon_js, part)
+        check(f"{label}: ícono de calendario de trazo, 16 px", ic["w"] == 16 and ic["h"] == 16
+              and ic["font"] == "0px" and ic["mask"], str(ic))
+    goto_route(page, "consulta")
+    page.wait_for_selector("ds-dropdown[data-filter='estado']")
+    ic = page.eval_on_selector("ds-dropdown[data-filter='estado']", icon_js, "chevron")
+    check(f"{label}: chevron de trazo en color de acento, 16 px", ic["w"] == 16 and ic["h"] == 16 and ic["font"] == "0px"
+          and ic["mask"] and ic["color"] == hex_rgb(accent), f"{ic} vs {accent}")
+    page.focus("input[data-filter='q']")
+    page.keyboard.press("Shift+Tab"); page.keyboard.press("Tab")  # foco por teclado (:focus-visible)
+    try:  # el halo entra con transición: esperar al valor final
+        page.wait_for_function("getComputedStyle(document.querySelector(\"input[data-filter='q']\")).boxShadow.endsWith(' 3px')", timeout=2000)
+    except Exception:
+        pass  # el check de abajo reporta la falla
+    focus = page.eval_on_selector("input[data-filter='q']", "e => { const s = getComputedStyle(e); return [s.borderTopColor, s.boxShadow]; }")
+    check(f"{label}: foco con borde de acento y halo", focus[0] == hex_rgb(accent) and focus[1].endswith(" 3px"), str(focus))
+    page.evaluate("document.activeElement.blur()")
+    goto_route(page, "tablero")  # deja la Consulta para que la siguiente prueba la pinte de nuevo
+
+
+def ref_radius(page):
+    # El borde se lee de la variable declarada: Edge dibuja 1,5 px como 1 px de dispositivo (igual que la referencia)
+    return page.eval_on_selector("input[data-filter='q']", """e => [getComputedStyle(e).borderTopLeftRadius,
+        getComputedStyle(document.documentElement).getPropertyValue('--field-border').trim().split(' ')[0]]""")
+
+
+def hex_rgb(h):
+    h = h.lstrip("#")
+    return f"rgb({int(h[0:2], 16)}, {int(h[2:4], 16)}, {int(h[4:6], 16)})"
 
 
 def check_hover(page, label, name, hover_loc, bg_js, text_js=None):

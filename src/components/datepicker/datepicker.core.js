@@ -245,7 +245,8 @@ class DsDatepicker extends HTMLElement {
       </style>
       <button type="button" class="trigger" part="trigger" aria-haspopup="dialog" aria-expanded="false">
         <span class="value" part="value" data-empty></span>
-        <span aria-hidden="true">📅</span>
+        <!-- Parche local (Liquidaciones_ESAP): part="icon" para cambiar el ícono desde fuera; candidato al Core -->
+        <span class="icon" part="icon" aria-hidden="true">📅</span>
       </button>
       <div class="panel" part="panel" role="dialog" aria-label="Elegir fecha" popover="manual">
         <div class="nav" part="nav">

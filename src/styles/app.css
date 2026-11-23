@@ -301,29 +301,64 @@ ds-sidebar::part(sidebar) {
 }
 .field { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
 .field-label { font-size: var(--font-size-sm); color: var(--color-text-muted); font-weight: var(--font-weight-medium); }
+/* Campos al estilo de Cotizaciones_simple (.campo__input): borde 1,5 px, esquinas de 8 px,
+   borde de acento al pasar el cursor y halo de 3 px al enfocar. El fondo de hover sigue
+   siendo el azul claro ESAP (--color-hover, excepción del proyecto), no el cian de la referencia. */
+:root {
+  --field-border: 1.5px solid var(--color-border);
+  --field-radius: var(--radius-md);
+  --field-halo: 0 0 0 3px rgb(2 96 100 / 0.15); /* --color-accent (#026064) al 15 % */
+}
 .field input {
   font: inherit;
   color: var(--color-text);
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border: var(--field-border);
+  border-radius: var(--field-radius);
   padding: var(--spacing-inline-sm) var(--spacing-inline-md);
   min-height: var(--target-size-comfort);
+  transition: border-color var(--motion-duration-fast, .15s), box-shadow var(--motion-duration-fast, .15s);
 }
-.field input:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
-/* Desplegables y fechas con el mismo aspecto que la caja de texto: un solo borde fino,
+/* Desplegables y fechas con el mismo aspecto que la caja de texto: un solo borde,
    fondo blanco, mismo relleno y altura (el disparador del Core trae fondo gris y borde propios) */
 .field ds-dropdown::part(trigger),
 .field ds-datepicker::part(trigger) {
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border: var(--field-border);
+  border-radius: var(--field-radius);
   padding: var(--spacing-inline-sm) var(--spacing-inline-md);
   min-height: var(--target-size-comfort);
   font-size: var(--font-size-md);
 }
+.field input:hover,
+.field ds-dropdown::part(trigger):hover,
+.field ds-datepicker::part(trigger):hover { border-color: var(--color-accent); }
+.field input:focus-visible,
 .field ds-dropdown::part(trigger):focus-visible,
-.field ds-datepicker::part(trigger):focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.field ds-datepicker::part(trigger):focus-visible {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: var(--field-halo);
+}
+/* Íconos de trazo de 16 px (como la referencia), dibujados con máscara para tomar el color
+   del token: chevron en acento, calendario en gris. Reemplazan el "▾" y el emoji 📅 del Core. */
+.field ds-dropdown::part(chevron),
+.field ds-datepicker::part(icon) {
+  font-size: 0;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  -webkit-mask: var(--field-icon) center / 16px no-repeat;
+  mask: var(--field-icon) center / 16px no-repeat;
+}
+.field ds-dropdown::part(chevron) {
+  background-color: var(--color-accent);
+  --field-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+.field ds-datepicker::part(icon) {
+  background-color: var(--color-text-muted);
+  --field-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M16 3v4M8 3v4M3 10h18'/%3E%3C/svg%3E");
+}
 .result-bar {
   display: flex;
   align-items: center;
@@ -397,13 +432,14 @@ ds-sidebar::part(sidebar) {
   font: inherit;
   color: var(--color-text);
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border: var(--field-border);
+  border-radius: var(--field-radius);
   padding: var(--spacing-inline-sm) var(--spacing-inline-md);
   min-height: var(--target-size-comfort);
   resize: vertical;
 }
-.field textarea:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.field textarea:hover { border-color: var(--color-accent); }
+.field textarea:focus-visible { outline: none; border-color: var(--color-accent); box-shadow: var(--field-halo); }
 .log { list-style: none; margin: 0; padding: 0; }
 .log li {
   display: grid;
