@@ -31,7 +31,8 @@ fases_reabiertas: 0
 - Fase 5 (Tablero): **completa** (2026-11-23) — 4 KPIs (contratos, avance general, cerrados con paralizados/en trámite, competencia vencida), barras horizontales de avance por responsable (una serie, color de acento, etiqueta directa, tooltip con cursor o foco; entran una por una de mayor a menor con barrido a la derecha, sin animación con movimiento reducido) y semáforo de pérdida de competencia de los contratos sin cerrar (Vencido / Menos de 90 días / En plazo / Sin fecha, con ícono y texto). Validación: `python pruebas/validar_app.py` 146/146.
   - **Corrección de cálculo:** los promedios se calculaban sumando fracciones (0,5833…) y el error de punto flotante cambiaba el redondeo (68,75 % se mostraba 68,7 %). Ahora `store.js` promedia con enteros: pasos hechos / pasos posibles. Lo detectó la prueba al comparar contra Python.
   - Umbral "próximo a vencer" = 90 días (`store.DEADLINE_WARN_DAYS`), ajustable en un solo punto.
-  - Dato a la vista con la semilla (2026-11-23): 11 de los 17 contratos sin cerrar ya pasaron su fecha de pérdida de competencia, 0 vencen en los próximos 90 días, 4 en plazo y 3 sin fecha.
+  - Dato a la vista con la semilla (2026-11-23): 11 de los 18 contratos sin cerrar ya pasaron su fecha de pérdida de competencia, 0 vencen en los próximos 90 días, 4 en plazo y 3 sin fecha.
+  - Ajuste pedido tras el cierre (2026-11-23): los chips de nivel del semáforo pasan a ser **chips de filtro** (botones con `aria-pressed`): un clic filtra la lista, un segundo clic quita el filtro; el chip sin contratos queda deshabilitado; el filtro se conserva al volver de la ficha; contador "N de M contratos sin cerrar". Validación: `python pruebas/validar_app.py` 158/158.
 - Fase 6 (Respaldo): **pendiente**.
 
 ## Bloqueos

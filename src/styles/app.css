@@ -344,6 +344,26 @@ ds-sidebar > a[aria-current="page"] {
   color: var(--color-text);
 }
 .level-icon { font-weight: var(--font-weight-bold); }
+/* Chips de filtro del semáforo: botones con estado presionado */
+.level-filter {
+  font: inherit;
+  font-size: var(--font-size-sm);
+  min-height: var(--target-size-min);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: box-shadow var(--motion-duration-fast, .15s), opacity var(--motion-duration-fast, .15s);
+}
+.level-filter:hover:not(:disabled) { border-color: currentColor; }
+.level-filter:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.level-filter[aria-pressed="true"] {
+  border-color: currentColor;
+  box-shadow: inset 0 0 0 1px currentColor;
+  font-weight: var(--font-weight-bold);
+}
+/* Con un filtro activo, los demás chips se atenúan */
+.levels:has([aria-pressed="true"]) .level-filter[aria-pressed="false"] { opacity: .6; }
+.level-filter:disabled { cursor: not-allowed; opacity: .5; }
+.deadline-count { margin: 0 0 var(--spacing-stack-xs); font-size: var(--font-size-sm); }
 .level[data-level="vencido"] { background: var(--status-danger-bg); color: var(--status-danger-text); }
 .level[data-level="proximo"] { background: var(--status-warn-bg); color: var(--status-warn-text); }
 .level[data-level="en-plazo"] { background: var(--status-ok-bg); color: var(--status-ok-text); }

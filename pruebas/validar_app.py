@@ -479,6 +479,36 @@ def phase5(page, label):
     no_color_only = page.eval_on_selector_all("[data-deadlines] .level",
                                               "els => els.every(e => e.querySelector('.level-icon').textContent.trim() && e.textContent.trim().length > 2)")
     check(f"{label}: semáforo con ícono y texto (no solo color)", no_color_only)
+
+    # Chips del semáforo como filtro: un clic filtra, otro clic quita el filtro
+    for lvl in ("vencido", "proximo", "en-plazo", "sin-fecha"):
+        n = sum(r[2] == lvl for r in dl)
+        chip = page.locator(f"[data-level-filter='{lvl}']")
+        if not n:
+            check(f"{label}: chip {lvl} sin contratos deshabilitado", chip.is_disabled())
+            continue
+        chip.click()
+        shown = page.eval_on_selector_all("[data-deadlines] a[data-id]", "els => els.map(e => e.dataset.id)")
+        check(f"{label}: chip {lvl} filtra la lista", shown == [r[0] for r in dl if r[2] == lvl]
+              and chip.get_attribute("aria-pressed") == "true"
+              and page.text_content("[data-deadline-shown]") == str(n), f"{len(shown)} vs {n}")
+    page.screenshot(path=str(SHOTS / f"fase5_{label}_tablero_filtro.png"), full_page=True)
+    active = page.locator("[data-level-filter][aria-pressed='true']")
+    lvl = active.get_attribute("data-level-filter")
+    active.click()
+    shown = page.locator("[data-deadlines] a[data-id]").count()
+    check(f"{label}: segundo clic quita el filtro", shown == len(dl)
+          and not page.locator("[data-level-filter][aria-pressed='true']").count(), str(shown))
+    # El filtro se recuerda al volver de una ficha
+    page.click("[data-level-filter='vencido']")
+    page.locator("[data-deadlines] a[data-id]").first.click()
+    page.wait_for_selector("[data-contrato]")
+    page.click("ds-sidebar a[data-route='tablero']")
+    page.wait_for_selector("[data-deadlines] a[data-id]")
+    kept = page.get_attribute("[data-level-filter='vencido']", "aria-pressed") == "true"
+    check(f"{label}: filtro del semáforo se conserva al volver", kept
+          and page.locator("[data-deadlines] a[data-id]").count() == overdue)
+    page.click("[data-level-filter='vencido']")
     page.screenshot(path=str(SHOTS / f"fase5_{label}_tablero.png"), full_page=True)
 
     # Movimiento reducido: sin animación
