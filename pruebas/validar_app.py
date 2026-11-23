@@ -278,13 +278,14 @@ def phase3(page, label):
 
     # Contraste de los chips de estado
     pick(page, "estado", "")
-    for est in ("en-tramite", "cerrado", "paralizado"):
+    # Excepción del proyecto: píldoras de estado con tonos vivos y contraste AA (>= 4,5:1), no 7:1
+    for est in ("en-tramite", "cerrado", "paralizado", "sin-seguimiento"):
         if not page.locator(f".chip[data-status='{est}']").count():
             continue
         fg, bg = page.eval_on_selector(f".chip[data-status='{est}']",
                                        "e => [getComputedStyle(e).color, getComputedStyle(e).backgroundColor]")
         ratio = contrast(fg, bg)
-        check(f"{label}: contraste chip {est} >= 7:1", ratio >= 7, f"{ratio:.2f}")
+        check(f"{label}: contraste chip {est} >= 4,5:1 (AA)", ratio >= 4.5 and bg != "rgba(0, 0, 0, 0)", f"{ratio:.2f}")
 
     # Píldoras de estado: todas del mismo ancho, texto centrado y sin desbordar (con los 4 estados en pantalla)
     chips = page.eval_on_selector_all("[data-list='contratos'] .chip[data-status]", """els => els.map(e => {
@@ -701,6 +702,11 @@ def phase5(page, label):
     for lvl in ("vencido", "proximo", "en-plazo", "sin-fecha"):
         got = page.text_content(f"[data-level-count='{lvl}']").strip()
         check(f"{label}: conteo {lvl}", got == str(sum(r[2] == lvl for r in dl)), got)
+    # Etiquetas del semáforo con los mismos tonos vivos de estado: contraste AA (>= 4,5:1)
+    lv = page.eval_on_selector_all("[data-deadlines] .level", """els => els.map(e => [e.closest('[data-level]')?.dataset.level,
+        getComputedStyle(e).color, getComputedStyle(e).backgroundColor])""")
+    low = [f"{l}: {contrast(fg, bg):.2f}" for l, fg, bg in lv if contrast(fg, bg) < 4.5 or bg == "rgba(0, 0, 0, 0)"]
+    check(f"{label}: contraste de las etiquetas del semáforo >= 4,5:1 (AA)", lv and not low, "; ".join(sorted(set(low))))
     no_color_only = page.eval_on_selector_all("[data-deadlines] .level",
                                               "els => els.every(e => e.querySelector('.level-icon').textContent.trim() && e.textContent.trim().length > 2)")
     check(f"{label}: semáforo con ícono y texto (no solo color)", no_color_only)
