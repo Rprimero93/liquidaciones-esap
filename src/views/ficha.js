@@ -73,9 +73,19 @@ function renderAlerts(root, c) {
   }).join('');
 }
 
+// Bitácora: se muestran los últimos LOG_PREVIEW eventos; "Ver más" despliega el resto
+const LOG_PREVIEW = 5;
+let logExpanded = false; // se reinicia al abrir otro contrato
+
 function renderLog(root, c) {
-  const rows = store.sortedLogOf(c.id);
-  root.querySelector('[data-log-count]').textContent = rows.length;
+  const all = store.sortedLogOf(c.id);
+  const rows = logExpanded ? all : all.slice(0, LOG_PREVIEW);
+  const hidden = all.length - LOG_PREVIEW;
+  root.querySelector('[data-log-count]').textContent = all.length;
+  const more = root.querySelector('[data-log-more]');
+  more.hidden = hidden <= 0;
+  more.textContent = logExpanded ? 'Ver menos' : `Ver más (${hidden})`;
+  more.setAttribute('aria-expanded', String(logExpanded));
   root.querySelector('[data-log]').innerHTML = rows.length
     ? rows.map((b) => `
       <li data-origin="${b.origen}">
@@ -123,6 +133,7 @@ export function render(container, id) {
       </div>`;
     return;
   }
+  if (c.id !== lastId) logExpanded = false;
   lastId = c.id;
   container.innerHTML = `
     <div class="ficha" data-contrato="${escapeHtml(c.id)}">
@@ -182,7 +193,8 @@ export function render(container, id) {
           </label>
           <ds-button type="submit" data-log-add>Agregar</ds-button>
         </form>
-        <ol class="log" data-log></ol>
+        <ol class="log" data-log id="log-list"></ol>
+        <div class="log-more"><ds-button density="compact" data-log-more aria-controls="log-list" hidden></ds-button></div>
       </section>
     </div>`;
 
@@ -221,6 +233,10 @@ export function render(container, id) {
   });
 
   // Bitácora
+  root.querySelector('[data-log-more]').addEventListener('click', () => {
+    logExpanded = !logExpanded;
+    renderLog(root, c);
+  });
   const form = root.querySelector('[data-log-form]');
   const text = form.querySelector('[data-log-text]');
   form.querySelector('[data-log-add]').addEventListener('click', () => form.requestSubmit());

@@ -373,6 +373,29 @@ def phase4(page, label):
     pct = page.text_content(f"a[data-id='{c['id']}'] .list-pct").strip()
     check(f"{label}: consulta refleja el avance editado", pct == fmt_pct(page, (done - 1) / n), pct)
 
+    # Bitácora: últimos 5 eventos + "Ver más (N)" / "Ver menos"
+    preview = 5
+    log_n = {}
+    for b in SEED["bitacora"]:
+        log_n[b["contrato"]] = log_n.get(b["contrato"], 0) + 1
+    many = max(log_n, key=log_n.get)
+    open_ficha(page, many)
+    log_total = int(page.text_content("[data-log-count]"))
+    more = page.locator("[data-log-more]")
+    items = lambda: page.locator("[data-log] li").count()
+    check(f"{label}: bitácora muestra los últimos {preview}", items() == preview and more.is_visible()
+          and more.text_content().strip() == f"Ver más ({log_total - preview})",
+          f"{items()} de {log_total}; botón '{more.text_content().strip()}'")
+    more.click()
+    check(f"{label}: 'Ver más' despliega toda la bitácora", items() == log_total and more.text_content().strip() == "Ver menos"
+          and more.get_attribute("aria-expanded") == "true", f"{items()} de {log_total}")
+    more.click()
+    check(f"{label}: 'Ver menos' vuelve a {preview}", items() == preview)
+    few = next((c["id"] for c in SEED["contratos"] if log_n.get(c["id"], 0) <= preview), None)
+    if few:
+        open_ficha(page, few)
+        check(f"{label}: sin botón con {preview} eventos o menos", not page.locator("[data-log-more]").is_visible())
+
     # Fecha ilegible del Excel: se muestra el texto original
     bad = next((c for c in SEED["contratos"] if c["plazo_cierre_texto"] and not c["plazo_cierre"]), None)
     if bad:

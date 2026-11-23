@@ -385,6 +385,9 @@ ds-sidebar > a[aria-current="page"] {
 .log-text { margin: 0; }
 .log-origin { font-size: var(--font-size-sm); color: var(--color-text-muted); }
 .log li[data-origin="app"] .log-origin { color: var(--color-accent); font-weight: var(--font-weight-medium); }
+/* Botón "Ver más / Ver menos" bajo la bitácora */
+.log-more { display: flex; justify-content: center; padding-top: var(--spacing-stack-sm); border-top: 1px solid var(--color-border); }
+.log-more:has(> [hidden]) { display: none; }
 
 /* Tablero */
 .dash-cols {
