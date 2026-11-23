@@ -1,0 +1,3 @@
+# Salidas de la validación en navegador (se regeneran con pruebas/validar_app.py)
+pruebas/capturas/
+__pycache__/

@@ -10,8 +10,9 @@
   - Criterio: `seed.json` incluye todos los contratos de la hoja `Contratos` (los sin tarjeta, marcados como tal); la prueba compara contra el Excel el número de contratos y el avance por contrato, con conteos leídos de los datos.
   - **Cumplido: sí** — 26 contratos (25 con tarjeta, `BOG-759-2022` marcado sin tarjeta), 0 tarjetas sin cruzar, 284 entradas de bitácora; `pytest pruebas` 13/13 (contratos, cruce de tarjetas, avance = valor calculado por Excel en cada contrato, estructura, bitácora, fechas, seed al día).
 
-- [ ] **Fase 2 — Estructura y estilo.** Base de la app con Sidebar, tokens + `minimalista-corporativo`, capa de datos (semilla + `localStorage`) y navegación por `#ruta`.
+- [x] **Fase 2 — Estructura y estilo.** Base de la app con Sidebar, tokens + `minimalista-corporativo`, capa de datos (semilla + `localStorage`) y navegación por `#ruta`.
   - Criterio: las 3 rutas cargan desde la Sidebar, el estilo activo es el minimalista y los datos se leen de la semilla; 0 errores de consola.
+  - **Cumplido: sí** — `python pruebas/validar_app.py 2` 36/36 en escritorio y celular emulado: estilo activo, 3 rutas desde la Sidebar, ficha por enlace y por URL directa, ruta desconocida → tablero, conteos y avance general (70,3 %) leídos de la semilla, Sidebar (íconos, cerrar/reabrir, una fila en móvil), 0 errores de consola.
 
 - [ ] **Fase 3 — Consulta.** Lista de contratos con búsqueda (número, contratista) y filtros (responsable, estado) con Dropdown.
   - Criterio: búsqueda y filtros, solos y combinados, reducen la lista correctamente; conteo leído de los datos; estados vacíos correctos.

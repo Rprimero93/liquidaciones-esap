@@ -1,0 +1,148 @@
+/**
+ * Layout y piezas propias de la app. Solo consume tokens del sistema
+ * (nunca valores de color propios): cambiar de estilo = cambiar el <link>.
+ */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-base);
+}
+
+a { color: var(--color-accent); }
+
+/* Layout Sidebar | Main (lo decide quien monta la Sidebar, no el Core) */
+.app {
+  display: flex;
+  gap: var(--spacing-section-sm);
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: var(--grid-gutter);
+}
+/* El host de <ds-sidebar> es display:contents: la posición se aplica a su parte interna */
+.app ds-sidebar::part(sidebar) { position: sticky; top: var(--grid-gutter); }
+
+/* Íconos de los enlaces: `::slotted(a) svg` del Core no es un selector válido
+   (::slotted no admite descendientes), así que el tamaño se fija en el light DOM */
+ds-sidebar > a > svg {
+  width: var(--sidebar-link-icon-size);
+  height: var(--sidebar-link-icon-size);
+  flex-shrink: 0;
+}
+/* Enlaces en gris (la regla global de <a> pisaría el color del Core) y el activo
+   con el color de acento (el Core usa un token que este estilo no define) */
+ds-sidebar > a { color: var(--color-text-muted); }
+ds-sidebar > a:hover { color: var(--color-text); }
+ds-sidebar > a[aria-current="page"] {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--layout-standard);
+}
+
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline-md);
+  margin-bottom: var(--spacing-group);
+}
+.page-head h1 {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.badge {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+}
+
+.muted { color: var(--color-text-muted); }
+
+/* Tarjetas */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-stack-md);
+}
+.card-title { margin: 0; font-size: var(--font-size-lg); }
+.empty { text-align: center; color: var(--color-text-muted); }
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--grid-gutter);
+  margin-bottom: var(--spacing-group);
+}
+.kpi { display: flex; flex-direction: column; gap: var(--space-1); }
+.kpi-label { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.kpi-value { font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); line-height: 1.1; }
+.kpi-note { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
+/* Lista de contratos */
+.list { list-style: none; margin: 0; padding: 0; }
+.list li + li { border-top: 1px solid var(--color-border); }
+.list-link {
+  display: grid;
+  grid-template-columns: minmax(9rem, auto) 1fr auto;
+  gap: var(--spacing-inline-md);
+  align-items: baseline;
+  padding: var(--spacing-stack-sm) var(--spacing-stack-md);
+  color: inherit;
+  text-decoration: none;
+}
+.list-link:hover { background: var(--color-surface-alt); }
+.list-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.list-main { font-weight: var(--font-weight-medium); }
+.list-sub { color: var(--color-text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list-end { font-variant-numeric: tabular-nums; }
+
+/* Datos de la ficha */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-stack-md);
+  margin: var(--spacing-group) 0 0;
+}
+.facts dt { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.facts dd { margin: 0; font-weight: var(--font-weight-medium); }
+
+/* Avisos: la pila la posiciona la app, no el Core */
+.toast-stack {
+  position: fixed;
+  right: var(--grid-gutter);
+  bottom: var(--grid-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-xs);
+  z-index: 10;
+}
+
+/* Móvil: la Sidebar pasa a barra horizontal (mismo corte que sidebar.core.js) */
+@media (max-width: 768px) {
+  :root { --sidebar-link-padding-inline: var(--spacing-inline-sm); }
+  .app { flex-direction: column; align-items: stretch; gap: var(--spacing-group); }
+  .app ds-sidebar::part(sidebar) { position: static; }
+  /* Enlaces en su propia fila, uno al lado del otro */
+  .app ds-sidebar::part(links) { flex-basis: 100%; }
+  .list-link { grid-template-columns: 1fr auto; }
+  .list-sub { grid-column: 1 / -1; grid-row: 2; white-space: normal; }
+}

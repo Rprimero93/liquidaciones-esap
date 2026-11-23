@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquidaciones ESAP</title>
+<link rel="icon" href="data:,">
+<!-- Tokens base (siempre los 3) + estilo activo + tokens de componente -->
+<link rel="stylesheet" href="tokens/primitive.css">
+<link rel="stylesheet" href="tokens/semantic.css">
+<link rel="stylesheet" href="tokens/accessibility.css">
+<link id="style-link" rel="stylesheet" href="styles/minimalista-corporativo.css">
+<link rel="stylesheet" href="components/sidebar/sidebar.tokens.css">
+<link rel="stylesheet" href="components/button/button.tokens.css">
+<link rel="stylesheet" href="components/toast/toast.tokens.css">
+<link rel="stylesheet" href="styles/app.css">
+<script type="module" src="js/app.js"></script>
+</head>
+<body>
+<div class="app">
+  <ds-sidebar brand="Liquidaciones">
+    <a href="#/tablero" data-route="tablero"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>Tablero</a>
+    <a href="#/consulta" data-route="consulta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Consulta</a>
+    <a href="#/ficha" data-route="ficha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6a1 1 0 0 1 1 1v1h1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1V4a1 1 0 0 1 1-1z"/><path d="M9 12l2 2 4-4"/></svg>Ficha</a>
+  </ds-sidebar>
+  <main class="main">
+    <header class="page-head">
+      <h1 id="page-title">Liquidaciones ESAP</h1>
+      <span class="badge" id="data-source" title="Origen de los datos mostrados"></span>
+    </header>
+    <section id="view" aria-live="polite"></section>
+  </main>
+</div>
+<div class="toast-stack" id="toast-stack"></div>
+</body>
+</html>

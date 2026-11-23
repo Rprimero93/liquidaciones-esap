@@ -1,0 +1,29 @@
+/**
+ * Tokens de componente — Sidebar (docs/05_BACKEND.md §1.3).
+ * Capa ESTRUCTURAL — var() sobre tokens/semantic.css, salvo un grupo de
+ * dimensiones propias del componente sin equivalente en la escala
+ * compartida (mismo criterio que --toast-max-width de la Fase 10):
+ * --sidebar-width-expanded/collapsed y los tamaños de ícono. Nombrados por
+ * los 2 estados reales que este componente porta (expandido/colapsado),
+ * no como el ejemplo ilustrativo `sidebar-width-sm/md/lg` que aparece en
+ * §1.3 — este Sidebar no tiene 3 anchos, tiene 2 estados con un ancho cada
+ * uno. El color/blur/sombra vienen de la capa VISUAL (src/styles/*.css) vía
+ * sidebar.core.js, igual que el resto de los componentes.
+ */
+:root {
+  --sidebar-width-expanded: 220px;
+  --sidebar-width-collapsed: 72px;
+
+  --sidebar-icon-button-size: 28px;
+  --sidebar-icon-button-icon-size: 14px;
+  --sidebar-link-icon-size: 18px;
+
+  --sidebar-padding: var(--spacing-stack-md);
+  --sidebar-padding-inline-collapsed: var(--spacing-inline-sm);
+  --sidebar-gap: var(--spacing-group);
+
+  --sidebar-links-gap: var(--spacing-inline-xs);
+  --sidebar-link-gap: var(--spacing-inline-sm);
+  --sidebar-link-padding-inline: var(--spacing-inline-md);
+  --sidebar-link-padding-block: var(--spacing-inline-sm);
+}

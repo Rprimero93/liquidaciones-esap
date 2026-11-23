@@ -1,0 +1,18 @@
+/**
+ * Tokens de componente — Toast (docs/05_BACKEND.md §1.3).
+ * Capa ESTRUCTURAL (spacing) — todo valor es var() sobre tokens/semantic.css,
+ * salvo --toast-max-width: dimensión propia del componente, sin equivalente
+ * en primitive/semantic (--container-* son anchos de página/región, no de
+ * una tarjeta flotante) — mismo criterio que la familia Motion agregada en
+ * la Fase 6 (docs/05_BACKEND.md §10): un valor nuevo documentado en vez de
+ * forzar un token que no representa lo mismo. El color/blur/sombra vienen
+ * de la capa VISUAL (src/styles/*.css) vía toast.core.js, igual que Button
+ * (docs/05_BACKEND.md §3: dos cadenas de consumo distintas).
+ */
+:root {
+  --toast-padding-inline: var(--spacing-section-sm);
+  --toast-padding-block: var(--spacing-inline-md);
+  --toast-content-gap: var(--spacing-group);
+  --toast-actions-gap: var(--spacing-inline-xs);
+  --toast-max-width: 420px;
+}

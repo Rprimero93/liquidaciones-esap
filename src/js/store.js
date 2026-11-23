@@ -1,0 +1,94 @@
+/**
+ * Capa de datos: semilla (data/seed.json) + persistencia en localStorage.
+ * Si hay datos guardados, mandan sobre la semilla; si no, se lee la semilla.
+ * Las vistas nunca tocan localStorage directo: todo pasa por aquí.
+ */
+const SEED_URL = new URL('../../data/seed.json', import.meta.url);
+const STORAGE_KEY = 'liquidaciones_esap.v1';
+
+let state = null;
+let source = 'semilla'; // 'semilla' | 'local'
+const listeners = new Set();
+
+function readLocal() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null; // almacenamiento bloqueado o JSON dañado: se cae a la semilla
+  }
+}
+
+async function readSeed() {
+  const res = await fetch(SEED_URL);
+  if (!res.ok) throw new Error(`No se pudo leer la semilla (${res.status})`);
+  return res.json();
+}
+
+export async function load() {
+  const local = readLocal();
+  if (local) {
+    state = local;
+    source = 'local';
+  } else {
+    state = await readSeed();
+    source = 'semilla';
+  }
+  return state;
+}
+
+export function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    source = 'local';
+  } catch (err) {
+    console.warn('No se pudo guardar en localStorage', err);
+    return false;
+  }
+  listeners.forEach((fn) => fn(state));
+  return true;
+}
+
+export async function reset() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch { /* sin almacenamiento */ }
+  state = await readSeed();
+  source = 'semilla';
+  listeners.forEach((fn) => fn(state));
+  return state;
+}
+
+export function onChange(fn) {
+  listeners.add(fn);
+  return () => listeners.delete(fn);
+}
+
+export const getState = () => state;
+export const getSource = () => source;
+
+// --- Consultas de solo lectura ---
+
+export const contracts = () => state.contratos;
+export const steps = () => state.pasos;
+export const alerts = () => state.alertas;
+export const contract = (id) => state.contratos.find((c) => c.id === id) || null;
+
+export function itemsOf(id, type) {
+  return state.avances.filter((a) => a.contrato === id && a.tipo === type);
+}
+
+/** Avance 0..1 de un contrato (pasos hechos / total de pasos); null si no tiene tarjeta. */
+export function progressOf(id) {
+  const rows = itemsOf(id, 'paso');
+  if (!rows.length) return null;
+  return rows.filter((r) => r.hecho).length / state.pasos.length;
+}
+
+/** Promedio del avance de todos los contratos con tarjeta. */
+export function generalProgress() {
+  const values = state.contratos.map((c) => progressOf(c.id)).filter((v) => v !== null);
+  return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+}
+
+export function logOf(id) {
+  return state.bitacora.filter((b) => b.contrato === id);
+}

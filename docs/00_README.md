@@ -3,7 +3,7 @@ tecnologia: Web
 tipo: entregable
 proyecto: Liquidaciones_ESAP
 estado: pendiente
-estado_resumen: "Fase 1 cerrada (extracción de datos) — Fase 2 (estructura y estilo) por iniciar"
+estado_resumen: "Fase 2 cerrada (estructura y estilo) — Fase 3 (consulta) por iniciar"
 stack: "HTML/CSS/JS vanilla + Design_System_Core (minimalista-corporativo) + localStorage; extracción con Python (openpyxl)"
 descripcion: "Micro app web de seguimiento de la liquidación de contratos ESAP (12 pasos, alertas, pérdida de competencia, bitácora, SECOP), migrada desde liquidacion.xlsm"
 aliases: [Liquidaciones_ESAP]
@@ -49,6 +49,10 @@ Hallazgos que la app corrige:
 
 - [[Herramientas/Web/Design_System_Core/docs/00_README|Design_System_Core]] — fuente de componentes y estilo.
 - [[Entregables/Web/Form_Comisiones/docs/00_README|Form_Comisiones]] — guía de estructura (ESAP, 6 componentes adaptados, historial/tablero).
+
+## Cómo abrirla
+
+Desde la carpeta del proyecto: `python -m http.server 8000` y abrir `http://localhost:8000/src/index.html` (los módulos JS y la semilla no cargan con doble clic en el archivo).
 
 ## Git
 
