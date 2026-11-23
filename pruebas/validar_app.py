@@ -95,6 +95,12 @@ def phase2(page, label):
           and sym["right"] <= sym["titleLeft"] - clearance and sym["midDiff"] < 4 and sym["alt"] == "ESAP",
           f"{sym['w']:.0f}x{sym['h']:.0f}, separación {sym['titleLeft'] - sym['right']:.1f} ≥ {clearance:.1f}")
 
+    # Favicon ESAP: declarado y servido (SVG + PNG de respaldo)
+    icons = page.eval_on_selector_all("link[rel='icon']", "els => els.map(e => e.href)")
+    served = [page.request.get(h).status for h in icons]
+    check(f"{label}: favicon ESAP", len(icons) == 2 and all(s == 200 for s in served)
+          and any(h.endswith("favicon.svg") for h in icons), f"{[h.rsplit('/', 1)[-1] for h in icons]} {served}")
+
     # Las 3 rutas desde la Sidebar
     for route in ("tablero", "consulta", "ficha"):
         page.click(f"ds-sidebar a[data-route='{route}']")
