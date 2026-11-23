@@ -554,6 +554,53 @@ ds-sidebar::part(sidebar) {
   z-index: 10;
 }
 
+/* Insignia de origen como enlace a Respaldo */
+a.badge { text-decoration: none; }
+a.badge:hover { background: var(--color-hover, var(--color-surface-alt)); color: var(--color-text); }
+a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* Vista Respaldo */
+.backup-summary { margin-bottom: var(--spacing-group); }
+.backup-summary p { margin: var(--space-2) 0 0; }
+.backup-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--grid-gutter);
+}
+.backup-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+.backup-card p { margin: 0; flex: 1; }
+.backup-card .backup-note { flex: 0; font-size: var(--font-size-sm); }
+
+/* Diálogo de confirmación (<dialog> nativo con el aspecto de tarjeta) */
+.confirm-dialog {
+  max-width: min(32rem, calc(100vw - 2 * var(--space-4)));
+  background: var(--card-bg);
+  color: var(--color-text);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  padding: var(--spacing-stack-md);
+}
+.confirm-dialog::backdrop { background: rgb(15 23 42 / 0.45); }
+.confirm-body p { margin: var(--space-3) 0 0; }
+.confirm-compare {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-3);
+  margin: var(--space-3) 0 0;
+}
+.confirm-compare dt { font-weight: var(--font-weight-bold); }
+.confirm-compare dd { margin: 0; }
+.confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--spacing-stack-md);
+}
+/* La acción secundaria del diálogo (ej. "Exportar antes") a la izquierda */
+.confirm-actions [data-dialog="extra"] { margin-right: auto; }
+
 /* Móvil: la Sidebar pasa a barra horizontal (mismo corte que sidebar.core.js) */
 @media (max-width: 768px) {
   :root { --sidebar-link-padding-inline: var(--spacing-inline-sm); }
@@ -561,6 +608,17 @@ ds-sidebar::part(sidebar) {
   .app ds-sidebar::part(sidebar) { position: static; }
   /* Enlaces en su propia fila, uno al lado del otro */
   .app ds-sidebar::part(links) { flex-basis: 100%; }
+  /* Con 4 enlaces (Respaldo, Fase 6) no caben en fila con ícono al lado: ícono sobre el texto, mismo ancho */
+  .app ds-sidebar > a {
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-1);
+    padding-inline: var(--space-1);
+    font-size: var(--font-size-sm);
+    text-align: center;
+  }
   /* Encabezado a todo el ancho: ‹ a la izquierda, × a la derecha y la marca centrada */
   .app ds-sidebar::part(head) { flex-basis: 100%; }
   .list-link { grid-template-columns: 1fr auto; }

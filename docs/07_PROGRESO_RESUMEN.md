@@ -1,6 +1,6 @@
 ---
-fase_actual: 5
-estado_resumen: "Fase 5 cerrada (tablero) — Fase 6 por iniciar"
+fase_actual: 6
+estado_resumen: "Fase 6 cerrada (respaldo) — Fase 7 por iniciar"
 tolerancias_excedidas: 0
 fases_reabiertas: 0
 ---
@@ -49,7 +49,10 @@ fases_reabiertas: 0
   - Ajuste pedido (2026-11-23) — **fondo y tabla al estilo de Cotizaciones_simple** (`coorwallbox.github.io/Cotizaciones_simple`, leído de su `styles.css`): página `#F5F7FA`, tarjetas y menú blancos con borde `#E0E4EA`, esquinas de 16 px y sombra con tinte verde azulado; la Consulta pasa a tabla con encabezado (CONTRATO · CONTRATISTA / ETAPA · ESTADO · AVANCE; fondo `#DDFCFF`, línea inferior de 2 px en acento, mayúsculas pequeñas) y columnas en rejilla compartida; cebra suave en las filas (también en la lista del semáforo). El hover sigue siendo el azul ESAP (gana sobre la cebra). Excepción: el texto del encabezado usa `#025558` (7,96:1) porque el `#03787C` de la referencia da 4,88:1. En móvil la tabla oculta el encabezado. Validación: 232/232.
   - Ajuste pedido (2026-11-23): el encabezado de la tabla pasa al azul ESAP — fondo azul oscuro `#04477A`, texto blanco (9,6:1) y línea inferior en azul `#0665AE` (opción elegida por Ricardo; el azul principal con texto blanco da 6,0:1 y la variante clara coincidía con el hover). Reemplaza el cian de Cotizaciones_simple; la cebra de las filas se mantiene. Validación: 232/232.
   - Corrección de la prueba: el servidor de `validar_app.py` era de un hilo con cola de 5 y a veces rechazaba conexiones (`ERR_CONNECTION_REFUSED` intermitente, visto desde la Fase 4: esta vez quedó la URL, un CSS). Pasa a `ThreadingHTTPServer` con cola de 64; 3 corridas seguidas en verde.
-- Fase 6 (Respaldo): **pendiente**.
+- Fase 6 (Respaldo): **completa** (2026-11-23) — vista nueva **Respaldo** (`#/respaldo`, 4.ª entrada del menú; la insignia de origen del encabezado enlaza a ella): resumen de los datos actuales y tres tarjetas — Exportar (descarga `liquidaciones_esap_respaldo_AAAA-MM-DD_HHMM.json`), Importar (valida y pide confirmación comparando el archivo con los datos actuales) y Restablecer a los datos del Excel (confirmación con "Exportar antes"; deshabilitado si ya se ve la semilla). Validación: `python pruebas/validar_app.py` 279/279 (3 corridas) y `pytest` 13/13.
+  - **Formato del respaldo** (opción aprobada por Ricardo): sobre `{formato: "liquidaciones_esap.respaldo", version: 1, exportado, origen, datos}`, con `datos` = estado de `store.js`; también se importa un `seed.json` suelto. Se rechazan JSON inválido, otro formato, otra versión, claves faltantes y avances/bitácora que apuntan a contratos inexistentes. Lógica en `js/backup.js`; `store.replace()` guarda primero y solo cambia el estado si `localStorage` acepta.
+  - Confirmación con `<dialog>` nativo (`ui.confirmDialog`): Design_System_Core no trae modal. Candidato a componente del Core.
+  - Ajuste por la 4.ª entrada: en celular los enlaces del menú pasan a ícono sobre el texto, los cuatro del mismo ancho (con ícono al lado no cabían: 397 px en 324 px).
 
 ## Bloqueos
 
@@ -57,4 +60,4 @@ fases_reabiertas: 0
 
 ## Siguiente paso
 
-Fase 6 — exportar e importar JSON (y restablecer a los datos del Excel).
+Fase 7 — validación integral (Playwright + Edge, escritorio y celular emulado); al cerrar, decidir la publicación en GitHub Pages (repo propio + datos anonimizados).

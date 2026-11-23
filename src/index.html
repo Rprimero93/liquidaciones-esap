@@ -27,6 +27,7 @@
     <a href="#/tablero" data-route="tablero"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>Tablero</a>
     <a href="#/consulta" data-route="consulta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Consulta</a>
     <a href="#/ficha" data-route="ficha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6a1 1 0 0 1 1 1v1h1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1V4a1 1 0 0 1 1-1z"/><path d="M9 12l2 2 4-4"/></svg>Ficha</a>
+    <a href="#/respaldo" data-route="respaldo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 7v10c0 1.7 3.6 3 8 3s8-1.3 8-3V7"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>Respaldo</a>
   </ds-sidebar>
   <main class="main">
     <header class="page-head">
@@ -35,7 +36,8 @@
         <img class="brand-symbol" src="assets/esap_logo_simbolo_color.svg" alt="ESAP" width="53" height="48">
         <h1 id="page-title">Liquidaciones ESAP</h1>
       </div>
-      <span class="badge" id="data-source" title="Origen de los datos mostrados"></span>
+      <!-- Insignia de origen: enlaza a la vista Respaldo (exportar, importar, restablecer) -->
+      <a class="badge" id="data-source" href="#/respaldo" title="Origen de los datos — ir a Respaldo"></a>
     </header>
     <section id="view" aria-live="polite"></section>
   </main>

@@ -60,6 +60,23 @@ export async function reset() {
   return state;
 }
 
+/**
+ * Reemplaza todos los datos (importar un respaldo) y avisa a la vista como
+ * reset(). Se guarda primero: si localStorage falla, el estado no cambia.
+ */
+export function replace(data) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (err) {
+    console.warn('No se pudo guardar en localStorage', err);
+    return false;
+  }
+  state = data;
+  source = 'local';
+  listeners.forEach((fn) => fn(state));
+  return true;
+}
+
 export function onChange(fn) {
   listeners.add(fn);
   return () => listeners.delete(fn);

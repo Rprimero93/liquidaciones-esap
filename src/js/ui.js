@@ -12,6 +12,41 @@ export function refreshSource() {
 }
 
 /**
+ * Confirmación modal con <dialog> nativo (Design_System_Core no trae modal).
+ * `body` es HTML ya escapado. Devuelve una promesa: true = confirmar, false =
+ * cancelar (botón, Escape o clic fuera). Si se pasa `extra: { label, run }`,
+ * se agrega un botón que ejecuta run(button) sin cerrar el diálogo.
+ */
+export function confirmDialog({ title, body, confirmLabel, cancelLabel = 'Cancelar', extra }) {
+  const dlg = document.createElement('dialog');
+  dlg.className = 'confirm-dialog';
+  dlg.setAttribute('aria-labelledby', 'confirm-title');
+  dlg.innerHTML = `
+    <h2 id="confirm-title" class="card-title">${title}</h2>
+    <div class="confirm-body">${body}</div>
+    <div class="confirm-actions">
+      ${extra ? '<ds-button data-dialog="extra"></ds-button>' : ''}
+      <ds-button data-dialog="cancel">${cancelLabel}</ds-button>
+      <ds-button data-dialog="confirm">${confirmLabel}</ds-button>
+    </div>`;
+  if (extra) dlg.querySelector('[data-dialog="extra"]').textContent = extra.label;
+  document.body.append(dlg);
+  return new Promise((resolve) => {
+    const close = (value) => { dlg.close(); dlg.remove(); resolve(value); };
+    dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(false); });
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) return close(false); // clic en el fondo
+      const btn = e.target.closest('[data-dialog]');
+      if (!btn) return;
+      if (btn.dataset.dialog === 'extra') extra.run(btn);
+      else close(btn.dataset.dialog === 'confirm');
+    });
+    dlg.showModal();
+    dlg.querySelector('[data-dialog="cancel"]').focus();
+  });
+}
+
+/**
  * Aviso flotante. `action` opcional: { label, run } — agrega un botón (ej.
  * "Deshacer") que ejecuta run() y cierra el aviso.
  */

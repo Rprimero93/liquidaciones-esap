@@ -100,6 +100,13 @@ def phase2(page, label):
     if label == "movil":
         tops = page.eval_on_selector_all("ds-sidebar > a", "els => els.map(e => Math.round(e.getBoundingClientRect().top))")
         check(f"{label}: enlaces en una sola fila", len(set(tops)) == 1, str(tops))
+        # Con 4 enlaces: ícono sobre el texto, todos del mismo ancho y sin texto desbordado
+        links = page.eval_on_selector_all("ds-sidebar > a", """els => els.map(e => ({ w: Math.round(e.getBoundingClientRect().width),
+            over: e.scrollWidth > e.clientWidth, stacked: e.querySelector('svg').getBoundingClientRect().bottom
+            <= e.getBoundingClientRect().top + e.getBoundingClientRect().height / 2 + 2 }))""")
+        check(f"{label}: enlaces del menú parejos (ícono sobre el texto)", len(links) == 4
+              and len({l["w"] for l in links}) == 1 and not any(l["over"] for l in links)
+              and all(l["stacked"] for l in links), str(links[0]))
 
     # Símbolo ESAP a la izquierda del título: cargado, ≥ 32 px, sin deformar, con área de protección
     sym = page.eval_on_selector(".brand-symbol", """e => { const r = e.getBoundingClientRect();
@@ -856,7 +863,151 @@ def phase5_and_hover(page, label):
     table_checks(page, label)
 
 
-PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5_and_hover}
+STORAGE_KEY = "liquidaciones_esap.v1"
+STORE_JS = "import(new URL('js/store.js', location.href).href)"  # misma instancia que usa la app
+
+
+def stored(page):
+    """Estado guardado en localStorage (None si no hay)."""
+    raw = page.evaluate(f"localStorage.getItem('{STORAGE_KEY}')")
+    return json.loads(raw) if raw else None
+
+
+def kpis(page):
+    goto_route(page, "tablero")
+    page.wait_for_selector("[data-kpi='avance'] .kpi-value")
+    return {k: page.text_content(f"[data-kpi='{k}'] .kpi-value").strip() for k in ("contratos", "avance")}
+
+
+def open_respaldo(page):
+    goto_route(page, "respaldo")
+    page.wait_for_selector("[data-backup-summary]")
+
+
+def choose_file(page, name, content):
+    """Elige un archivo en el selector de Importar (sin abrir el diálogo del sistema)."""
+    page.set_input_files("[data-import-file]", files=[{
+        "name": name, "mimeType": "application/json", "buffer": content.encode("utf-8")}])
+
+
+def dialog_open(page):
+    return page.locator("dialog.confirm-dialog[open]").count() == 1
+
+
+def phase6(page, label):
+    tmp = SHOTS / f"respaldo_{label}"
+    tmp.mkdir(exist_ok=True)
+
+    # Vista desde el menú y desde la insignia de origen
+    page.click("#data-source")
+    page.wait_for_selector("[data-backup-summary]", timeout=5000)
+    current = page.eval_on_selector_all("ds-sidebar a[aria-current='page']", "els => els.map(e => e.dataset.route)")
+    check(f"{label}: la insignia de origen abre Respaldo", current == ["respaldo"], str(current))
+
+    # Un cambio propio, para que exportado ≠ semilla
+    page.evaluate(f"""async () => {{ const s = await {STORE_JS};
+        s.addLog(s.contracts()[0].id, '2026-11-23', 'Prueba de respaldo {label}'); }}""")
+    before_kpis = kpis(page)
+    open_respaldo(page)
+    summary = page.text_content("[data-backup-summary]")
+    check(f"{label}: resumen con origen local y cifras", "guardados en este navegador" in summary
+          and f"{len(SEED['contratos'])} contratos" in summary, " ".join(summary.split())[:120])
+
+    # Exportar
+    with page.expect_download() as dl:
+        page.click("[data-export]")
+    download = dl.value
+    exported_path = tmp / download.suggested_filename
+    download.save_as(str(exported_path))
+    exported_text = exported_path.read_text(encoding="utf-8")
+    exported = json.loads(exported_text)
+    check(f"{label}: nombre del archivo de respaldo",
+          re.fullmatch(r"liquidaciones_esap_respaldo_\d{4}-\d{2}-\d{2}_\d{4}\.json", download.suggested_filename),
+          download.suggested_filename)
+    check(f"{label}: sobre del respaldo", exported.get("formato") == "liquidaciones_esap.respaldo"
+          and exported.get("version") == 1 and exported.get("origen") == "local"
+          and re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}", exported.get("exportado", "")),
+          str({k: exported.get(k) for k in ("formato", "version", "origen", "exportado")}))
+    check(f"{label}: exportado = datos guardados", exported["datos"] == stored(page))
+    check(f"{label}: exportado incluye el cambio propio", exported["datos"] != SEED
+          and any(b["texto"] == f"Prueba de respaldo {label}" for b in exported["datos"]["bitacora"]))
+    check(f"{label}: archivo legible (UTF-8, sangría 2)", exported_text.startswith('{\n  "formato"')
+          and ("á" in exported_text or "é" in exported_text))
+
+    # Restablecer: cancelar no cambia nada
+    page.click("[data-reset]")
+    page.wait_for_selector("dialog.confirm-dialog[open]")
+    page.keyboard.press("Escape")
+    check(f"{label}: cancelar restablecer no cambia los datos",
+          not dialog_open(page) and stored(page) == exported["datos"])
+    # "Exportar antes" descarga sin cerrar el diálogo; confirmar vuelve a la semilla
+    page.click("[data-reset]")
+    page.wait_for_selector("dialog.confirm-dialog[open]")
+    with page.expect_download() as dl2:
+        page.click("dialog [data-dialog='extra']")
+    pre = json.loads(Path(dl2.value.path()).read_text(encoding="utf-8"))
+    check(f"{label}: 'Exportar antes' descarga y deja el diálogo abierto",
+          dialog_open(page) and pre["datos"] == exported["datos"]
+          and "descargado" in page.text_content("dialog [data-dialog='extra']"))
+    page.click("dialog [data-dialog='confirm']")
+    page.wait_for_function("document.getElementById('data-source').dataset.source === 'semilla'", timeout=5000)
+    state = page.evaluate(f"async () => (await {STORE_JS}).getState()")
+    check(f"{label}: restablecer vuelve a la semilla", stored(page) is None and state == SEED)
+    check(f"{label}: restablecer queda deshabilitado con la semilla",
+          page.get_attribute("[data-reset]", "disabled") is not None)
+
+    # Importar archivos inválidos: se rechazan sin tocar los datos
+    bad_files = {
+        "no_json.json": "esto no es JSON",
+        "otro_formato.json": json.dumps({"formato": "otra.app", "version": 1, "datos": {}}),
+        "version_2.json": json.dumps({**exported, "version": 2}),
+        "huerfanos.json": json.dumps({**SEED, "bitacora": SEED["bitacora"] + [{"contrato": "NO-EXISTE", "texto": "x"}]}),
+        "incompleto.json": json.dumps({k: v for k, v in SEED.items() if k != "avances"}),
+    }
+    for name, content in bad_files.items():
+        choose_file(page, name, content)
+        page.wait_for_function(f"[...document.querySelectorAll('ds-toast')].some(t => t.textContent.includes('{name}'))",
+                               timeout=5000)
+        check(f"{label}: importar {name} se rechaza", not dialog_open(page)
+              and stored(page) is None and page.get_attribute("#data-source", "data-source") == "semilla")
+
+    # Importar el respaldo: cancelar no cambia nada; confirmar deja los datos idénticos
+    choose_file(page, download.suggested_filename, exported_text)
+    page.wait_for_selector("dialog.confirm-dialog[open]")
+    archivo = page.text_content("dialog [data-compare='archivo']")
+    actual = page.text_content("dialog [data-compare='actual']")
+    n_log = len(exported["datos"]["bitacora"])
+    check(f"{label}: confirmación compara archivo y datos actuales",
+          f"{n_log} entradas" in archivo and f"{len(SEED['bitacora'])} entradas" in actual, f"{archivo} | {actual}")
+    page.click("dialog [data-dialog='cancel']")
+    check(f"{label}: cancelar importar no cambia los datos", not dialog_open(page) and stored(page) is None)
+    choose_file(page, download.suggested_filename, exported_text)
+    page.wait_for_selector("dialog.confirm-dialog[open]")
+    page.click("dialog [data-dialog='confirm']")
+    page.wait_for_function("document.getElementById('data-source').dataset.source === 'local'", timeout=5000)
+    state = page.evaluate(f"async () => (await {STORE_JS}).getState()")
+    check(f"{label}: exportar, restablecer e importar = datos idénticos",
+          stored(page) == exported["datos"] and state == exported["datos"])
+    check(f"{label}: el tablero vuelve a las mismas cifras", kpis(page) == before_kpis, str(before_kpis))
+    open_respaldo(page)
+    page.reload(wait_until="networkidle")
+    page.wait_for_selector("[data-backup-summary]")
+    check(f"{label}: lo importado persiste al recargar", stored(page) == exported["datos"]
+          and page.get_attribute("#data-source", "data-source") == "local")
+
+    # Importar un seed.json suelto (sin sobre)
+    choose_file(page, "seed.json", (ROOT / "data" / "seed.json").read_text(encoding="utf-8"))
+    page.wait_for_selector("dialog.confirm-dialog[open]")
+    check(f"{label}: seed.json se reconoce como semilla", "semilla" in page.text_content("dialog .confirm-body"))
+    page.click("dialog [data-dialog='confirm']")
+    page.wait_for_function(f"localStorage.getItem('{STORAGE_KEY}') !== null && "
+                           f"JSON.parse(localStorage.getItem('{STORAGE_KEY}')).bitacora.length === {len(SEED['bitacora'])}",
+                           timeout=5000)
+    check(f"{label}: importar seed.json carga la semilla", stored(page) == SEED)
+    page.screenshot(path=str(SHOTS / f"fase6_{label}_respaldo.png"), full_page=True)
+
+
+PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5_and_hover, "6": phase6}
 
 
 def run(browser, url, label, phases, **ctx):

@@ -10,10 +10,11 @@ import { start } from './router.js';
 import * as tablero from '../views/tablero.js';
 import * as consulta from '../views/consulta.js';
 import * as ficha from '../views/ficha.js';
+import * as respaldo from '../views/respaldo.js';
 
 import { refreshSource } from './ui.js';
 
-const routes = { tablero, consulta, ficha };
+const routes = { tablero, consulta, ficha, respaldo };
 
 const viewEl = document.getElementById('view');
 const titleEl = document.getElementById('page-title');
