@@ -10,9 +10,11 @@
   --status-ok-text: #14532D;      --status-ok-bg: #E7F3EC;
   --status-warn-text: #6B3E00;    --status-warn-bg: #FCF1DE;
   --status-danger-text: #7F1D1D;  --status-danger-bg: #FCE8E8;
-  /* Fondo de hover: azul 10 % ("azulClaro") de la marca ESAP (Kit_Marca_ESAP/kit/marca.json).
-     Sobre él el texto va en --color-text (14,6:1); el acento (6,35:1) no llega a 7:1. */
-  --color-hover: #E6F0F7;
+  /* Fondo de hover: variante azul del cian claro de Cotizaciones_simple (#DDFCFF, hsl 184° 100 % 93 %)
+     con el tono del azul ESAP (206°) — opción pedida por Ricardo; reemplaza el azul 10 % ESAP
+     (#E6F0F7), que se veía opaco. Sobre él el texto va en --color-text (14,5:1); el acento (6,3:1)
+     no llega a 7:1. También es el fondo del enlace activo del menú. */
+  --color-hover: #DDF0FF;
 
   /* Fondo de página, tarjetas y tablas tomados de Cotizaciones_simple (styles.css):
      página gris claro y tarjetas blancas con borde, esquinas de 16 px y sombra con tinte verde azulado */
@@ -71,10 +73,13 @@ ds-sidebar > a:hover { color: var(--color-text); background: var(--color-hover);
 /* Pasos de la ficha: hover azul claro y etiqueta en color de texto */
 .steps ds-step::part(header):hover { background: var(--color-hover); }
 .steps ds-step:hover::part(label) { color: var(--color-text); }
+/* Activo: fondo azul de hover, texto oscuro en negrita (7:1 sobre el azul) e ícono en acento */
 ds-sidebar > a[aria-current="page"] {
-  color: var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-hover);
   font-weight: var(--font-weight-bold);
 }
+ds-sidebar > a[aria-current="page"] > svg { color: var(--color-accent); }
 
 .main {
   flex: 1;

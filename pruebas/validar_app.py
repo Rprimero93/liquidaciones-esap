@@ -744,7 +744,7 @@ def phase5(page, label):
     page.emulate_media(reduced_motion="no-preference")
 
 
-HOVER_BG = "rgb(230, 240, 247)"  # azul 10 % ESAP (#E6F0F7) — token --color-hover
+HOVER_BG = "rgb(221, 240, 255)"  # variante azul del cian de Cotizaciones_simple (#DDF0FF) — token --color-hover
 
 # Aspecto de un campo: lo que debe coincidir entre caja de texto, desplegable y fecha
 FIELD_LOOK_JS = """e => { const s = getComputedStyle(e); return [s.borderTopWidth, s.borderTopColor, s.backgroundColor,
@@ -866,7 +866,7 @@ def check_hover(page, label, name, hover_loc, bg_js, text_js=None):
         ratio = contrast(text_js(), bg)
         ok = ratio >= 7
         detail = f"contraste {ratio:.2f}"
-    check(f"{label}: hover azul claro ESAP en {name}", ok, detail)
+    check(f"{label}: hover azul claro en {name}", ok, detail)
 
 
 def hover_checks(page, label):
@@ -886,6 +886,12 @@ def hover_checks(page, label):
     check_hover(page, label, "enlace del menú", page.locator("ds-sidebar a[data-route='consulta']"),
                 css("ds-sidebar a[data-route='consulta']", "backgroundColor"),
                 css("ds-sidebar a[data-route='consulta']", "color"))
+    # Enlace activo del menú: mismo fondo azul, texto oscuro ≥ 7:1 e ícono en acento
+    act = page.eval_on_selector("ds-sidebar a[aria-current='page']", """e => { const s = getComputedStyle(e);
+        return [s.backgroundColor, s.color, getComputedStyle(e.querySelector('svg')).color]; }""")
+    accent = page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()")
+    check(f"{label}: enlace activo del menú con fondo azul", act[0] == HOVER_BG and contrast(act[1], act[0]) >= 7
+          and act[2] == hex_rgb(accent), f"{act} contraste {contrast(act[1], act[0]):.2f}")
     goto_route(page, "consulta")
     page.wait_for_selector("[data-list='contratos'] a[data-id]")
     check_hover(page, label, "fila de la consulta", page.locator("[data-list='contratos'] a[data-id]").first,
