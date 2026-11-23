@@ -76,6 +76,16 @@ def phase2(page, label):
     nav = "document.querySelector('ds-sidebar').shadowRoot.querySelector('.sidebar')"
     visible = lambda sel: page.evaluate(f"{sel}.getBoundingClientRect().width > 0")
     check(f"{label}: botón de reapertura oculto con el menú abierto", not visible(reopen))
+    # Encabezado del menú: contraer a la izquierda, marca centrada entre los botones, cerrar a la derecha
+    head = page.evaluate("""(() => { const sr = document.querySelector('ds-sidebar').shadowRoot;
+        const box = s => sr.querySelector(s).getBoundingClientRect();
+        const c = box('.collapse'), x = box('.close'), b = box('.brand');
+        const r = document.createRange(); r.selectNodeContents(sr.querySelector('.brand'));
+        const t = r.getBoundingClientRect();
+        return { order: c.right <= b.left && b.right <= x.left,
+                 centerDiff: Math.abs((t.left + t.right) / 2 - (c.right + x.left) / 2) }; })()""")
+    check(f"{label}: encabezado del menú ‹ Liquidaciones ×", head["order"] and head["centerDiff"] < 2,
+          f"desfase del centro {head['centerDiff']:.1f}px")
     page.evaluate("document.querySelector('ds-sidebar').shadowRoot.querySelector('.close').click()")
     check(f"{label}: cerrar oculta el menú", not visible(nav) and visible(reopen))
     page.evaluate(f"{reopen}.click()")

@@ -47,6 +47,10 @@ ds-sidebar > a > svg {
   height: var(--sidebar-link-icon-size);
   flex-shrink: 0;
 }
+/* Encabezado del menú: [‹ contraer] [Liquidaciones, centrado] [× cerrar] */
+ds-sidebar::part(collapse-button) { order: -1; }
+ds-sidebar::part(brand) { flex: 1; text-align: center; }
+
 /* Enlaces en gris (la regla global de <a> pisaría el color del Core) y el activo
    con el color de acento (el Core usa un token que este estilo no define) */
 ds-sidebar > a { color: var(--color-text-muted); }
@@ -511,6 +515,8 @@ ds-sidebar > a[aria-current="page"] {
   .app ds-sidebar::part(sidebar) { position: static; }
   /* Enlaces en su propia fila, uno al lado del otro */
   .app ds-sidebar::part(links) { flex-basis: 100%; }
+  /* Encabezado a todo el ancho: ‹ a la izquierda, × a la derecha y la marca centrada */
+  .app ds-sidebar::part(head) { flex-basis: 100%; }
   .list-link { grid-template-columns: 1fr auto; }
   .list-sub { grid-column: 1 / -1; grid-row: 2; white-space: normal; }
   .filters { grid-template-columns: 1fr; }
