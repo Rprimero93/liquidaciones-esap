@@ -148,7 +148,8 @@ class DsDatepicker extends HTMLElement {
           background: var(--color-surface, transparent);
           border-color: var(--color-accent, currentColor);
         }
-        .value[data-empty] { color: var(--color-text-muted, inherit); }
+        /* Parche local (Liquidaciones_ESAP): color del texto de ejemplo configurable desde fuera */
+        .value[data-empty] { color: var(--field-placeholder, var(--color-text-muted, inherit)); }
 
         .panel {
           position: fixed;

@@ -830,6 +830,13 @@ def field_checks(page, label):
     focus = page.eval_on_selector("input[data-filter='q']", "e => { const s = getComputedStyle(e); return [s.borderTopColor, s.boxShadow]; }")
     check(f"{label}: foco con borde de acento y halo", focus[0] == hex_rgb(accent) and focus[1].endswith(" 3px"), str(focus))
     page.evaluate("document.activeElement.blur()")
+
+    # Etiquetas en seminegrita gris oscuro y texto de ejemplo #6B7585 (≥ 4,5:1)
+    lbl = page.eval_on_selector(".field-label", "e => { const s = getComputedStyle(e); return [s.fontWeight, s.color]; }")
+    check(f"{label}: etiquetas en seminegrita gris oscuro", lbl == ["600", "rgb(54, 54, 54)"], str(lbl))
+    ph = page.eval_on_selector("input[data-filter='q']", "e => getComputedStyle(e, '::placeholder').color")
+    check(f"{label}: texto de ejemplo #6B7585 con contraste AA", ph == "rgb(107, 117, 133)"
+          and contrast(ph, "rgb(255, 255, 255)") >= 4.5, f"{ph} {contrast(ph, 'rgb(255, 255, 255)'):.2f}")
     goto_route(page, "tablero")  # deja la Consulta para que la siguiente prueba la pinte de nuevo
 
 

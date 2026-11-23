@@ -300,7 +300,11 @@ ds-sidebar::part(sidebar) {
   margin-bottom: var(--spacing-stack-md);
 }
 .field { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
-.field-label { font-size: var(--font-size-sm); color: var(--color-text-muted); font-weight: var(--font-weight-medium); }
+/* Etiquetas y texto de ejemplo al estilo de Cotizaciones_simple (.campo__label): seminegrita y gris oscuro.
+   El placeholder de la referencia (#B0B8C4) da 2,0:1; se usa #6B7585 (4,66:1, AA), opción elegida por Ricardo */
+.field-label { font-size: var(--font-size-sm); color: var(--field-label-color); font-weight: 600; letter-spacing: 0.01em; }
+.field input::placeholder,
+.field textarea::placeholder { color: var(--field-placeholder); opacity: 1; }
 /* Campos al estilo de Cotizaciones_simple (.campo__input): borde 1,5 px, esquinas de 8 px,
    borde de acento al pasar el cursor y halo de 3 px al enfocar. El fondo de hover sigue
    siendo el azul claro ESAP (--color-hover, excepción del proyecto), no el cian de la referencia. */
@@ -308,6 +312,8 @@ ds-sidebar::part(sidebar) {
   --field-border: 1.5px solid var(--color-border);
   --field-radius: var(--radius-md);
   --field-halo: 0 0 0 3px rgb(2 96 100 / 0.15); /* --color-accent (#026064) al 15 % */
+  --field-label-color: #363636;  /* 12,1:1 sobre blanco */
+  --field-placeholder: #6B7585;  /* 4,66:1 sobre blanco */
 }
 .field input {
   font: inherit;
