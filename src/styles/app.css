@@ -203,11 +203,19 @@ ds-sidebar > a[aria-current="page"] {
   min-height: var(--target-size-comfort);
 }
 .field input:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
-.field ds-dropdown {
+/* Desplegables y fechas con el mismo aspecto que la caja de texto: un solo borde fino,
+   fondo blanco, mismo relleno y altura (el disparador del Core trae fondo gris y borde propios) */
+.field ds-dropdown::part(trigger),
+.field ds-datepicker::part(trigger) {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
+  padding: var(--spacing-inline-sm) var(--spacing-inline-md);
+  min-height: var(--target-size-comfort);
+  font-size: var(--font-size-md);
 }
+.field ds-dropdown::part(trigger):focus-visible,
+.field ds-datepicker::part(trigger):focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
 .result-bar {
   display: flex;
   align-items: center;
@@ -245,11 +253,6 @@ ds-sidebar > a[aria-current="page"] {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--grid-gutter);
-}
-.field ds-datepicker {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
 }
 .ficha-cols {
   display: grid;

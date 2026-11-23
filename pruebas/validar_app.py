@@ -572,6 +572,31 @@ def phase5(page, label):
 
 HOVER_BG = "rgb(230, 240, 247)"  # azul 10 % ESAP (#E6F0F7) — token --color-hover
 
+# Aspecto de un campo: lo que debe coincidir entre caja de texto, desplegable y fecha
+FIELD_LOOK_JS = """e => { const s = getComputedStyle(e); return [s.borderTopWidth, s.borderTopColor, s.backgroundColor,
+    s.borderTopLeftRadius, s.paddingLeft, s.fontSize, Math.round(e.getBoundingClientRect().height)]; }"""
+TRIGGER_LOOK_JS = "e => (" + FIELD_LOOK_JS + ")(e.shadowRoot.querySelector('.trigger'))"
+HOST_BORDER_JS = "e => getComputedStyle(e).borderTopWidth"
+
+
+def field_checks(page, label):
+    goto_route(page, "consulta")
+    page.wait_for_selector("input[data-filter='q']")
+    ref = page.eval_on_selector("input[data-filter='q']", FIELD_LOOK_JS)
+    for name in ("responsable", "estado"):
+        sel = f"ds-dropdown[data-filter='{name}']"
+        look = page.eval_on_selector(sel, TRIGGER_LOOK_JS)
+        host = page.eval_on_selector(sel, HOST_BORDER_JS)
+        check(f"{label}: desplegable {name} con el mismo borde que la caja de texto", look == ref and host == "0px",
+              f"{look} vs {ref}; borde extra {host}")
+    cid = next(c["id"] for c in SEED["contratos"] if c["tiene_tarjeta"])
+    open_ficha(page, cid)
+    for sel in ("ds-datepicker[data-date='perdida_competencia']", "ds-datepicker[data-log-date]"):
+        look = page.eval_on_selector(sel, TRIGGER_LOOK_JS)
+        host = page.eval_on_selector(sel, HOST_BORDER_JS)
+        check(f"{label}: fecha {sel.split('[')[1][:-1]} con el mismo borde que la caja de texto",
+              look == ref and host == "0px", f"{look} vs {ref}; borde extra {host}")
+
 
 def check_hover(page, label, name, hover_loc, bg_js, text_js=None):
     """Pasa el cursor y compara el fondo; si se indica, mide el contraste del texto sobre ese fondo."""
@@ -631,6 +656,7 @@ def hover_checks(page, label):
 def phase5_and_hover(page, label):
     phase5(page, label)
     hover_checks(page, label)
+    field_checks(page, label)
 
 
 PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5_and_hover}
