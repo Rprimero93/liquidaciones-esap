@@ -174,6 +174,8 @@ def listed(page):
 
 def pick(page, name, value):
     dd = page.locator(f"ds-dropdown[data-filter='{name}']")
+    # El panel se cierra al hacer scroll: centrar el campo antes de abrirlo
+    dd.evaluate("e => e.scrollIntoView({block: 'center'})")
     dd.locator(".trigger").click()
     dd.locator(f".option[data-value='{value}']").click()
 
@@ -464,9 +466,32 @@ def phase5(page, label):
     if label == "escritorio":
         first.hover()
     else:
-        first.focus()
+        first.locator(".bar-link").focus()
     tip = page.locator("[data-tooltip]")
     check(f"{label}: tooltip de la barra", tip.is_visible() and exp[0][0] in tip.text_content(), tip.text_content()[:60])
+
+    # Clic en un responsable → Consulta filtrada solo por él (limpia búsqueda y estado previos)
+    def consulta_state():
+        page.wait_for_selector("[data-list='contratos'] a[data-id]")
+        return (page.locator("ds-dropdown[data-filter='responsable']").evaluate("e => e.value"),
+                page.locator("ds-dropdown[data-filter='estado']").evaluate("e => e.value"),
+                page.input_value("input[data-filter='q']"), listed(page))
+
+    combined = next(c for c in SEED["contratos"] if len(responsibles(c)) > 1)
+    for resp, target in ((responsibles(combined)[-1], ".bar-link"), (exp[-1][0], ".bar-track")):
+        goto_route(page, "consulta")
+        page.wait_for_selector("[data-list='contratos'] a[data-id]")
+        pick(page, "estado", "cerrado")  # filtro previo que debe limpiarse
+        page.locator("input[data-filter='q']").fill("bog")
+        goto_route(page, "tablero")
+        page.locator(f"[data-bars] .bar-row[data-name='{resp}'] {target}").click()
+        page.wait_for_function("location.hash === '#/consulta'", timeout=5000)
+        got_resp, got_est, got_q, rows = consulta_state()
+        check(f"{label}: clic en {'nombre' if target == '.bar-link' else 'barra'} de '{resp}' filtra la consulta",
+              got_resp == resp and got_est == "" and got_q == "" and rows == expected(resp=resp), f"{len(rows)} contratos")
+    page.locator("[data-clear]").click()
+    goto_route(page, "tablero")
+    page.wait_for_selector("[data-deadlines] a[data-id]")
 
     # Semáforo
     ids = page.eval_on_selector_all("[data-deadlines] a[data-id]", "els => els.map(e => e.dataset.id)")

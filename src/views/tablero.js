@@ -6,6 +6,7 @@
 import * as store from '../js/store.js';
 import { href } from '../js/router.js';
 import { date, escapeHtml, percent } from '../js/format.js';
+import { showResponsible } from './consulta.js';
 
 export const title = 'Tablero';
 
@@ -46,13 +47,14 @@ function bars() {
   return `
     <section class="card" aria-labelledby="h-resp">
       <h2 class="section-title" id="h-resp">Avance por responsable</h2>
-      <p class="muted hint">Promedio de avance de sus contratos con seguimiento. Un contrato compartido cuenta para cada responsable.</p>
+      <p class="muted hint">Promedio de avance de sus contratos con seguimiento. Un contrato compartido cuenta para cada responsable. Toca un responsable para ver sus contratos.</p>
       <ol class="bars" data-bars style="--stagger:${BAR_STAGGER_MS}ms">
         ${rows.map((r, i) => {
           const tip = `${r.nombre}: ${percent(r.avance)} de avance promedio · ${r.contratos} contrato${r.contratos === 1 ? '' : 's'}, ${r.cerrados} cerrado${r.cerrados === 1 ? '' : 's'}`;
           return `
-          <li class="bar-row" tabindex="0" data-name="${escapeHtml(r.nombre)}" data-tip="${escapeHtml(tip)}" aria-label="${escapeHtml(tip)}">
-            <span class="bar-label">${escapeHtml(r.nombre)} <small class="muted">(${r.contratos})</small></span>
+          <li class="bar-row" data-name="${escapeHtml(r.nombre)}" data-tip="${escapeHtml(tip)}">
+            <a class="bar-label bar-link" href="${href('consulta')}" data-resp="${escapeHtml(r.nombre)}"
+              aria-label="${escapeHtml(tip)}. Ver sus contratos en Consulta">${escapeHtml(r.nombre)} <small class="muted">(${r.contratos})</small></a>
             <span class="bar-track"><span class="bar" style="--w:${r.avance};--i:${i}" data-value="${r.avance}"></span></span>
             <span class="bar-value">${percent(r.avance)}</span>
           </li>`;
@@ -143,13 +145,27 @@ function bindTooltip(container) {
   };
   const hide = () => { tip.hidden = true; };
   container.querySelectorAll('.bar-row').forEach((row) => {
+    const link = row.querySelector('.bar-link');
     row.addEventListener('mousemove', (e) => show(row, e.clientX, e.clientY));
     row.addEventListener('mouseleave', hide);
-    row.addEventListener('focus', () => {
+    link.addEventListener('focus', () => {
       const r = row.querySelector('.bar-track').getBoundingClientRect();
       show(row, r.left, r.bottom - 8);
     });
-    row.addEventListener('blur', hide);
+    link.addEventListener('blur', hide);
+  });
+}
+
+/** Clic en un responsable (nombre o cualquier parte de su fila) → Consulta filtrada por él. */
+function bindResponsibleLinks(container) {
+  container.querySelector('[data-bars]').addEventListener('click', (e) => {
+    const row = e.target.closest('.bar-row');
+    if (!row) return;
+    const link = row.querySelector('.bar-link');
+    showResponsible(link.dataset.resp);
+    if (e.target.closest('.bar-link')) return; // el enlace navega solo
+    e.preventDefault();
+    location.hash = link.getAttribute('href');
   });
 }
 
@@ -157,6 +173,7 @@ export function render(container) {
   container.innerHTML = `${kpis()}<div class="dash-cols">${bars()}${traffic()}</div>`;
   bindTooltip(container);
   bindLevels(container);
+  bindResponsibleLinks(container);
   // Arranca la animación en el siguiente cuadro (las barras parten en ancho 0)
   requestAnimationFrame(() => requestAnimationFrame(() => container.querySelector('[data-bars]')?.classList.add('is-in')));
 }

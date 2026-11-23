@@ -298,8 +298,11 @@ ds-sidebar > a[aria-current="page"] {
   border-radius: var(--radius-sm);
   outline: none;
 }
-.bar-row:hover, .bar-row:focus-visible { background: var(--color-surface-alt); }
-.bar-row:focus-visible { box-shadow: 0 0 0 2px var(--color-focus); }
+.bar-row { cursor: pointer; }
+.bar-row:hover, .bar-row:focus-within { background: var(--color-surface-alt); }
+.bar-link { color: var(--color-text); text-decoration: none; }
+.bar-row:hover .bar-link { color: var(--color-accent); text-decoration: underline; }
+.bar-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 .bar-label { font-size: var(--font-size-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bar-track { height: 12px; display: block; }
 .bar {

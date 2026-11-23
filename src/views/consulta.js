@@ -10,6 +10,13 @@ export const title = 'Consulta';
 
 const filters = { q: '', responsable: '', estado: '' };
 
+/** Deja la consulta filtrada solo por un responsable (lo usa el tablero antes de navegar). */
+export function showResponsible(name) {
+  filters.q = '';
+  filters.estado = '';
+  filters.responsable = name;
+}
+
 /** Minúsculas sin tildes ni espacios repetidos, para comparar texto. */
 export function normalize(text) {
   return String(text || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
