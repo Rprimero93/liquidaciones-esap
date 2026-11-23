@@ -9,6 +9,7 @@ import json
 import re
 import socketserver
 import unicodedata
+from datetime import date
 import sys
 import threading
 from functools import partial
@@ -381,7 +382,115 @@ def phase4(page, label):
         check(f"{label}: el contrato pasa a en trámite", chip == "en-tramite", chip)
 
 
-PHASES = {"2": phase2, "3": phase3, "4": phase4}
+# --- Fase 5: tablero ---
+
+WARN_DAYS = 90  # mismo umbral que store.DEADLINE_WARN_DAYS
+
+
+def progress(c):
+    steps = seed_steps(c["id"])
+    return sum(s["hecho"] for s in steps) / len(SEED["pasos"]) if steps else None
+
+
+def by_responsible():
+    groups = {}
+    for c in SEED["contratos"]:
+        p = progress(c)
+        if p is None:
+            continue
+        for name in responsibles(c):
+            groups.setdefault(name, []).append(p)
+    rows = [(n, sum(v) / len(v), len(v)) for n, v in groups.items()]
+    # Mismo orden que la app: avance desc, contratos desc, nombre
+    rows.sort(key=lambda r: (-r[1], -r[2], norm(r[0])))
+    return rows
+
+
+def deadlines(today):
+    out = []
+    for c in SEED["contratos"]:
+        if status(c) == "cerrado":
+            continue
+        if not c["perdida_competencia"]:
+            out.append((c["id"], None, "sin-fecha"))
+            continue
+        days = (date.fromisoformat(c["perdida_competencia"]) - today).days
+        level = "vencido" if days < 0 else "proximo" if days <= WARN_DAYS else "en-plazo"
+        out.append((c["id"], days, level))
+    return sorted(out, key=lambda r: float("inf") if r[1] is None else r[1])
+
+
+def phase5(page, label):
+    # Datos limpios (la fase 4 los modifica)
+    page.evaluate("localStorage.clear()")
+    page.goto(page.url.split("#")[0] + "#/tablero", wait_until="networkidle")
+    page.reload(wait_until="networkidle")
+    page.wait_for_selector("[data-bars] .bar")
+    today = date.fromisoformat(page.evaluate(
+        "(() => { const d = new Date(); return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-'); })()"))
+
+    closed = sum(status(c) == "cerrado" for c in SEED["contratos"])
+    check(f"{label}: KPI cerrados", page.text_content("[data-kpi='cerrados'] .kpi-value").strip() == str(closed), str(closed))
+    dl = deadlines(today)
+    overdue = sum(r[2] == "vencido" for r in dl)
+    check(f"{label}: KPI competencia vencida", page.text_content("[data-kpi='vencidos'] .kpi-value").strip() == str(overdue), str(overdue))
+
+    # Barras: orden y valores
+    exp = by_responsible()
+    names = page.eval_on_selector_all("[data-bars] .bar-row", "els => els.map(e => e.dataset.name)")
+    check(f"{label}: responsables ordenados de mayor a menor avance", names == [r[0] for r in exp], f"{len(names)} barras")
+    values = page.eval_on_selector_all("[data-bars] .bar", "els => els.map(e => Number(e.dataset.value))")
+    check(f"{label}: valor de cada barra", all(abs(a - b[1]) < 1e-9 for a, b in zip(values, exp)) and len(values) == len(exp))
+    texts = page.eval_on_selector_all("[data-bars] .bar-value", "els => els.map(e => e.textContent.trim())")
+    exp_texts = [fmt_pct(page, r[1]) for r in exp]
+    check(f"{label}: etiqueta directa de cada barra", texts == exp_texts, str([(a, b) for a, b in zip(texts, exp_texts) if a != b][:3]))
+
+    # Animación: una por una, de mayor a menor (retardo creciente por posición)
+    delays = page.eval_on_selector_all("[data-bars] .bar", "els => els.map(e => parseFloat(getComputedStyle(e).transitionDelay))")
+    check(f"{label}: barras entran una por una (retardo creciente)",
+          all(b > a for a, b in zip(delays, delays[1:])) and delays[0] == 0, str(delays[:3]))
+    # Recargar para observar el inicio de la animación
+    page.reload(wait_until="domcontentloaded")
+    page.wait_for_function("document.querySelector('[data-bars] .bar')?.getBoundingClientRect().width > 0", timeout=5000)
+    last_w = page.evaluate("(() => { const b = document.querySelectorAll('[data-bars] .bar'); return b[b.length - 1].getBoundingClientRect().width; })()")
+    check(f"{label}: la primera barra arranca antes que la última", last_w == 0, str(last_w))
+    page.wait_for_function("""[...document.querySelectorAll('[data-bars] .bar')].every(b =>
+        Math.abs(b.getBoundingClientRect().width - b.parentElement.getBoundingClientRect().width * Number(b.dataset.value)) < 1)""",
+                           timeout=10000)
+    check(f"{label}: todas las barras llegan a su valor", True)
+
+    # Tooltip al pasar el cursor / foco
+    first = page.locator("[data-bars] .bar-row").first
+    if label == "escritorio":
+        first.hover()
+    else:
+        first.focus()
+    tip = page.locator("[data-tooltip]")
+    check(f"{label}: tooltip de la barra", tip.is_visible() and exp[0][0] in tip.text_content(), tip.text_content()[:60])
+
+    # Semáforo
+    ids = page.eval_on_selector_all("[data-deadlines] a[data-id]", "els => els.map(e => e.dataset.id)")
+    check(f"{label}: semáforo ordenado por urgencia", ids == [r[0] for r in dl], f"{len(ids)} contratos")
+    levels = page.eval_on_selector_all("[data-deadlines] a[data-id]", "els => els.map(e => e.dataset.level)")
+    check(f"{label}: nivel de cada contrato", levels == [r[2] for r in dl])
+    for lvl in ("vencido", "proximo", "en-plazo", "sin-fecha"):
+        got = page.text_content(f"[data-level-count='{lvl}']").strip()
+        check(f"{label}: conteo {lvl}", got == str(sum(r[2] == lvl for r in dl)), got)
+    no_color_only = page.eval_on_selector_all("[data-deadlines] .level",
+                                              "els => els.every(e => e.querySelector('.level-icon').textContent.trim() && e.textContent.trim().length > 2)")
+    check(f"{label}: semáforo con ícono y texto (no solo color)", no_color_only)
+    page.screenshot(path=str(SHOTS / f"fase5_{label}_tablero.png"), full_page=True)
+
+    # Movimiento reducido: sin animación
+    page.emulate_media(reduced_motion="reduce")
+    page.reload(wait_until="networkidle")
+    page.wait_for_selector("[data-bars] .bar")
+    dur = page.eval_on_selector("[data-bars] .bar", "e => getComputedStyle(e).transitionDuration")
+    check(f"{label}: movimiento reducido sin animación", dur == "0s", dur)
+    page.emulate_media(reduced_motion="no-preference")
+
+
+PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5}
 
 
 def run(browser, url, label, phases, **ctx):

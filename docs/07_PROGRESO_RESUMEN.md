@@ -1,6 +1,6 @@
 ---
-fase_actual: 4
-estado_resumen: "Fase 4 cerrada (ficha del contrato) — Fase 5 por iniciar"
+fase_actual: 5
+estado_resumen: "Fase 5 cerrada (tablero) — Fase 6 por iniciar"
 tolerancias_excedidas: 0
 fases_reabiertas: 0
 ---
@@ -28,7 +28,11 @@ fases_reabiertas: 0
   - **Decisión — pasos con `<ds-step>` sin `<ds-stepper>`:** el contenedor es un asistente que obliga a avanzar en orden y fija el estado de cada paso por navegación; el Excel tiene pasos marcados fuera de orden. Se usa `<ds-step>` suelto con el estado puesto por la app (completed / current = etapa actual / pending). Alternativa descartada: checklist propio (perdía la coherencia visual con el sistema). Impacto: ninguno en el Core; reversible.
   - `store.save()` ya no repinta la vista (la ficha se actualiza por secciones, sin perder foco ni scroll); `reset()` sí avisa. El aviso flotante pasó a `js/ui.js` para evitar una importación circular con `app.js`.
   - Validación: se corrigieron dos carreras de la prueba (no de la app): el calendario se cierra al hacer scroll, así que se centra el campo antes de abrirlo; y el enlace activo se espera tras `hashchange`. Un `ERR_CONNECTION_REFUSED` apareció una vez en móvil y no se repitió en 5 corridas: la prueba ahora registra la URL de toda solicitud fallida.
-- Fase 5 (Tablero): **pendiente**.
+- Fase 5 (Tablero): **completa** (2026-11-23) — 4 KPIs (contratos, avance general, cerrados con paralizados/en trámite, competencia vencida), barras horizontales de avance por responsable (una serie, color de acento, etiqueta directa, tooltip con cursor o foco; entran una por una de mayor a menor con barrido a la derecha, sin animación con movimiento reducido) y semáforo de pérdida de competencia de los contratos sin cerrar (Vencido / Menos de 90 días / En plazo / Sin fecha, con ícono y texto). Validación: `python pruebas/validar_app.py` 146/146.
+  - **Corrección de cálculo:** los promedios se calculaban sumando fracciones (0,5833…) y el error de punto flotante cambiaba el redondeo (68,75 % se mostraba 68,7 %). Ahora `store.js` promedia con enteros: pasos hechos / pasos posibles. Lo detectó la prueba al comparar contra Python.
+  - Umbral "próximo a vencer" = 90 días (`store.DEADLINE_WARN_DAYS`), ajustable en un solo punto.
+  - Dato a la vista con la semilla (2026-11-23): 11 de los 17 contratos sin cerrar ya pasaron su fecha de pérdida de competencia, 0 vencen en los próximos 90 días, 4 en plazo y 3 sin fecha.
+- Fase 6 (Respaldo): **pendiente**.
 
 ## Bloqueos
 
@@ -36,4 +40,4 @@ fases_reabiertas: 0
 
 ## Siguiente paso
 
-Fase 5 — tablero: avance general, avance por responsable (barras animadas una por una, de mayor a menor) y semáforo por días a la pérdida de competencia.
+Fase 6 — exportar e importar JSON (y restablecer a los datos del Excel).

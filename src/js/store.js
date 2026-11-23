@@ -79,17 +79,31 @@ export function itemsOf(id, type) {
   return state.avances.filter((a) => a.contrato === id && a.tipo === type);
 }
 
+/** Pasos hechos de un contrato; null si no tiene tarjeta. */
+function doneSteps(id) {
+  const rows = itemsOf(id, 'paso');
+  return rows.length ? rows.filter((r) => r.hecho).length : null;
+}
+
 /** Avance 0..1 de un contrato (pasos hechos / total de pasos); null si no tiene tarjeta. */
 export function progressOf(id) {
-  const rows = itemsOf(id, 'paso');
-  if (!rows.length) return null;
-  return rows.filter((r) => r.hecho).length / state.pasos.length;
+  const done = doneSteps(id);
+  return done === null ? null : done / state.pasos.length;
+}
+
+/**
+ * Promedio de avance de varios contratos. Se calcula con enteros (pasos hechos /
+ * pasos posibles) y no sumando fracciones: sumar 0,58333… da errores de punto
+ * flotante que cambian el redondeo (68,75 % se mostraba 68,7 %).
+ */
+function averageProgress(ids) {
+  const done = ids.map(doneSteps).filter((v) => v !== null);
+  return done.length ? done.reduce((a, b) => a + b, 0) / (done.length * state.pasos.length) : null;
 }
 
 /** Promedio del avance de todos los contratos con tarjeta. */
 export function generalProgress() {
-  const values = state.contratos.map((c) => progressOf(c.id)).filter((v) => v !== null);
-  return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+  return averageProgress(state.contratos.map((c) => c.id)) ?? 0;
 }
 
 export function logOf(id) {
@@ -180,6 +194,59 @@ export function sortedLogOf(id) {
     if (b.fecha) return 1;
     return a._i - b._i;
   });
+}
+
+// --- Tablero ---
+
+/** Avance promedio por responsable individual (un contrato compartido cuenta para cada uno). */
+export function progressByResponsible() {
+  const groups = new Map();
+  state.contratos.forEach((c) => {
+    const p = progressOf(c.id);
+    if (p === null) return;
+    responsiblesOf(c).forEach((name) => {
+      const g = groups.get(name) || { nombre: name, ids: [], cerrados: 0 };
+      g.ids.push(c.id);
+      if (p === 1) g.cerrados += 1;
+      groups.set(name, g);
+    });
+  });
+  return [...groups.values()]
+    .map((g) => ({
+      nombre: g.nombre,
+      contratos: g.ids.length,
+      cerrados: g.cerrados,
+      avance: averageProgress(g.ids),
+    }))
+    .sort((a, b) => b.avance - a.avance || b.contratos - a.contratos || a.nombre.localeCompare(b.nombre, 'es'));
+}
+
+/** Umbral en días para "próximo a vencer" en el semáforo de pérdida de competencia. */
+export const DEADLINE_WARN_DAYS = 90;
+
+export const DEADLINE_LEVELS = [
+  { id: 'vencido', nombre: 'Vencido', icono: '✕' },
+  { id: 'proximo', nombre: `Menos de ${DEADLINE_WARN_DAYS} días`, icono: '!' },
+  { id: 'en-plazo', nombre: 'En plazo', icono: '✓' },
+  { id: 'sin-fecha', nombre: 'Sin fecha', icono: '–' },
+];
+
+/** Días hasta la pérdida de competencia (negativo = ya pasó) y nivel del semáforo. */
+export function deadlineOf(c, today = new Date()) {
+  if (!c.perdida_competencia) return { dias: null, nivel: 'sin-fecha' };
+  const [y, m, d] = c.perdida_competencia.split('-').map(Number);
+  const start = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+  const dias = Math.round((Date.UTC(y, m - 1, d) - start) / 86400000);
+  const nivel = dias < 0 ? 'vencido' : dias <= DEADLINE_WARN_DAYS ? 'proximo' : 'en-plazo';
+  return { dias, nivel };
+}
+
+/** Contratos sin cerrar con su semáforo, del más urgente al menos urgente (sin fecha al final). */
+export function openDeadlines(today = new Date()) {
+  return state.contratos
+    .filter((c) => statusOf(c.id) !== 'cerrado')
+    .map((c) => ({ contrato: c, ...deadlineOf(c, today) }))
+    .sort((a, b) => (a.dias ?? Infinity) - (b.dias ?? Infinity));
 }
 
 /** Etapa actual: primer paso sin marcar (null si no hay tarjeta o ya cerró). */

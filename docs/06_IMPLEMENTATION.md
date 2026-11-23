@@ -22,8 +22,9 @@
   - Criterio: marcar pasos recalcula el avance; los cambios persisten al recargar; la bitácora conserva el historial.
   - **Cumplido: sí** — `python pruebas/validar_app.py` 112/112 (fases 2-4, escritorio + celular emulado; 3 corridas seguidas en verde): estados de los 12 pasos según la semilla, marcar/desmarcar recalcula el avance, deshacer desde el aviso, alertas, fecha elegida en el calendario, bitácora (vacía no se agrega; nueva queda primera), todo persiste al recargar, la consulta refleja el avance editado, texto original del plazo ilegible, "Iniciar seguimiento" en el contrato sin tarjeta. Pasos con `<ds-step>` sin `<ds-stepper>` (ver `07`).
 
-- [ ] **Fase 5 — Tablero.** Avance general calculado de los datos, avance por responsable (barras animadas una por una, de mayor a menor) y semáforo por días a la pérdida de competencia.
+- [x] **Fase 5 — Tablero.** Avance general calculado de los datos, avance por responsable (barras animadas una por una, de mayor a menor) y semáforo por días a la pérdida de competencia.
   - Criterio: el avance general coincide con el promedio de todos los contratos; el semáforo clasifica según la fecha actual.
+  - **Cumplido: sí** — `python pruebas/validar_app.py` 146/146 (fases 2-5, escritorio + celular emulado): KPIs (contratos, avance general, cerrados, competencia vencida) contra lo calculado desde la semilla; barras por responsable en orden y con su valor y etiqueta; animación una por una de mayor a menor (retardo creciente, la primera arranca antes que la última, todas llegan a su valor) y sin animación con movimiento reducido; tooltip; semáforo ordenado por urgencia, nivel y conteos según la fecha actual, con ícono y texto.
 
 - [ ] **Fase 6 — Respaldo.** Exportar e importar JSON.
   - Criterio: exportar → restablecer → importar deja los datos idénticos.

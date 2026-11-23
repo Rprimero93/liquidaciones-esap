@@ -3,7 +3,7 @@ tecnologia: Web
 tipo: entregable
 proyecto: Liquidaciones_ESAP
 estado: pendiente
-estado_resumen: "Fase 4 cerrada (ficha del contrato) — Fase 5 (tablero) por iniciar"
+estado_resumen: "Fase 5 cerrada (tablero) — Fase 6 (respaldo) por iniciar"
 stack: "HTML/CSS/JS vanilla + Design_System_Core (minimalista-corporativo) + localStorage; extracción con Python (openpyxl)"
 descripcion: "Micro app web de seguimiento de la liquidación de contratos ESAP (12 pasos, alertas, pérdida de competencia, bitácora, SECOP), migrada desde liquidacion.xlsm"
 aliases: [Liquidaciones_ESAP]
