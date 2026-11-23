@@ -73,6 +73,11 @@ ds-sidebar > a[aria-current="page"] {
   gap: var(--spacing-inline-md);
   margin-bottom: var(--spacing-group);
 }
+/* Símbolo ESAP a la izquierda del título: el SVG trae margen interno (el dibujo ocupa ~68 % del
+   alto), así que 48 px de archivo dejan el dibujo a la altura del título (mínimo de marca: 32 px).
+   Ancho proporcional (nunca deformar) y 12 px de separación, más que el área de protección (≈ 7,8 px) */
+.page-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.brand-symbol { height: 48px; width: auto; flex-shrink: 0; }
 .page-head h1 {
   margin: 0;
   font-family: var(--font-family-heading);

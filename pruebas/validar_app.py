@@ -84,6 +84,17 @@ def phase2(page, label):
         tops = page.eval_on_selector_all("ds-sidebar > a", "els => els.map(e => Math.round(e.getBoundingClientRect().top))")
         check(f"{label}: enlaces en una sola fila", len(set(tops)) == 1, str(tops))
 
+    # Símbolo ESAP a la izquierda del título: cargado, ≥ 32 px, sin deformar, con área de protección
+    sym = page.eval_on_selector(".brand-symbol", """e => { const r = e.getBoundingClientRect();
+        const t = document.getElementById('page-title').getBoundingClientRect();
+        return { loaded: e.complete && e.naturalWidth > 0, w: r.width, h: r.height, right: r.right, titleLeft: t.left,
+                 midDiff: Math.abs((r.top + r.height / 2) - (t.top + t.height / 2)), alt: e.alt }; }""")
+    ratio_ok = abs(sym["w"] / sym["h"] - 512 / 467) < 0.03   # proporción del viewBox del símbolo
+    clearance = sym["h"] * 75.86 / 467                       # área de protección = diámetro de un círculo
+    check(f"{label}: símbolo ESAP junto al título", sym["loaded"] and sym["h"] >= 32 and ratio_ok
+          and sym["right"] <= sym["titleLeft"] - clearance and sym["midDiff"] < 4 and sym["alt"] == "ESAP",
+          f"{sym['w']:.0f}x{sym['h']:.0f}, separación {sym['titleLeft'] - sym['right']:.1f} ≥ {clearance:.1f}")
+
     # Las 3 rutas desde la Sidebar
     for route in ("tablero", "consulta", "ficha"):
         page.click(f"ds-sidebar a[data-route='{route}']")
