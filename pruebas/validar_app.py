@@ -354,6 +354,12 @@ def phase4(page, label):
     exp_states = ["completed" if s["hecho"] else ("current" if s["item"] == first_pending else "pending")
                   for s in sorted(steps, key=lambda s: s["item"])]
     check(f"{label}: {n} pasos con el estado de la semilla", states == exp_states, f"{states.count('completed')} hechos")
+    # Círculo relleno con el azul claro de hover solo en los completados
+    fills = page.eval_on_selector_all("ds-step", """els => els.map(e => [e.getAttribute('state'),
+        getComputedStyle(e.shadowRoot.querySelector('[part~=circle]')).backgroundColor])""")
+    hover = page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--color-hover').trim()")
+    check(f"{label}: pasos completados con círculo azul claro",
+          all((bg == hex_rgb(hover)) == (st == "completed") for st, bg in fills), str(sorted(set(map(tuple, fills)))))
     check(f"{label}: avance de la ficha", avance(page) == fmt_pct(page, done / n), avance(page))
 
     # Marcar la etapa actual con el botón, luego deshacer desde el aviso
