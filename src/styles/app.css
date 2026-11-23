@@ -252,6 +252,13 @@ ds-sidebar > a[aria-current="page"] {
 .chip[data-status="paralizado"] { background: var(--status-danger-bg); color: var(--status-danger-text); }
 .chip[data-status="en-tramite"] { background: var(--status-warn-bg); color: var(--status-warn-text); }
 .chip[data-status="sin-seguimiento"] { color: var(--color-text-muted); }
+/* Píldoras de estado de igual ancho (el de la más larga, "Sin seguimiento") y texto centrado,
+   para que en la lista formen una columna pareja; en em para seguir el tamaño de la letra */
+.chip[data-status] {
+  display: inline-block;
+  width: 9.5em;
+  text-align: center;
+}
 
 /* Filtros de la consulta */
 .filters {

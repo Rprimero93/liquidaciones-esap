@@ -245,6 +245,15 @@ def phase3(page, label):
         ratio = contrast(fg, bg)
         check(f"{label}: contraste chip {est} >= 7:1", ratio >= 7, f"{ratio:.2f}")
 
+    # Píldoras de estado: todas del mismo ancho, texto centrado y sin desbordar (con los 4 estados en pantalla)
+    chips = page.eval_on_selector_all("[data-list='contratos'] .chip[data-status]", """els => els.map(e => {
+        const r = e.getBoundingClientRect(), s = getComputedStyle(e);
+        return [e.dataset.status, Math.round(r.width * 10) / 10, s.textAlign, e.scrollWidth <= e.clientWidth]; })""")
+    kinds = {c[0] for c in chips}
+    widths = {c[1] for c in chips}
+    check(f"{label}: píldoras de estado del mismo ancho", len(kinds) == 4 and len(widths) == 1
+          and all(c[2] == "center" and c[3] for c in chips), f"{sorted(kinds)}; anchos {sorted(widths)}")
+
     # Paneles cerrados no ocupan pantalla (no tapan clics de la lista)
     pick(page, "estado", "cerrado")
     hidden_panels = page.evaluate("""[...document.querySelectorAll('ds-dropdown')]
