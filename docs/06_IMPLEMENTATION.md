@@ -18,8 +18,9 @@
   - Criterio: búsqueda y filtros, solos y combinados, reducen la lista correctamente; conteo leído de los datos; estados vacíos correctos.
   - **Cumplido: sí** — `python pruebas/validar_app.py` 82/82 (fases 2 y 3, escritorio + celular emulado): búsqueda por número (con y sin espacios/guiones), por contratista sin tildes, sin resultados; filtro por responsable individual (incluidos los de celdas combinadas) y por cada estado, solos y combinados, contra lo esperado calculado desde la semilla; estado vacío, limpiar filtros, filtros conservados al volver de la ficha, contraste de chips ≥ 7:1, 0 errores de consola.
 
-- [ ] **Fase 4 — Ficha del contrato.** Stepper de 12 pasos, 4 alertas, bitácora con fecha, fechas editables con Datepicker, enlace a SECOP, Toast al guardar.
+- [x] **Fase 4 — Ficha del contrato.** Stepper de 12 pasos, 4 alertas, bitácora con fecha, fechas editables con Datepicker, enlace a SECOP, Toast al guardar.
   - Criterio: marcar pasos recalcula el avance; los cambios persisten al recargar; la bitácora conserva el historial.
+  - **Cumplido: sí** — `python pruebas/validar_app.py` 112/112 (fases 2-4, escritorio + celular emulado; 3 corridas seguidas en verde): estados de los 12 pasos según la semilla, marcar/desmarcar recalcula el avance, deshacer desde el aviso, alertas, fecha elegida en el calendario, bitácora (vacía no se agrega; nueva queda primera), todo persiste al recargar, la consulta refleja el avance editado, texto original del plazo ilegible, "Iniciar seguimiento" en el contrato sin tarjeta. Pasos con `<ds-step>` sin `<ds-stepper>` (ver `07`).
 
 - [ ] **Fase 5 — Tablero.** Avance general calculado de los datos, avance por responsable (barras animadas una por una, de mayor a menor) y semáforo por días a la pérdida de competencia.
   - Criterio: el avance general coincide con el promedio de todos los contratos; el semáforo clasifica según la fecha actual.

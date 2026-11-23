@@ -3,26 +3,20 @@ import '../components/sidebar/sidebar.core.js';
 import '../components/button/button.core.js';
 import '../components/toast/toast.core.js';
 import '../components/dropdown/dropdown.core.js';
+import '../components/stepper/stepper.core.js';
+import '../components/datepicker/datepicker.core.js';
 import * as store from './store.js';
 import { start } from './router.js';
 import * as tablero from '../views/tablero.js';
 import * as consulta from '../views/consulta.js';
 import * as ficha from '../views/ficha.js';
 
+import { refreshSource } from './ui.js';
+
 const routes = { tablero, consulta, ficha };
-const SOURCE_LABEL = { semilla: 'Datos de prueba (semilla)', local: 'Datos guardados en este navegador' };
 
 const viewEl = document.getElementById('view');
 const titleEl = document.getElementById('page-title');
-const sourceEl = document.getElementById('data-source');
-
-/** Aviso flotante; lo usan las vistas al guardar (Fase 4). */
-export function toast(message, ms = 3000) {
-  const el = document.createElement('ds-toast');
-  el.setAttribute('auto-dismiss', String(ms));
-  el.textContent = message;
-  document.getElementById('toast-stack').append(el);
-}
 
 function markActive(name) {
   document.querySelectorAll('ds-sidebar a[data-route]').forEach((a) => {
@@ -37,8 +31,7 @@ function show(name, view, param) {
   markActive(name);
   titleEl.textContent = view.title;
   document.title = `${view.title} — Liquidaciones ESAP`;
-  sourceEl.textContent = SOURCE_LABEL[store.getSource()];
-  sourceEl.dataset.source = store.getSource();
+  refreshSource();
   view.render(viewEl, param);
 }
 

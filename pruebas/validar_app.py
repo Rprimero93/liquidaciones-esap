@@ -87,6 +87,11 @@ def phase2(page, label):
     for route in ("tablero", "consulta", "ficha"):
         page.click(f"ds-sidebar a[data-route='{route}']")
         page.wait_for_function(f"location.hash === '#/{route}'", timeout=5000)
+        # hashchange llega después del cambio de URL: esperar a que la app marque el enlace
+        try:
+            page.wait_for_selector(f"ds-sidebar a[data-route='{route}'][aria-current='page']", timeout=5000)
+        except Exception:
+            pass  # el check de abajo reporta la falla
         current = page.eval_on_selector_all("ds-sidebar a[aria-current='page']", "els => els.map(e => e.dataset.route)")
         check(f"{label}: ruta {route} desde la Sidebar", current == [route], str(current))
 
@@ -255,7 +260,128 @@ def phase3(page, label):
     page.locator("[data-clear]").click()
 
 
-PHASES = {"2": phase2, "3": phase3}
+# --- Fase 4: ficha editable ---
+
+def fmt_pct(page, value):
+    return page.evaluate(f"new Intl.NumberFormat('es-CO', {{style:'percent', maximumFractionDigits:1}}).format({value})")
+
+
+def seed_steps(cid):
+    return [a for a in SEED["avances"] if a["contrato"] == cid and a["tipo"] == "paso"]
+
+
+def open_ficha(page, cid):
+    goto_route(page, f"ficha/{cid}")
+    page.wait_for_selector(f"[data-contrato='{cid}'] ds-step, [data-contrato='{cid}'] [data-start]", timeout=5000)
+
+
+def avance(page):
+    return page.text_content("[data-avance]").strip()
+
+
+def step_states(page):
+    return page.eval_on_selector_all("[data-steps] ds-step", "els => els.map(e => e.getAttribute('state'))")
+
+
+def last_toast(page):
+    page.wait_for_selector("#toast-stack ds-toast", timeout=5000)
+    return page.locator("#toast-stack ds-toast").last
+
+
+def phase4(page, label):
+    n = len(SEED["pasos"])
+    # Contrato en trámite con pasos marcados y pendientes
+    c = next(c for c in SEED["contratos"] if status(c) == "en-tramite")
+    steps = seed_steps(c["id"])
+    done = sum(s["hecho"] for s in steps)
+    first_pending = min(s["item"] for s in steps if not s["hecho"])
+    open_ficha(page, c["id"])
+
+    states = step_states(page)
+    exp_states = ["completed" if s["hecho"] else ("current" if s["item"] == first_pending else "pending")
+                  for s in sorted(steps, key=lambda s: s["item"])]
+    check(f"{label}: {n} pasos con el estado de la semilla", states == exp_states, f"{states.count('completed')} hechos")
+    check(f"{label}: avance de la ficha", avance(page) == fmt_pct(page, done / n), avance(page))
+
+    # Marcar la etapa actual con el botón, luego deshacer desde el aviso
+    page.click(f"[data-done='{first_pending}']")
+    check(f"{label}: marcar paso sube el avance", avance(page) == fmt_pct(page, (done + 1) / n), avance(page))
+    check(f"{label}: guardar muestra aviso y origen local",
+          last_toast(page).is_visible() and page.get_attribute("#data-source", "data-source") == "local")
+    last_toast(page).locator("ds-button").click()
+    check(f"{label}: deshacer revierte el paso", avance(page) == fmt_pct(page, done / n)
+          and step_states(page) == exp_states, avance(page))
+
+    # Desmarcar un paso hecho haciendo clic en su encabezado
+    done_item = next(s["item"] for s in steps if s["hecho"])
+    page.locator(f"ds-step[data-step='{done_item}']").locator(".header").click()
+    check(f"{label}: clic en paso hecho lo desmarca", avance(page) == fmt_pct(page, (done - 1) / n), avance(page))
+
+    # Alerta 2
+    alert = page.locator("[data-alert='2']")
+    was = alert.is_checked()
+    alert.click()
+    check(f"{label}: alerta cambia", alert.is_checked() != was)
+
+    # Fecha de pérdida de competencia: elegir el día 15 del mes mostrado
+    dp = page.locator("ds-datepicker[data-date='perdida_competencia']")
+    # El panel se cierra al hacer scroll (comportamiento del componente): se centra
+    # el campo antes de abrirlo para que el calendario quepa sin desplazar la página
+    dp.evaluate("e => e.scrollIntoView({block: 'center'})")
+    dp.locator(".trigger").click()
+    dp.locator(".day:not(.day--vacio)", has_text=re.compile(r"^15$")).click()
+    new_date = dp.evaluate("e => e.value")
+    check(f"{label}: fecha elegida en el calendario", new_date.endswith("-15"), new_date)
+
+    # Bitácora: vacío no agrega; texto sí, y queda primero
+    count0 = int(page.text_content("[data-log-count]"))
+    page.click("[data-log-add]")
+    check(f"{label}: observación vacía no se agrega", int(page.text_content("[data-log-count]")) == count0)
+    note = f"Prueba automática {label}"
+    page.fill("[data-log-text]", note)
+    page.click("[data-log-add]")
+    first = page.text_content("[data-log] li .log-text")
+    check(f"{label}: observación agregada primero", int(page.text_content("[data-log-count]")) == count0 + 1
+          and first == note, first)
+
+    # Persistencia al recargar
+    page.reload(wait_until="networkidle")
+    open_ficha(page, c["id"])
+    persisted = (avance(page) == fmt_pct(page, (done - 1) / n)
+                 and page.locator("[data-alert='2']").is_checked() != was
+                 and page.locator("ds-datepicker[data-date='perdida_competencia']").evaluate("e => e.value") == new_date
+                 and page.text_content("[data-log] li .log-text") == note
+                 and page.get_attribute("#data-source", "data-source") == "local")
+    check(f"{label}: cambios persisten al recargar", persisted)
+    page.screenshot(path=str(SHOTS / f"fase4_{label}_ficha.png"), full_page=True)
+
+    # La consulta refleja el cambio
+    goto_route(page, "consulta")
+    page.wait_for_selector(f"a[data-id='{c['id']}']")
+    pct = page.text_content(f"a[data-id='{c['id']}'] .list-pct").strip()
+    check(f"{label}: consulta refleja el avance editado", pct == fmt_pct(page, (done - 1) / n), pct)
+
+    # Fecha ilegible del Excel: se muestra el texto original
+    bad = next((c for c in SEED["contratos"] if c["plazo_cierre_texto"] and not c["plazo_cierre"]), None)
+    if bad:
+        open_ficha(page, bad["id"])
+        hint = page.locator(".date-grid small").text_content() or ""
+        check(f"{label}: texto original del plazo ilegible", bad["plazo_cierre_texto"] in hint, hint)
+
+    # Contrato sin tarjeta: iniciar seguimiento
+    nocard = next((c for c in SEED["contratos"] if not c["tiene_tarjeta"]), None)
+    if nocard:
+        open_ficha(page, nocard["id"])
+        page.click("[data-start]")
+        page.wait_for_selector("[data-steps] ds-step")
+        states = step_states(page)
+        check(f"{label}: iniciar seguimiento crea {n} pasos sin marcar",
+              len(states) == n and states.count("completed") == 0 and states[0] == "current", str(states[:2]))
+        chip = page.get_attribute("[data-summary] .chip", "data-status")
+        check(f"{label}: el contrato pasa a en trámite", chip == "en-tramite", chip)
+
+
+PHASES = {"2": phase2, "3": phase3, "4": phase4}
 
 
 def run(browser, url, label, phases, **ctx):
@@ -264,6 +390,7 @@ def run(browser, url, label, phases, **ctx):
     errors = []
     page.on("console", lambda m: m.type == "error" and errors.append(m.text))
     page.on("pageerror", lambda e: errors.append(str(e)))
+    page.on("requestfailed", lambda r: errors.append(f"{r.failure} {r.url[:120]}"))
     page.goto(url, wait_until="networkidle")
     page.wait_for_selector("#view > *", timeout=10000)
     if label == "movil":

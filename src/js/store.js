@@ -37,6 +37,10 @@ export async function load() {
   return state;
 }
 
+/**
+ * Guarda el estado actual. No repinta la vista (la ficha se actualiza en el
+ * lugar para no perder el foco ni el scroll); solo cambia el origen a 'local'.
+ */
 export function save() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -45,7 +49,6 @@ export function save() {
     console.warn('No se pudo guardar en localStorage', err);
     return false;
   }
-  listeners.forEach((fn) => fn(state));
   return true;
 }
 
@@ -127,6 +130,57 @@ export function statusOf(id) {
 }
 
 export const statusName = (status) => STATUSES.find((s) => s.id === status)?.nombre || status;
+
+// --- Edición (cada función guarda y devuelve true si pudo) ---
+
+function findItem(id, type, item) {
+  return state.avances.find((a) => a.contrato === id && a.tipo === type && a.item === item);
+}
+
+/** Marca o desmarca un paso o una alerta. */
+export function setItem(id, type, item, done) {
+  const row = findItem(id, type, item);
+  if (!row) return false;
+  row.hecho = !!done;
+  return save();
+}
+
+/** Fecha ISO (o '' para vaciarla) en 'perdida_competencia' o 'plazo_cierre'. */
+export function setDate(id, field, iso) {
+  const c = contract(id);
+  if (!c || !['perdida_competencia', 'plazo_cierre'].includes(field)) return false;
+  c[field] = iso || null;
+  return save();
+}
+
+/** Agrega una entrada a la bitácora (origen 'app' para distinguirla de las del Excel). */
+export function addLog(id, fecha, texto) {
+  const text = String(texto || '').trim();
+  if (!contract(id) || !text) return false;
+  state.bitacora.push({ contrato: id, fecha: fecha || null, texto: text, origen: 'app' });
+  return save();
+}
+
+/** Crea los pasos y alertas (todos sin marcar) de un contrato que no tenía tarjeta en el Excel. */
+export function startTracking(id) {
+  const c = contract(id);
+  if (!c || c.tiene_tarjeta) return false;
+  state.pasos.forEach((p) => state.avances.push({ contrato: id, tipo: 'paso', item: p.id, hecho: false, etiqueta: '' }));
+  state.alertas.forEach((a) => state.avances.push({ contrato: id, tipo: 'alerta', item: a.id, hecho: false, etiqueta: '' }));
+  c.tiene_tarjeta = true;
+  return save();
+}
+
+/** Bitácora ordenada: más reciente primero; las entradas sin fecha al final, en su orden original. */
+export function sortedLogOf(id) {
+  const rows = logOf(id).map((b, i) => ({ ...b, _i: i }));
+  return rows.sort((a, b) => {
+    if (a.fecha && b.fecha) return b.fecha.localeCompare(a.fecha) || b._i - a._i;
+    if (a.fecha) return -1;
+    if (b.fecha) return 1;
+    return a._i - b._i;
+  });
+}
 
 /** Etapa actual: primer paso sin marcar (null si no hay tarjeta o ya cerró). */
 export function currentStep(id) {

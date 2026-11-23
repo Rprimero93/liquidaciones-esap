@@ -1,6 +1,6 @@
 ---
-fase_actual: 3
-estado_resumen: "Fase 3 cerrada (consulta) — Fase 4 por iniciar"
+fase_actual: 4
+estado_resumen: "Fase 4 cerrada (ficha del contrato) — Fase 5 por iniciar"
 tolerancias_excedidas: 0
 fases_reabiertas: 0
 ---
@@ -24,7 +24,11 @@ fases_reabiertas: 0
   - Responsables separados de las celdas combinadas (", ", " y ", " - "): 14 individuales. Se calcula en `store.js`; la semilla queda fiel al Excel.
   - Tokens propios de la app para colores de estado (`--status-*`, el estilo no los trae), contraste verificado ≥ 7:1.
   - Hallazgo en `<ds-dropdown>` de Design_System_Core: `.panel { display: flex }` anula el `display: none` de un popover cerrado → el panel cerrado quedaba fijo en pantalla tapando los clics de la lista. Parche comentado en la copia local; mismo patrón que el `[hidden]` de la Sidebar (Fase 2). Candidato a llevar a Design_System_Core.
-- Fase 4 (Ficha del contrato): **pendiente**.
+- Fase 4 (Ficha del contrato): **completa** (2026-11-23) — ficha editable: 12 pasos (clic para marcar/desmarcar, botón "Marcar como completado" en la etapa actual), 4 alertas, fechas con `<ds-datepicker>` (con el texto original del Excel cuando la fecha era ilegible), enlace a SECOP, bitácora (más reciente primero, origen Excel/Nota/App) con alta de observaciones, "Iniciar seguimiento" para el contrato sin tarjeta. Cada cambio se guarda solo y se confirma con un aviso (con "Deshacer" en pasos y alertas). Validación: `python pruebas/validar_app.py` 112/112.
+  - **Decisión — pasos con `<ds-step>` sin `<ds-stepper>`:** el contenedor es un asistente que obliga a avanzar en orden y fija el estado de cada paso por navegación; el Excel tiene pasos marcados fuera de orden. Se usa `<ds-step>` suelto con el estado puesto por la app (completed / current = etapa actual / pending). Alternativa descartada: checklist propio (perdía la coherencia visual con el sistema). Impacto: ninguno en el Core; reversible.
+  - `store.save()` ya no repinta la vista (la ficha se actualiza por secciones, sin perder foco ni scroll); `reset()` sí avisa. El aviso flotante pasó a `js/ui.js` para evitar una importación circular con `app.js`.
+  - Validación: se corrigieron dos carreras de la prueba (no de la app): el calendario se cierra al hacer scroll, así que se centra el campo antes de abrirlo; y el enlace activo se espera tras `hashchange`. Un `ERR_CONNECTION_REFUSED` apareció una vez en móvil y no se repitió en 5 corridas: la prueba ahora registra la URL de toda solicitud fallida.
+- Fase 5 (Tablero): **pendiente**.
 
 ## Bloqueos
 
@@ -32,4 +36,4 @@ fases_reabiertas: 0
 
 ## Siguiente paso
 
-Fase 4 — ficha con Stepper de 12 pasos, 4 alertas, bitácora con fecha, fechas editables (Datepicker), enlace a SECOP y Toast al guardar.
+Fase 5 — tablero: avance general, avance por responsable (barras animadas una por una, de mayor a menor) y semáforo por días a la pérdida de competencia.
