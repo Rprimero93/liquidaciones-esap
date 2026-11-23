@@ -121,7 +121,15 @@ ds-sidebar > a[aria-current="page"] {
   gap: var(--space-1);
   text-align: center;
 }
-.kpi-label { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.kpi-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+/* Ícono del título: mide 1em, así sigue la proporción del texto del título */
+.kpi-icon { width: 1em; height: 1em; flex-shrink: 0; }
 .kpi-value { font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); line-height: 1.1; }
 .kpi-note { font-size: var(--font-size-sm); color: var(--color-text-muted); }
 /* Tarjeta Avance general: anillo de progreso con el valor al centro; la descripción va en un

@@ -31,6 +31,19 @@ function ring(value) {
     </div>`;
 }
 
+// Íconos de los títulos de las tarjetas (trazo, mismo estilo que el menú lateral)
+const KPI_ICONS = {
+  contratos: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  avance: '<path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 12A9 9 0 0 0 12 3v9z"/>',
+  estados: '<path d="M10 6h10M10 12h10M10 18h10"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/>',
+  vencidos: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M19 3l3 3"/>',
+};
+
+function kpiLabel(key, text) {
+  return `<span class="kpi-label"><svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${KPI_ICONS[key]}</svg>${text}</span>`;
+}
+
 function kpis() {
   const all = store.contracts();
   const withCard = all.filter((c) => c.tiene_tarjeta).length;
@@ -39,19 +52,19 @@ function kpis() {
   return `
     <div class="kpi-row">
       <article class="card kpi" data-kpi="contratos">
-        <span class="kpi-label">Contratos</span>
+        ${kpiLabel('contratos', 'Contratos')}
         <div class="kpi-body">
           <strong class="kpi-value">${all.length}</strong>
           <span class="kpi-note">${withCard} con seguimiento</span>
         </div>
       </article>
       <article class="card kpi kpi-has-tip" data-kpi="avance" tabindex="0" aria-describedby="tip-avance">
-        <span class="kpi-label">Avance general</span>
+        ${kpiLabel('avance', 'Avance general')}
         <div class="kpi-body">${ring(store.generalProgress())}</div>
         <div class="tooltip kpi-tip" id="tip-avance" role="tooltip">Promedio de los ${withCard} contratos con seguimiento</div>
       </article>
       <article class="card kpi" data-kpi="estados">
-        <span class="kpi-label">Estados</span>
+        ${kpiLabel('estados', 'Estados')}
         <div class="kpi-body kpi-split">
           ${STATUS_KPIS.map((s) => `
             <a class="kpi-part" href="${href('consulta')}" data-status-link="${s}"
@@ -62,7 +75,7 @@ function kpis() {
         </div>
       </article>
       <article class="card kpi kpi-has-tip" data-kpi="vencidos" tabindex="0" aria-describedby="tip-vencidos">
-        <span class="kpi-label">Competencia vencida</span>
+        ${kpiLabel('vencidos', 'Competencia vencida')}
         <div class="kpi-body"><strong class="kpi-value">${overdue}</strong></div>
         <div class="tooltip kpi-tip" id="tip-vencidos" role="tooltip">Contratos sin cerrar con la fecha ya pasada</div>
       </article>

@@ -482,6 +482,15 @@ def phase5(page, label):
         off = [(k, c) for k, c in centers if abs(c - ring_c) > 3]
         check(f"{label}: contenido de las tarjetas centrado con el anillo", not off, f"anillo {ring_c}; fuera {off}")
 
+    # Íconos de los títulos: uno por tarjeta, del tamaño de la letra del título y del mismo color
+    icons = page.eval_on_selector_all(".kpi-row > .kpi > .kpi-label", """els => els.map(l => {
+        const i = l.querySelector('svg.kpi-icon'); if (!i) return null;
+        const s = getComputedStyle(l), r = i.getBoundingClientRect();
+        return [Math.round(r.width), Math.round(r.height), Math.round(parseFloat(s.fontSize)),
+                getComputedStyle(i).color === s.color, i.getAttribute('aria-hidden')]; })""")
+    ok = len(icons) == 4 and all(i and i[0] == i[1] == i[2] and i[3] and i[4] == "true" for i in icons)
+    check(f"{label}: ícono en cada título, del tamaño del texto", ok, str(icons))
+
     # Competencia vencida: la descripción solo en el mensaje flotante
     vtip = lambda: page.eval_on_selector("#tip-vencidos", "e => getComputedStyle(e).opacity")
     no_note = page.locator("[data-kpi='vencidos'] .kpi-note").count() == 0
