@@ -40,17 +40,19 @@ function kpis() {
     <div class="kpi-row">
       <article class="card kpi" data-kpi="contratos">
         <span class="kpi-label">Contratos</span>
-        <strong class="kpi-value">${all.length}</strong>
-        <span class="kpi-note">${withCard} con seguimiento</span>
+        <div class="kpi-body">
+          <strong class="kpi-value">${all.length}</strong>
+          <span class="kpi-note">${withCard} con seguimiento</span>
+        </div>
       </article>
-      <article class="card kpi kpi-ring-card" data-kpi="avance" tabindex="0" aria-describedby="tip-avance">
+      <article class="card kpi kpi-has-tip" data-kpi="avance" tabindex="0" aria-describedby="tip-avance">
         <span class="kpi-label">Avance general</span>
-        ${ring(store.generalProgress())}
+        <div class="kpi-body">${ring(store.generalProgress())}</div>
         <div class="tooltip kpi-tip" id="tip-avance" role="tooltip">Promedio de los ${withCard} contratos con seguimiento</div>
       </article>
       <article class="card kpi" data-kpi="estados">
         <span class="kpi-label">Estados</span>
-        <div class="kpi-split">
+        <div class="kpi-body kpi-split">
           ${STATUS_KPIS.map((s) => `
             <a class="kpi-part" href="${href('consulta')}" data-status-link="${s}"
               aria-label="${count(s)} ${STATUS_PLURAL[s].toLowerCase()}: ver en Consulta">
@@ -59,10 +61,10 @@ function kpis() {
             </a>`).join('')}
         </div>
       </article>
-      <article class="card kpi" data-kpi="vencidos">
+      <article class="card kpi kpi-has-tip" data-kpi="vencidos" tabindex="0" aria-describedby="tip-vencidos">
         <span class="kpi-label">Competencia vencida</span>
-        <strong class="kpi-value">${overdue}</strong>
-        <span class="kpi-note">Contratos sin cerrar con la fecha ya pasada</span>
+        <div class="kpi-body"><strong class="kpi-value">${overdue}</strong></div>
+        <div class="tooltip kpi-tip" id="tip-vencidos" role="tooltip">Contratos sin cerrar con la fecha ya pasada</div>
       </article>
     </div>`;
 }

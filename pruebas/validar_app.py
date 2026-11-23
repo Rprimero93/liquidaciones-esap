@@ -466,10 +466,37 @@ def phase5(page, label):
     tops = page.eval_on_selector_all("[data-kpi='estados'] .kpi-value", "els => els.map(e => Math.round(e.getBoundingClientRect().top))")
     check(f"{label}: cifras de Estados en una misma fila", len(set(tops)) == 1, str(tops))
     if label == "escritorio":
-        ref = page.eval_on_selector("[data-kpi='contratos'] .kpi-value", "e => Math.round(e.getBoundingClientRect().top)")
+        # Títulos a la misma altura; el contenido de cada tarjeta centrado a la altura del centro del anillo
         heights = page.eval_on_selector_all(".kpi-row > .kpi", "els => els.map(e => Math.round(e.getBoundingClientRect().height))")
-        check(f"{label}: cifras de Estados alineadas con las otras tarjetas", tops[0] == ref and len(set(heights)) == 1,
-              f"{tops[0]} vs {ref}; alturas {heights}")
+        title_tops = page.eval_on_selector_all(".kpi-row > .kpi > .kpi-label", "els => els.map(e => Math.round(e.getBoundingClientRect().top))")
+        check(f"{label}: tarjetas de igual alto y títulos en su posición", len(set(heights)) == 1 and len(set(title_tops)) == 1,
+              f"alturas {heights}; títulos {title_tops}")
+        centers = page.eval_on_selector_all(".kpi-row > .kpi", """els => els.map(card => {
+            const body = card.querySelector('.kpi-body');
+            const kids = [...body.children];
+            const top = Math.min(...kids.map(k => k.getBoundingClientRect().top));
+            const bottom = Math.max(...kids.map(k => k.getBoundingClientRect().bottom));
+            return [card.dataset.kpi, Math.round((top + bottom) / 2)];
+        })""")
+        ring_c = page.eval_on_selector(".ring", "e => { const r = e.getBoundingClientRect(); return Math.round(r.top + r.height / 2); }")
+        off = [(k, c) for k, c in centers if abs(c - ring_c) > 3]
+        check(f"{label}: contenido de las tarjetas centrado con el anillo", not off, f"anillo {ring_c}; fuera {off}")
+
+    # Competencia vencida: la descripción solo en el mensaje flotante
+    vtip = lambda: page.eval_on_selector("#tip-vencidos", "e => getComputedStyle(e).opacity")
+    no_note = page.locator("[data-kpi='vencidos'] .kpi-note").count() == 0
+    check(f"{label}: Competencia vencida sin descripción visible", no_note and vtip() == "0")
+    vcard = page.locator("[data-kpi='vencidos']")
+    if label == "escritorio":
+        vcard.hover()
+    else:
+        vcard.tap()
+    page.wait_for_function("getComputedStyle(document.getElementById('tip-vencidos')).opacity === '1'", timeout=3000)
+    check(f"{label}: mensaje de Competencia vencida", page.text_content("#tip-vencidos").strip()
+          == "Contratos sin cerrar con la fecha ya pasada")
+    page.mouse.move(0, 0)
+    page.evaluate("document.activeElement.blur()")
+
     dl = deadlines(today)
     overdue = sum(r[2] == "vencido" for r in dl)
     check(f"{label}: KPI competencia vencida", page.text_content("[data-kpi='vencidos'] .kpi-value").strip() == str(overdue), str(overdue))

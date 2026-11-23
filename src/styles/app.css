@@ -110,13 +110,24 @@ ds-sidebar > a[aria-current="page"] {
   margin-bottom: var(--spacing-group);
 }
 .kpi { display: flex; flex-direction: column; gap: var(--space-1); }
+/* Cuerpo de la tarjeta: ocupa el alto bajo el título y centra su contenido en ambos ejes,
+   así todas las cifras quedan a la altura del centro del anillo de Avance general */
+.kpi-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  text-align: center;
+}
 .kpi-label { font-size: var(--font-size-sm); color: var(--color-text-muted); }
 .kpi-value { font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); line-height: 1.1; }
 .kpi-note { font-size: var(--font-size-sm); color: var(--color-text-muted); }
 /* Tarjeta Avance general: anillo de progreso con el valor al centro; la descripción va en un
    mensaje flotante al pasar el cursor o al enfocar la tarjeta */
-.kpi-ring-card { position: relative; outline: none; }
-.kpi-ring-card:focus-visible { box-shadow: 0 0 0 2px var(--color-focus); }
+.kpi-has-tip { position: relative; outline: none; }
+.kpi-has-tip:focus-visible { box-shadow: 0 0 0 2px var(--color-focus); }
 .ring { position: relative; width: 112px; height: 112px; align-self: center; }
 .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); } /* el arco arranca arriba */
 .ring circle { fill: none; stroke-width: 10; }
@@ -151,11 +162,11 @@ ds-sidebar > a[aria-current="page"] {
   transition: opacity var(--motion-duration-fast, .15s);
 }
 /* :focus (no solo :focus-visible) para que en el celular aparezca al tocar la tarjeta */
-.kpi-ring-card:hover .kpi-tip,
-.kpi-ring-card:focus .kpi-tip { opacity: 1; visibility: visible; }
+.kpi-has-tip:hover .kpi-tip,
+.kpi-has-tip:focus .kpi-tip { opacity: 1; visibility: visible; }
 
 /* Tarjeta con varias cifras en fila: cada cifra queda al mismo nivel que la de las otras tarjetas */
-.kpi-split { display: flex; gap: var(--spacing-inline-md); }
+.kpi-split { flex-direction: row; align-items: center; gap: var(--spacing-inline-md); }
 .kpi-part .kpi-note { white-space: nowrap; }
 /* Solo en la tarjeta Estados: cada cifra centrada sobre su descripción */
 .kpi-part { align-items: center; text-align: center; }
