@@ -39,9 +39,13 @@ const KPI_ICONS = {
   vencidos: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M19 3l3 3"/>',
 };
 
-function kpiLabel(key, text) {
+/** Título con ícono. `short` (opcional): versión corta que se muestra si la tarjeta es angosta. */
+function kpiLabel(key, text, short) {
+  const title = short
+    ? `<span class="kpi-title-long">${text}</span><span class="kpi-title-short" aria-hidden="true">${short}</span>`
+    : text;
   return `<span class="kpi-label"><svg class="kpi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${KPI_ICONS[key]}</svg>${text}</span>`;
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${KPI_ICONS[key]}</svg>${title}</span>`;
 }
 
 function kpis() {
@@ -75,7 +79,7 @@ function kpis() {
         </div>
       </article>
       <article class="card kpi kpi-has-tip" data-kpi="vencidos" tabindex="0" aria-describedby="tip-vencidos">
-        ${kpiLabel('vencidos', 'Competencia vencida')}
+        ${kpiLabel('vencidos', 'Competencia vencida', 'Vencida')}
         <div class="kpi-body"><strong class="kpi-value">${overdue}</strong></div>
         <div class="tooltip kpi-tip" id="tip-vencidos" role="tooltip">Contratos sin cerrar con la fecha ya pasada</div>
       </article>
@@ -223,4 +227,29 @@ export function render(container) {
     container.querySelector('[data-bars]')?.classList.add('is-in');
     container.querySelector('.ring')?.classList.add('is-in');
   }));
+  fitShortTitles(container);
+}
+
+/**
+ * Títulos con versión corta: si el largo no cabe en el ancho disponible de la tarjeta,
+ * se marca la etiqueta con .is-short. Se vuelve a medir cada vez que la tarjeta cambia de ancho.
+ */
+let titleObserver = null;
+function fitShortTitles(container) {
+  titleObserver?.disconnect();
+  const labels = [...container.querySelectorAll('.kpi-label')].filter((l) => l.querySelector('.kpi-title-long'));
+  const SAFETY_PX = 4; // margen para que el título no quede justo al borde
+  const fit = () => labels.forEach((label) => {
+    const card = label.closest('.kpi');
+    const s = getComputedStyle(card);
+    const room = card.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
+    // Ancho que necesita el título largo: texto + ícono + espacio entre ambos
+    const icon = label.querySelector('.kpi-icon').getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(label).columnGap) || 0;
+    const text = label.querySelector('.kpi-title-long').scrollWidth;
+    label.classList.toggle('is-short', text + icon + gap + SAFETY_PX > room);
+  });
+  titleObserver = new ResizeObserver(fit);
+  labels.forEach((l) => titleObserver.observe(l.closest('.kpi')));
+  fit();
 }

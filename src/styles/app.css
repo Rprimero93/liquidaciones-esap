@@ -130,6 +130,15 @@ ds-sidebar > a[aria-current="page"] {
 }
 /* Ícono del título: mide 1em, así sigue la proporción del texto del título */
 .kpi-icon { width: 1em; height: 1em; flex-shrink: 0; }
+/* El título no se parte en dos líneas (el ícono quedaba centrado entre ambas) */
+.kpi-label { white-space: nowrap; }
+/* Título corto: si el título largo no cabe en la tarjeta (lo mide tablero.js con
+   ResizeObserver), se muestra la versión corta ("Vencida") en vez de "Competencia vencida" */
+.kpi-title-short { display: none; }
+.kpi-label.is-short .kpi-title-long {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); /* solo lector de pantalla */
+}
+.kpi-label.is-short .kpi-title-short { display: inline; }
 .kpi-value { font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); line-height: 1.1; }
 .kpi-note { font-size: var(--font-size-sm); color: var(--color-text-muted); }
 /* Tarjeta Avance general: anillo de progreso con el valor al centro; la descripción va en un
@@ -180,7 +189,8 @@ ds-sidebar > a[aria-current="page"] {
 .kpi-part { align-items: center; text-align: center; }
 /* En escritorio, la tarjeta Estados (3 cifras) toma más ancho que las demás */
 @media (min-width: 1100px) {
-  .kpi-row { grid-template-columns: 1fr 1fr 1.5fr 1fr; }
+  /* Estados (3 cifras) más ancha; Competencia vencida un poco más para que su título quepa completo */
+  .kpi-row { grid-template-columns: 1fr 1fr 1.4fr 1.1fr; }
 }
 .kpi-part {
   flex: 1;

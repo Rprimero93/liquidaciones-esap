@@ -491,6 +491,44 @@ def phase5(page, label):
     ok = len(icons) == 4 and all(i and i[0] == i[1] == i[2] and i[3] and i[4] == "true" for i in icons)
     check(f"{label}: ícono en cada título, del tamaño del texto", ok, str(icons))
 
+    # Títulos en una sola línea a cualquier ancho; "Vencida" solo cuando "Competencia vencida" no cabe
+    if label == "escritorio":
+        size = page.viewport_size
+        # Mide el título visible (largo o corto) contra el espacio útil de la tarjeta
+        title_js = """() => { const l = document.querySelector("[data-kpi='vencidos'] .kpi-label");
+            const card = l.closest('.kpi'), s = getComputedStyle(card);
+            const room = card.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
+            const short = l.classList.contains('is-short');
+            const shown = l.querySelector(short ? '.kpi-title-short' : '.kpi-title-long');
+            const icon = l.querySelector('.kpi-icon').getBoundingClientRect();
+            const txt = shown.getBoundingClientRect();
+            const gap = parseFloat(getComputedStyle(l).columnGap) || 0;
+            const need = txt.width + icon.width + gap;
+            const needLong = l.querySelector('.kpi-title-long').scrollWidth + icon.width + gap;
+            return { short, oneLine: Math.abs(txt.top - icon.top) < txt.height && txt.height < parseFloat(getComputedStyle(l).fontSize) * 1.6,
+                     fits: need <= room, longFits: needLong + 4 <= room, need: Math.round(need), room: Math.round(room) }; }"""
+        settle = "new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))"  # deja actuar al ResizeObserver
+        results_w = []
+        for w in (1440, 1280, 1150, 1100, 900, 800):
+            page.set_viewport_size({"width": w, "height": size["height"]})
+            page.evaluate(settle)
+            t = page.evaluate(title_js)
+            results_w.append((w, t["short"], t["oneLine"], t["fits"], t["longFits"], t["need"], t["room"]))
+        ok = all(one and fits and short == (not long_fits) for _, short, one, fits, long_fits, _, _ in results_w)
+        check(f"{label}: título en una línea y dentro de la tarjeta a todo ancho ('Vencida' solo si el largo no cabe)",
+              ok, str([(w, "corto" if s else "largo", n, r) for w, s, _, _, _, n, r in results_w]))
+        page.set_viewport_size(size)
+        page.evaluate(settle)
+        # Tarjeta forzada a angosta: debe pasar a "Vencida", en una línea y dentro; al soltarla, vuelve al largo
+        page.eval_on_selector("[data-kpi='vencidos']", "e => e.style.maxWidth = '170px'")
+        page.evaluate(settle)
+        t = page.evaluate(title_js)
+        page.eval_on_selector("[data-kpi='vencidos']", "e => e.style.maxWidth = ''")
+        page.evaluate(settle)
+        back = page.evaluate(title_js)
+        check(f"{label}: tarjeta angosta muestra 'Vencida' y luego vuelve al título completo",
+              t["short"] and t["oneLine"] and t["fits"] and not back["short"], f"angosta {t}; normal {back}")
+
     # Competencia vencida: la descripción solo en el mensaje flotante
     vtip = lambda: page.eval_on_selector("#tip-vencidos", "e => getComputedStyle(e).opacity")
     no_note = page.locator("[data-kpi='vencidos'] .kpi-note").count() == 0
