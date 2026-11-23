@@ -194,7 +194,7 @@ class DsDatepicker extends HTMLElement {
           cursor: pointer;
           transition: background var(--motion-duration-fast, .15s) var(--motion-easing-standard, ease);
         }
-        .nav-btn:hover { background: var(--color-surface-alt, transparent); }
+        .nav-btn:hover { background: var(--color-hover, var(--color-surface-alt, transparent)); } /* Ajuste Liquidaciones_ESAP */
         .nav-btn:focus-visible {
           outline: var(--focus-offset-sm, 2px) solid var(--color-focus, currentColor);
           outline-offset: var(--focus-offset-sm, 2px);
@@ -230,7 +230,7 @@ class DsDatepicker extends HTMLElement {
           cursor: pointer;
           transition: background var(--motion-duration-fast, .15s) var(--motion-easing-standard, ease);
         }
-        .day:hover { background: var(--color-surface-alt, transparent); }
+        .day:hover { background: var(--color-hover, var(--color-surface-alt, transparent)); } /* Ajuste Liquidaciones_ESAP */
         .day:focus-visible {
           outline: var(--focus-offset-sm, 2px) solid var(--color-focus, currentColor);
           outline-offset: var(--focus-offset-sm, 2px);

@@ -570,7 +570,70 @@ def phase5(page, label):
     page.emulate_media(reduced_motion="no-preference")
 
 
-PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5}
+HOVER_BG = "rgb(230, 240, 247)"  # azul 10 % ESAP (#E6F0F7) — token --color-hover
+
+
+def check_hover(page, label, name, hover_loc, bg_js, text_js=None):
+    """Pasa el cursor y compara el fondo; si se indica, mide el contraste del texto sobre ese fondo."""
+    hover_loc.hover()
+    # Varios componentes animan el fondo: esperar a que llegue al color final (tope ~1 s)
+    for _ in range(20):
+        bg = bg_js()
+        if bg == HOVER_BG:
+            break
+        page.wait_for_timeout(50)
+    ok = bg == HOVER_BG
+    detail = bg
+    if ok and text_js:
+        ratio = contrast(text_js(), bg)
+        ok = ratio >= 7
+        detail = f"contraste {ratio:.2f}"
+    check(f"{label}: hover azul claro ESAP en {name}", ok, detail)
+
+
+def hover_checks(page, label):
+    if label != "escritorio":
+        return  # sin cursor en móvil
+    css = lambda sel, prop: (lambda: page.eval_on_selector(sel, f"e => getComputedStyle(e).{prop}"))
+    goto_route(page, "tablero")
+    page.wait_for_selector("[data-bars] .bar-row")
+    check_hover(page, label, "barra de responsable", page.locator("[data-bars] .bar-row").first,
+                css("[data-bars] .bar-row", "backgroundColor"), css("[data-bars] .bar-link", "color"))
+    check_hover(page, label, "cifra de Estados", page.locator("[data-status-link='cerrado']"),
+                css("[data-status-link='cerrado']", "backgroundColor"),
+                css("[data-status-link='cerrado'] .kpi-note", "color"))
+    check_hover(page, label, "fila del semáforo", page.locator("[data-deadlines] a[data-id]").first,
+                css("[data-deadlines] a[data-id]", "backgroundColor"),
+                css("[data-deadlines] a[data-id] .list-meta", "color"))
+    check_hover(page, label, "enlace del menú", page.locator("ds-sidebar a[data-route='consulta']"),
+                css("ds-sidebar a[data-route='consulta']", "backgroundColor"),
+                css("ds-sidebar a[data-route='consulta']", "color"))
+    goto_route(page, "consulta")
+    page.wait_for_selector("[data-list='contratos'] a[data-id]")
+    check_hover(page, label, "fila de la consulta", page.locator("[data-list='contratos'] a[data-id]").first,
+                css("[data-list='contratos'] a[data-id]", "backgroundColor"),
+                css("[data-list='contratos'] a[data-id] .list-sub", "color"))
+    dd = page.locator("ds-dropdown[data-filter='estado']")
+    dd.evaluate("e => e.scrollIntoView({block: 'center'})")
+    dd.locator(".trigger").click()
+    opt = dd.locator(".option").nth(1)
+    check_hover(page, label, "opción del desplegable", opt, lambda: opt.evaluate("e => getComputedStyle(e).backgroundColor"))
+    page.keyboard.press("Escape")
+    cid = next(c["id"] for c in SEED["contratos"] if c["tiene_tarjeta"])
+    open_ficha(page, cid)
+    head = page.locator("ds-step").first.locator(".header")
+    check_hover(page, label, "paso de la ficha", head, lambda: head.evaluate("e => getComputedStyle(e).backgroundColor"))
+    btn = page.locator("[data-log-add]")
+    check_hover(page, label, "botón", btn,
+                lambda: btn.evaluate("e => getComputedStyle(e.shadowRoot.querySelector('button')).backgroundColor"))
+
+
+def phase5_and_hover(page, label):
+    phase5(page, label)
+    hover_checks(page, label)
+
+
+PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5_and_hover}
 
 
 def run(browser, url, label, phases, **ctx):

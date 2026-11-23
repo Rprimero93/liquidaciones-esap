@@ -140,7 +140,7 @@ class DsSidebar extends HTMLElement {
           height: var(--sidebar-icon-button-icon-size);
         }
         .icon-button:hover {
-          background: var(--color-surface, transparent);
+          background: var(--color-hover, var(--color-surface, transparent)); /* Ajuste Liquidaciones_ESAP */
         }
         .icon-button:focus-visible {
           outline: none;

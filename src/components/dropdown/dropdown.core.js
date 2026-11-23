@@ -192,7 +192,7 @@ class DsDropdown extends HTMLElement {
           transition: background var(--motion-duration-fast, .15s) var(--motion-easing-standard, ease);
         }
         .option:hover {
-          background: var(--color-surface-alt, transparent);
+          background: var(--color-hover, var(--color-surface-alt, transparent)); /* Ajuste Liquidaciones_ESAP */
           box-shadow:
             var(--surface-inner-top, 0 0 transparent),
             var(--surface-inner-bottom, 0 0 transparent),

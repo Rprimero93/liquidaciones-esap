@@ -66,8 +66,9 @@ class DsButton extends HTMLElement {
             background var(--motion-duration-fast, .15s) var(--motion-easing-standard, ease),
             border-color var(--motion-duration-fast, .15s) var(--motion-easing-standard, ease);
         }
+        /* Ajuste Liquidaciones_ESAP: hover con --color-hover (azul claro ESAP) si existe */
         button:hover:not(:disabled) {
-          background: var(--color-surface-alt, var(--color-surface));
+          background: var(--color-hover, var(--color-surface-alt, var(--color-surface)));
           border-color: var(--color-accent, var(--color-border));
           transform: var(--transform-hover-lift, translateY(-2px));
           /* Hover activa el rim-light completo (glassmorphism) — Default

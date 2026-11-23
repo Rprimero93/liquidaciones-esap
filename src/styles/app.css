@@ -10,6 +10,9 @@
   --status-ok-text: #14532D;      --status-ok-bg: #E7F3EC;
   --status-warn-text: #6B3E00;    --status-warn-bg: #FCF1DE;
   --status-danger-text: #7F1D1D;  --status-danger-bg: #FCE8E8;
+  /* Fondo de hover: azul 10 % ("azulClaro") de la marca ESAP (Kit_Marca_ESAP/kit/marca.json).
+     Sobre él el texto va en --color-text (14,6:1); el acento (6,35:1) no llega a 7:1. */
+  --color-hover: #E6F0F7;
 }
 
 /* [hidden] debe ganarle al display de los componentes (:host { display: ... }) */
@@ -47,7 +50,10 @@ ds-sidebar > a > svg {
 /* Enlaces en gris (la regla global de <a> pisaría el color del Core) y el activo
    con el color de acento (el Core usa un token que este estilo no define) */
 ds-sidebar > a { color: var(--color-text-muted); }
-ds-sidebar > a:hover { color: var(--color-text); }
+ds-sidebar > a:hover { color: var(--color-text); background: var(--color-hover); }
+/* Pasos de la ficha: hover azul claro y etiqueta en color de texto */
+.steps ds-step::part(header):hover { background: var(--color-hover); }
+.steps ds-step:hover::part(label) { color: var(--color-text); }
 ds-sidebar > a[aria-current="page"] {
   color: var(--color-accent);
   font-weight: var(--font-weight-bold);
@@ -128,8 +134,8 @@ ds-sidebar > a[aria-current="page"] {
   color: inherit;
   text-decoration: none;
 }
-.kpi-part:hover { background: var(--color-surface-alt); }
-.kpi-part:hover .kpi-note { color: var(--color-accent); text-decoration: underline; }
+.kpi-part:hover { background: var(--color-hover); }
+.kpi-part:hover .kpi-note { color: var(--color-text); text-decoration: underline; }
 .kpi-part:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 0; }
 
 /* Lista de contratos */
@@ -144,7 +150,8 @@ ds-sidebar > a[aria-current="page"] {
   color: inherit;
   text-decoration: none;
 }
-.list-link:hover { background: var(--color-surface-alt); }
+.list-link:hover { background: var(--color-hover); }
+.list-link:hover .list-sub, .list-link:hover .list-meta { color: var(--color-text); }
 .list-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
 .list-main { font-weight: var(--font-weight-medium); }
 .list-sub { color: var(--color-text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -323,9 +330,10 @@ ds-sidebar > a[aria-current="page"] {
   outline: none;
 }
 .bar-row { cursor: pointer; }
-.bar-row:hover, .bar-row:focus-within { background: var(--color-surface-alt); }
+.bar-row:hover, .bar-row:focus-within { background: var(--color-hover); }
 .bar-link { color: var(--color-text); text-decoration: none; }
-.bar-row:hover .bar-link { color: var(--color-accent); text-decoration: underline; }
+.bar-row:hover .bar-link { text-decoration: underline; }
+.bar-row:hover .muted { color: var(--color-text); }
 .bar-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 .bar-label { font-size: var(--font-size-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bar-track { height: 12px; display: block; }
