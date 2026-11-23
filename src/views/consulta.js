@@ -38,7 +38,7 @@ function row(c) {
       <a class="list-link" href="${href('ficha', c.id)}" data-id="${escapeHtml(c.id)}">
         <span class="list-main">${escapeHtml(c.id)}</span>
         <span class="list-sub">${escapeHtml(c.contratista)}
-          <small class="list-meta">${escapeHtml(c.responsable || 'Sin responsable')}${step ? ` · Etapa: ${escapeHtml(step.nombre)}` : ''}</small>
+          ${step ? `<small class="list-meta">Etapa: ${escapeHtml(step.nombre)}</small>` : ''}
         </span>
         <span class="list-end">
           <span class="chip" data-status="${status}">${store.statusName(status)}</span>
