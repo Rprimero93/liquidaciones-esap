@@ -25,7 +25,33 @@ async function readSeed() {
   return res.json();
 }
 
+/**
+ * Enlaces SECOP verificados en datos.gov.co (scripts/consultar_secop.py). Van aparte del
+ * estado: no se guardan en localStorage ni en el respaldo, y mandan sobre el enlace del Excel.
+ */
+const SECOP_URL = new URL('../../data/secop.json', import.meta.url);
+let secopLinks = {};
+
+async function readSecop() {
+  try {
+    const res = await fetch(SECOP_URL);
+    secopLinks = res.ok ? (await res.json()).contratos || {} : {};
+  } catch {
+    secopLinks = {}; // sin tabla: se usa el enlace del Excel
+  }
+}
+
+/** Enlace SECOP de un contrato: { url, plataforma, verificado } o null si no hay. */
+export function secopOf(c) {
+  const v = secopLinks[c.id];
+  if (v?.url) return { url: v.url, plataforma: v.plataforma, verificado: !!v.verificado };
+  if (!/^https?:\/\//.test(c.secop || '')) return null;
+  const plataforma = c.secop.includes('contratos.gov.co') ? 'SECOP I' : 'SECOP II';
+  return { url: c.secop, plataforma, verificado: false };
+}
+
 export async function load() {
+  await readSecop();
   const local = readLocal();
   if (local) {
     state = local;

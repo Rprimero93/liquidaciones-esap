@@ -26,6 +26,15 @@ function saved(message, undo) {
   toast(message, undo ? { action: { label: 'Deshacer', run: undo } } : {});
 }
 
+/** Enlace a SECOP con la plataforma en el texto; el no verificado en datos.gov.co lo dice. */
+function secopLink(c) {
+  const s = store.secopOf(c);
+  if (!s) return 'Sin enlace';
+  const note = s.verificado ? '' : ' <small class="muted" data-secop-unverified>(enlace del Excel, sin verificar)</small>';
+  return `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener" data-secop data-platform="${escapeHtml(s.plataforma)}">`
+    + `Abrir en ${escapeHtml(s.plataforma)} ↗</a>${note}`;
+}
+
 function renderSummary(root, c) {
   const status = store.statusOf(c.id);
   root.querySelector('[data-summary]').innerHTML = `
@@ -148,9 +157,7 @@ export function render(container, id) {
         <dl class="facts">
           <div><dt>Responsable</dt><dd>${escapeHtml(c.responsable) || '—'}</dd></div>
           <div><dt>Valor</dt><dd>${currency(c.valor)}</dd></div>
-          <div><dt>SECOP</dt><dd>${/^https?:\/\//.test(c.secop)
-            ? `<a href="${escapeHtml(c.secop)}" target="_blank" rel="noopener" data-secop>Abrir en SECOP ↗</a>`
-            : 'Sin enlace'}</dd></div>
+          <div><dt>SECOP</dt><dd>${secopLink(c)}</dd></div>
         </dl>
       </article>
 

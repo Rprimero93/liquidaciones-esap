@@ -908,6 +908,28 @@ def hover_checks(page, label):
                 lambda: btn.evaluate("e => getComputedStyle(e.shadowRoot.querySelector('button')).backgroundColor"))
 
 
+def secop_checks(page, label):
+    """La ficha enlaza al SECOP de data/secop.json (no al del Excel) y nombra la plataforma."""
+    table = json.loads((ROOT / "data" / "secop.json").read_text(encoding="utf-8"))["contratos"]
+    by_id = {c["id"]: c for c in SEED["contratos"]}
+    changed = [cid for cid, v in table.items() if v["url"] != by_id[cid]["secop"]]
+    wrong = []
+    for cid in changed:
+        open_ficha(page, cid)
+        a = page.locator("[data-secop]")
+        got = (a.get_attribute("href"), a.text_content().strip(), page.locator("[data-secop-unverified]").count())
+        exp = (table[cid]["url"], f"Abrir en {table[cid]['plataforma']} ↗", 0 if table[cid]["verificado"] else 1)
+        if got != exp:
+            wrong.append(f"{cid}: {got}")
+    check(f"{label}: {len(changed)} enlaces SECOP corregidos desde datos.gov.co", not wrong and len(changed) > 0,
+          "; ".join(wrong)[:300])
+
+
+def phase4_and_secop(page, label):
+    phase4(page, label)
+    secop_checks(page, label)
+
+
 def phase5_and_hover(page, label):
     phase5(page, label)
     hover_checks(page, label)
@@ -1059,7 +1081,7 @@ def phase6(page, label):
     page.screenshot(path=str(SHOTS / f"fase6_{label}_respaldo.png"), full_page=True)
 
 
-PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5_and_hover, "6": phase6}
+PHASES = {"2": phase2, "3": phase3, "4": phase4_and_secop, "5": phase5_and_hover, "6": phase6}
 
 
 def run(browser, url, label, phases, **ctx):

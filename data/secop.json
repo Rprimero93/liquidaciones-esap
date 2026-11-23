@@ -1,0 +1,243 @@
+{
+  "fuente": "datos.gov.co — SECOP II Contratos Electrónicos (jbjy-vk9h) y SECOP I Procesos (f789-7hwg)",
+  "generado": "2026-11-23T18:10:05",
+  "sin_verificar": [
+    "BOG-244-2016"
+  ],
+  "contratos": {
+    "BOG-1539-2019": {
+      "plataforma": "SECOP I",
+      "url": "https://www.contratos.gov.co/consultas/detalleProceso.do?numConstancia=19-12-10144449",
+      "proceso": "19-12-10144449",
+      "contrato": "BOG-1539-2019",
+      "contratista_secop": "MARLEN RUIZ MEDINA",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1311-2019": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.888220",
+      "proceso": "CO1.BDOS.857347",
+      "contrato": "CO1.PCCNTR.1083722",
+      "contratista_secop": "UNIÓN TEMPORAL JARDINE LLOYD THOMPSON VALENCIA & IRAGORRI CORREDORES DE SEGUROS S.A.  ITAÚ CORREDOR DE SEGUROS COLOMBIA S.A.",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-758-2022": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2901812",
+      "proceso": "CO1.BDOS.2895298",
+      "contrato": "CO1.PCCNTR.3665264",
+      "contratista_secop": "JESE PROYECTOS SAS",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-769-2022": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2977815",
+      "proceso": "CO1.BDOS.2937875",
+      "contrato": "CO1.PCCNTR.3786276",
+      "contratista_secop": "DISEÑOS Y CONSTRUCCIONES SAS",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-946-2022": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.3506800",
+      "proceso": "CO1.BDOS.3500470",
+      "contrato": "CO1.PCCNTR.4248658",
+      "contratista_secop": "ROCA INGENIERIA & CONSTRUCCIONES",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1174-2023": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.4475452",
+      "proceso": "CO1.BDOS.4468268",
+      "contrato": "CO1.PCCNTR.5043585",
+      "contratista_secop": "FUMIGACIONES EL TRIUNFO CAR",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1835-2023": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5208525",
+      "proceso": "CO1.BDOS.5138326",
+      "contrato": "CO1.PCCNTR.5673651",
+      "contratista_secop": "CONSULTORÍA ESTRUCTURAL Y DE CONSTRUCCIÓN SAS",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1836-2023": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5208526",
+      "proceso": "CO1.BDOS.5141142",
+      "contrato": "CO1.PCCNTR.5674339",
+      "contratista_secop": "CONSORCIO INTER CONSULTORIA SEDES ESAP",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1842-2023": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5250648",
+      "proceso": "CO1.BDOS.5119699",
+      "contrato": "CO1.PCCNTR.5704352",
+      "contratista_secop": "DRV INGENIERIA SAS",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1588-2019": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.1002823",
+      "proceso": "CO1.BDOS.998920",
+      "contrato": "CO1.PCCNTR.1237305",
+      "contratista_secop": "ABCONTROL INGENIERIA SAS",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1579-2019": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.979620",
+      "proceso": "CO1.BDOS.948925",
+      "contrato": "CO1.PCCNTR.1222012",
+      "contratista_secop": "CHUBB SEGUROS COLOMBIA S.A.",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-763-2022": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2930724",
+      "proceso": "CO1.BDOS.2900538",
+      "contrato": "CO1.PCCNTR.3714627",
+      "contratista_secop": "MARINO DUARTE SILVA",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-764-2022": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2945336",
+      "proceso": "CO1.BDOS.2913773",
+      "contrato": "CO1.PCCNTR.3728563",
+      "contratista_secop": "ARQ. LUZ MILA RAMIREZ LEON",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-777-2022": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.3021785",
+      "proceso": "CO1.BDOS.2974790",
+      "contrato": "CO1.PCCNTR.3856004",
+      "contratista_secop": "RAELJA INGENIERIA S.A.S",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1844-2023": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5250648",
+      "proceso": "CO1.BDOS.5119699",
+      "contrato": "CO1.PCCNTR.5705282",
+      "contratista_secop": "BUILDING S.A.S.",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1846-2023": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5230133",
+      "proceso": "CO1.BDOS.5149149",
+      "contrato": "CO1.PCCNTR.5704358",
+      "contratista_secop": "CONSORCIO INTERVENTORES A&O",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-958-2024": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.6178359",
+      "proceso": "CO1.BDOS.6168081",
+      "contrato": "CO1.PCCNTR.6422457",
+      "contratista_secop": "COMPAÑIA OPERADORA DE CONTRATOS SAS",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-737-2020": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.1414066",
+      "proceso": "CO1.BDOS.1415152",
+      "contrato": "CO1.PCCNTR.1822209",
+      "contratista_secop": "COMPUSERTEC INGENIERIA SAS",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1843-2023": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5250648",
+      "proceso": "CO1.BDOS.5119699",
+      "contrato": "CO1.PCCNTR.5705280",
+      "contratista_secop": "BUILDING S.A.S.",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-383-2020": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.1150776",
+      "proceso": "CO1.BDOS.1150118",
+      "contrato": "CO1.PCCNTR.1432089",
+      "contratista_secop": "AGROBOLSA S.A. COMISIONISTA DE BOLSA",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-594-2022": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2767375",
+      "proceso": "CO1.BDOS.2764987",
+      "contrato": "CO1.PCCNTR.3513693",
+      "contratista_secop": "IGAC Sede Central *",
+      "verificado": true,
+      "contratista_coincide": false
+    },
+    "BOG-1220-2023": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.4664512",
+      "proceso": "CO1.BDOS.4654592",
+      "contrato": "CO1.PCCNTR.5167372",
+      "contratista_secop": "MUNICIPIO DE MONTERIA",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-244-2016": {
+      "plataforma": "SECOP I",
+      "url": "https://www.contratos.gov.co/consultas/detalleProceso.do?numConstancia=16-12-4734928",
+      "proceso": "16-12-4734928",
+      "contrato": null,
+      "contratista_secop": null,
+      "verificado": false,
+      "contratista_coincide": null
+    },
+    "BOG-588-2019": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.772328",
+      "proceso": "CO1.BDOS.780720",
+      "contrato": "CO1.PCCNTR.892925",
+      "contratista_secop": "HYUNDAUTOS S.A.S.",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-1190-2024": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.6591744",
+      "proceso": "CO1.BDOS.6572255",
+      "contrato": "CO1.PCCNTR.6722021",
+      "contratista_secop": "AS EN FUMIGACIONES SAS",
+      "verificado": true,
+      "contratista_coincide": true
+    },
+    "BOG-759-2022": {
+      "plataforma": "SECOP II",
+      "url": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2904717",
+      "proceso": "CO1.BDOS.2898247",
+      "contrato": "CO1.PCCNTR.3669512",
+      "contratista_secop": "CAR SCANNERS S.A.S.",
+      "verificado": true,
+      "contratista_coincide": true
+    }
+  }
+}
