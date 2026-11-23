@@ -1,0 +1,5026 @@
+{
+  "meta": {
+    "fuente": "liquidacion.xlsm",
+    "generado": "2026-11-23T13:31:37",
+    "avance_general_excel": 0.7222222222222222,
+    "tarjetas_sin_contrato": []
+  },
+  "pasos": [
+    {
+      "id": 1,
+      "nombre": "Consecución de información"
+    },
+    {
+      "id": 2,
+      "nombre": "En Proyección por responsable del área"
+    },
+    {
+      "id": 3,
+      "nombre": "En revisión Abogado infraestructura"
+    },
+    {
+      "id": 4,
+      "nombre": "Radicado a contratos para revisión"
+    },
+    {
+      "id": 5,
+      "nombre": "Devuelto por contratación y en ajuste por responsable del área"
+    },
+    {
+      "id": 6,
+      "nombre": "Mesa de trabajo para subsanaciones"
+    },
+    {
+      "id": 7,
+      "nombre": "Radicado a contratos con subsanaciones"
+    },
+    {
+      "id": 8,
+      "nombre": "Aprobado por contratación"
+    },
+    {
+      "id": 9,
+      "nombre": "En proceso de firmas"
+    },
+    {
+      "id": 10,
+      "nombre": "Modificación de pólizas"
+    },
+    {
+      "id": 11,
+      "nombre": "Publicado en secop"
+    },
+    {
+      "id": 12,
+      "nombre": "Cierre"
+    }
+  ],
+  "alertas": [
+    {
+      "id": 1,
+      "nombre": "Proceso paralizado por falta de información"
+    },
+    {
+      "id": 2,
+      "nombre": "Solicitud temporal de supervisor para cargue de documentos secop"
+    },
+    {
+      "id": 3,
+      "nombre": "Solicitud de documentos al proveedor para acta de liquidación"
+    },
+    {
+      "id": 4,
+      "nombre": "Si no se cuenta con documentos para el caso de acta de cierre remitir oficio Con la trazabilidad"
+    }
+  ],
+  "contratos": [
+    {
+      "id": "BOG-1539-2019",
+      "numero": "BOG-1539-2019",
+      "contratista": "MARLEN RUIZ MEDINA",
+      "responsable": "Marianella Petro Alvarez",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2022-06-29",
+      "plazo_cierre": "2022-06-30",
+      "plazo_cierre_texto": "A partir del 30/06/2022",
+      "valor": 1400000,
+      "secop": "https://www.contratos.gov.co/consultas/detalleProceso.do?numConstancia=19*12*10144449&g*recaptcha*response=03AFcWeA5r8mfbrPrfK_fwGqB2WAStowAZX4e2Q4caqJbtk52ziHj03dtWhol_YzozmDKOTqGPPx0L3R6dNuam4uCC4HCCSbXk*1PXcn1cnOZJVF4_QRePC*I*P*3oZ33Iq8QfQljreyjgtxZPOfQL0E5l31Fp5c0mVTbn8W76cVd_r7z7qWEhep4EoTbMhOMkN4hJkyl0MCknhhP5VTGcdxQH8cYJLkK*zySHFzv8*xiPgSnSuxLTlIjmNc5esyutn9AVvEvQB093xpgx4_QTCwehJKG1vu2HyHeuYbyr6yZgtNxgoGnaJ9Ey801oyOEo_RaYk9emFt97I**LxpELATNL5ScTMgjTSINqnNVWMnMLOZArJB5SSHeGWYrW21QcRQ4R7ST_vo8OBGkL5Pc7DvrmSAtRtEznijjqSS0eYVnNs5XpWDNskYALzAqOGHun_3vg0xef*Lv9V_vfsvgJkZwkuGDYdjbKW1o8fZjNaigXrH_nLD6l4yHkT0Juqx7xPeL1S6KkaKKQC1ZmTQpUmnHV9VeROdzJj3k8oMj8T34obxLaK0pyb9FyRWILbAeT7cCvywHwarofov_aWlYsLOVfh_gRljyi8wxrj6fMC2El4NXVV6QabVpt6WwEcWx4tvXjcJpNyofZKo5Z44ISK9XHS9WVgB_tEf93oDK80FVbzX6cozWojMbinG1XQ6dD7gYy5Xkv*HblC7Yet*7sMlZpp0eqyE5d**WWfmKJ3SAOqhk2FEMu1BG0qcTeNgVSj2ESD7DwiKF3oY1HtmZg8v21XUcBQUIIHS8w5S8vRIMW0zzF*cUJBrY3MS9_u_oGRTrszqmN2UcHQ4vo61wVRtSMRNSidXj7*P_GlYZcyUxp5tTUA7vWMoo775PDk9e6WcWdbW8VNA1QmETnYjV6ef1_d4qbdqQXOOQukB_btz4CVCjQf03Fwma3FmIvRwU9TZQYAwnn8Cyz",
+      "tiene_tarjeta": true,
+      "fila_excel": 2,
+      "celda_tarjeta": "A3",
+      "avance_excel": 0.5
+    },
+    {
+      "id": "BOG-1311-2019",
+      "numero": "BOG-1311-2019",
+      "contratista": "UNIÓN TEMPORAL JARDINE LLOYD THOMPSON VALENCIA & IRAGORRI CORREDORES DE SEGUROS S.A.– ITAÚ CORREDOR DE SEGUROS COLOMBIA S.A",
+      "responsable": "Paola Andrea Naranjo Florez",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2026-06-14",
+      "plazo_cierre": "2026-06-15",
+      "plazo_cierre_texto": "A partir de 15/06/2026",
+      "valor": 0,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.851824",
+      "tiene_tarjeta": true,
+      "fila_excel": 3,
+      "celda_tarjeta": "D3",
+      "avance_excel": 0.75
+    },
+    {
+      "id": "BOG-758-2022",
+      "numero": "BOG-758-2022",
+      "contratista": "JESE PROYECTOS SAS",
+      "responsable": "Francy Lizeth Castro Moreno",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2025-01-22",
+      "plazo_cierre": "2025-01-23",
+      "plazo_cierre_texto": "A partir de 23/01/2025",
+      "valor": null,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2901812",
+      "tiene_tarjeta": true,
+      "fila_excel": 4,
+      "celda_tarjeta": "G3",
+      "avance_excel": 1
+    },
+    {
+      "id": "BOG-769-2022",
+      "numero": "BOG-769-2022",
+      "contratista": "DISEÑOS Y CONSTRUCCIONES SAS",
+      "responsable": "Hernan Carrasquilla Coral , Walter David Isaza Aviles,Aleida Maritza Aceros Tauta",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2026-06-29",
+      "plazo_cierre": "2026-06-30",
+      "plazo_cierre_texto": "A partir de 30/06/2026",
+      "valor": 269309105.45,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2977815",
+      "tiene_tarjeta": true,
+      "fila_excel": 5,
+      "celda_tarjeta": "J3",
+      "avance_excel": 0.25
+    },
+    {
+      "id": "BOG-946-2022",
+      "numero": "BOG-946-2022",
+      "contratista": "ROCA INGENIERIA& CONSTRUCCIONES SAS",
+      "responsable": "Mauricio Gil Zapata",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2025-06-23",
+      "plazo_cierre": "2025-06-24",
+      "plazo_cierre_texto": "A partir de 24/06/2025",
+      "valor": 36763181,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.3506800",
+      "tiene_tarjeta": true,
+      "fila_excel": 6,
+      "celda_tarjeta": "A33",
+      "avance_excel": 0.75
+    },
+    {
+      "id": "BOG-1174-2023",
+      "numero": "BOG-1174-2023",
+      "contratista": "FUMIGACIONES EL TRIUNFO CAR",
+      "responsable": "Julieth Tatiana Baquero Alba",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2026-06-13",
+      "plazo_cierre": "2026-06-14",
+      "plazo_cierre_texto": "A partir de 14/06/2026",
+      "valor": null,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.4475452",
+      "tiene_tarjeta": true,
+      "fila_excel": 7,
+      "celda_tarjeta": "D33",
+      "avance_excel": 0.75
+    },
+    {
+      "id": "BOG-1835-2023",
+      "numero": "BOG-1835-2023",
+      "contratista": "CONSULTORÍA ESTRUCTURAL Y DE CONSTRUCCIÓN SA",
+      "responsable": "Walter David Isaza Aviles",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2027-06-01",
+      "plazo_cierre": "2027-06-02",
+      "plazo_cierre_texto": "A partir de 02/06/2027",
+      "valor": 648839009.27,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5208525",
+      "tiene_tarjeta": true,
+      "fila_excel": 8,
+      "celda_tarjeta": "G33",
+      "avance_excel": 1
+    },
+    {
+      "id": "BOG-1836-2023",
+      "numero": "BOG-1836-2023",
+      "contratista": "CONSORCIO INTER CONSULTORIA",
+      "responsable": "Walter David Isaza Aviles",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2027-06-06",
+      "plazo_cierre": "2027-06-05",
+      "plazo_cierre_texto": "A partir de 05/06/2027",
+      "valor": 127786124.62,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5208526",
+      "tiene_tarjeta": true,
+      "fila_excel": 9,
+      "celda_tarjeta": "J33",
+      "avance_excel": 0.25
+    },
+    {
+      "id": "BOG-1842-2023",
+      "numero": "BOG-1842-2023",
+      "contratista": "DRV INGENIERIA SAS",
+      "responsable": "Carlos Ernesto Rivera Ramos",
+      "estado": "",
+      "documento_activo": "7515-2895-4094",
+      "perdida_competencia": "2027-04-12",
+      "plazo_cierre": "2027-04-13",
+      "plazo_cierre_texto": "A partir de 13/04/2027",
+      "valor": null,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5250648",
+      "tiene_tarjeta": true,
+      "fila_excel": 10,
+      "celda_tarjeta": "A63",
+      "avance_excel": 0.8333333333333334
+    },
+    {
+      "id": "BOG-1588-2019",
+      "numero": "BOG- 1588 -2019",
+      "contratista": "ABCONTROL INGENIERIA",
+      "responsable": "Mauricio Gil Zapata",
+      "estado": "",
+      "documento_activo": "Active document 2630",
+      "perdida_competencia": "2022-06-30",
+      "plazo_cierre": "2022-07-01",
+      "plazo_cierre_texto": "A partir del 01/07/2022",
+      "valor": 52362218,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.1002823",
+      "tiene_tarjeta": true,
+      "fila_excel": 11,
+      "celda_tarjeta": "D63",
+      "avance_excel": 0.6666666666666666
+    },
+    {
+      "id": "BOG-1579-2019",
+      "numero": "BOG- 1579 -2019",
+      "contratista": "CHUBB SEGUROS COLOMBIA",
+      "responsable": "Paola Andrea Naranjo Florez",
+      "estado": "",
+      "documento_activo": "Active document 2630",
+      "perdida_competencia": "2023-12-15",
+      "plazo_cierre": "2023-12-16",
+      "plazo_cierre_texto": "A partir del 16/12/2023",
+      "valor": 356645494,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.979620",
+      "tiene_tarjeta": true,
+      "fila_excel": 12,
+      "celda_tarjeta": "G63",
+      "avance_excel": 1
+    },
+    {
+      "id": "BOG-763-2022",
+      "numero": "BOG- 763 -2022",
+      "contratista": "MARINO DUARTE SILVA",
+      "responsable": "Mauricio Gil Zapata",
+      "estado": "",
+      "documento_activo": "Active document 2630",
+      "perdida_competencia": "2025-06-15",
+      "plazo_cierre": "2025-06-16",
+      "plazo_cierre_texto": "A partir del16/06/2025",
+      "valor": 62946700,
+      "secop": "",
+      "tiene_tarjeta": true,
+      "fila_excel": 13,
+      "celda_tarjeta": "J63",
+      "avance_excel": 0.6666666666666666
+    },
+    {
+      "id": "BOG-764-2022",
+      "numero": "BOG- 764 -2022",
+      "contratista": "LUZ MILA RAMIREZ LEON",
+      "responsable": "Carlos Ernesto Rivera Ramos y Walter David Isaza Aviles",
+      "estado": "",
+      "documento_activo": "Active document 2630",
+      "perdida_competencia": "2025-06-25",
+      "plazo_cierre": "2025-06-26",
+      "plazo_cierre_texto": "A partir del 26/06/2025",
+      "valor": 270942169.55,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.2945336",
+      "tiene_tarjeta": true,
+      "fila_excel": 14,
+      "celda_tarjeta": "A93",
+      "avance_excel": 0.5833333333333334
+    },
+    {
+      "id": "BOG-777-2022",
+      "numero": "BOG- 777 -2022",
+      "contratista": "RAELJA INGENIERÍA SAS",
+      "responsable": "Walter David Isaza Aviles",
+      "estado": "",
+      "documento_activo": "Active document 2630",
+      "perdida_competencia": "2025-06-28",
+      "plazo_cierre": "2025-06-29",
+      "plazo_cierre_texto": "A partir del 29/6/2025",
+      "valor": null,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.3021785",
+      "tiene_tarjeta": true,
+      "fila_excel": 15,
+      "celda_tarjeta": "D93",
+      "avance_excel": 1
+    },
+    {
+      "id": "BOG-1844-2023",
+      "numero": "BOG-1844-2023",
+      "contratista": "BUILDING S.A.S 1",
+      "responsable": "Julian Andres Martinez Parra - Francy Lizeth Castro Moreno",
+      "estado": "",
+      "documento_activo": "Active document 2630",
+      "perdida_competencia": "2027-06-18",
+      "plazo_cierre": "2027-06-19",
+      "plazo_cierre_texto": "A partir del 19/06/2027",
+      "valor": 2985827129,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5250648",
+      "tiene_tarjeta": true,
+      "fila_excel": 16,
+      "celda_tarjeta": "G93",
+      "avance_excel": 1
+    },
+    {
+      "id": "BOG-1846-2023",
+      "numero": "BOG-1846-2023",
+      "contratista": "CONSORCIO INTERVENTORES A&O",
+      "responsable": "Aleida Maritza Aceros Tauta",
+      "estado": "",
+      "documento_activo": "Active document 2630",
+      "perdida_competencia": "2027-04-30",
+      "plazo_cierre": "2027-05-01",
+      "plazo_cierre_texto": "A partir del 01/05/2027",
+      "valor": 1141389371,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5230133",
+      "tiene_tarjeta": true,
+      "fila_excel": 17,
+      "celda_tarjeta": "J93",
+      "avance_excel": 0.8333333333333334
+    },
+    {
+      "id": "BOG-958-2024",
+      "numero": "BOG-958-2024",
+      "contratista": "COMPAÑIA OPERADORA DE CONTRATOS S.A.S",
+      "responsable": "Wilson Gerardo Pena Parra",
+      "estado": "",
+      "documento_activo": "",
+      "perdida_competencia": "2027-06-11",
+      "plazo_cierre": "2027-06-12",
+      "plazo_cierre_texto": "A partir del 12/06/2027",
+      "valor": null,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.6178359",
+      "tiene_tarjeta": true,
+      "fila_excel": 18,
+      "celda_tarjeta": "A123",
+      "avance_excel": 0.5833333333333334
+    },
+    {
+      "id": "BOG-737-2020",
+      "numero": "BOG- 737-2020",
+      "contratista": "COMPUSERTEC INGENIERÍA SAS",
+      "responsable": "Mauricio Gil Zapata",
+      "estado": "",
+      "documento_activo": "",
+      "perdida_competencia": "2023-06-30",
+      "plazo_cierre": "2023-07-01",
+      "plazo_cierre_texto": "A partir del 1/7/2023",
+      "valor": null,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.1414066",
+      "tiene_tarjeta": true,
+      "fila_excel": 19,
+      "celda_tarjeta": "D123",
+      "avance_excel": 0.6666666666666666
+    },
+    {
+      "id": "BOG-1843-2023",
+      "numero": "BOG-1843-2023",
+      "contratista": "BUILDING S.A.S 2",
+      "responsable": "Francy Lizeth Castro Moreno",
+      "estado": "",
+      "documento_activo": "",
+      "perdida_competencia": "2026-10-01",
+      "plazo_cierre": "2026-11-01",
+      "plazo_cierre_texto": "A partir del 01/11/2026",
+      "valor": 993178173,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5250648",
+      "tiene_tarjeta": true,
+      "fila_excel": 20,
+      "celda_tarjeta": "G123",
+      "avance_excel": 1
+    },
+    {
+      "id": "BOG-383-2020",
+      "numero": "BOG-383-2020",
+      "contratista": "AGROBOLSA",
+      "responsable": "Wilson Gerardo Pena Parra",
+      "estado": "",
+      "documento_activo": "Active document 3023",
+      "perdida_competencia": "2025-06-30",
+      "plazo_cierre": "2025-07-01",
+      "plazo_cierre_texto": "A partir del 1/7/2025",
+      "valor": null,
+      "secop": "",
+      "tiene_tarjeta": true,
+      "fila_excel": 21,
+      "celda_tarjeta": "J123",
+      "avance_excel": 0.16666666666666666
+    },
+    {
+      "id": "BOG-594-2022",
+      "numero": "BOG-594-2022",
+      "contratista": "INSTITUTO GEOGRÁFICO AGUSTÍN CODAZZI",
+      "responsable": "Nathalie Galviz Agudelo",
+      "estado": "",
+      "documento_activo": "Active document 3023",
+      "perdida_competencia": "2025-06-30",
+      "plazo_cierre": "2025-07-01",
+      "plazo_cierre_texto": "A partir del 1/07/2025",
+      "valor": null,
+      "secop": "",
+      "tiene_tarjeta": true,
+      "fila_excel": 22,
+      "celda_tarjeta": "A153",
+      "avance_excel": 1
+    },
+    {
+      "id": "BOG-1220-2023",
+      "numero": "BOG-1220-2023",
+      "contratista": "MUNICIPIO DE MONTERÍA",
+      "responsable": "Mario Aguirre Bermudez",
+      "estado": "",
+      "documento_activo": "",
+      "perdida_competencia": null,
+      "plazo_cierre": "2023-12-29",
+      "plazo_cierre_texto": "A partir del 29/12/2023",
+      "valor": null,
+      "secop": "",
+      "tiene_tarjeta": true,
+      "fila_excel": 23,
+      "celda_tarjeta": "D153",
+      "avance_excel": 0.5833333333333334
+    },
+    {
+      "id": "BOG-244-2016",
+      "numero": "BOG-244-2016",
+      "contratista": "FUNDACIÓN UNIVERSIDAD DEL VALLE",
+      "responsable": "Francy Lizeth Castro Moreno",
+      "estado": "",
+      "documento_activo": "",
+      "perdida_competencia": "2018-04-29",
+      "plazo_cierre": "2018-04-30",
+      "plazo_cierre_texto": "A partir del 30/04/2018",
+      "valor": null,
+      "secop": "https://www.contratos.gov.co/consultas/detalleProceso.do?numConstancia=16*12*4734928",
+      "tiene_tarjeta": true,
+      "fila_excel": 24,
+      "celda_tarjeta": "G153",
+      "avance_excel": 1
+    },
+    {
+      "id": "BOG-588-2019",
+      "numero": "BOG-588-2019",
+      "contratista": "HYUNDAUTOS S.A.S.",
+      "responsable": "Wilson Gerardo Pena Parra",
+      "estado": "",
+      "documento_activo": "",
+      "perdida_competencia": "2022-06-30",
+      "plazo_cierre": null,
+      "plazo_cierre_texto": "A partir del 31/06/2022",
+      "valor": null,
+      "secop": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.772328",
+      "tiene_tarjeta": true,
+      "fila_excel": 25,
+      "celda_tarjeta": "J153",
+      "avance_excel": 0.16666666666666666
+    },
+    {
+      "id": "BOG-1190-2024",
+      "numero": "BOG-1190-2024",
+      "contratista": "AS EN FUMIGACIONES SAS",
+      "responsable": "Marianella Petro Alvarez",
+      "estado": "",
+      "documento_activo": "Active document 4011",
+      "perdida_competencia": null,
+      "plazo_cierre": null,
+      "plazo_cierre_texto": "",
+      "valor": 22707488.84,
+      "secop": "",
+      "tiene_tarjeta": true,
+      "fila_excel": 26,
+      "celda_tarjeta": "A182",
+      "avance_excel": 0.5833333333333334
+    },
+    {
+      "id": "BOG-759-2022",
+      "numero": "BOG-759-2022",
+      "contratista": "CAR SCANNERS S.A.S.",
+      "responsable": "",
+      "estado": "",
+      "documento_activo": "Active document 2189-2875",
+      "perdida_competencia": null,
+      "plazo_cierre": null,
+      "plazo_cierre_texto": "",
+      "valor": null,
+      "secop": "",
+      "tiene_tarjeta": false,
+      "fila_excel": 27
+    }
+  ],
+  "avances": [
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": "Modificación de pólizas (No requiere)"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": "Modificación de pólizas (No aplica para el cierre de contrato)"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": true,
+      "etiqueta": "Modificación de pólizas (No Aplica)"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 1,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 2,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 3,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 4,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 5,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 6,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 7,
+      "hecho": true,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 8,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 9,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 10,
+      "hecho": false,
+      "etiqueta": "Modificación de pólizas (No aplica para el cierre de contrato)"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 11,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "paso",
+      "item": 12,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "alerta",
+      "item": 1,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "alerta",
+      "item": 2,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "alerta",
+      "item": 3,
+      "hecho": false,
+      "etiqueta": ""
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "tipo": "alerta",
+      "item": 4,
+      "hecho": false,
+      "etiqueta": ""
+    }
+  ],
+  "bitacora": [
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-07-08",
+      "texto": "08/07/2025 se solicitó información del contrato al área de contratación debido a que en el aplicativo SECOP no se encontró información al respecto.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-07-08",
+      "texto": "08/07/2025 el área de contratación envió información pertinente al contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-07-09",
+      "texto": "09/07/2025 se solicitó relación o estado de pagos del presente contrato al área de tesorería.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-07-09",
+      "texto": "09/07/2025 el área de tesorería remitió información correspondiente a los pagos realizados al presente contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-07-11",
+      "texto": "11/07/2025 se envió formato de cierre del presente contrato a Álvaro Pareja para su revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-07-15",
+      "texto": "15/07/2025 se envió al área de contratación formato de cierre para su revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-07-24",
+      "texto": "24/07/2025 el área de contratación devuelve el formato de cierre para realización de ajustes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-07-25",
+      "texto": "25/07/2025 se remite al área de contratación formato de cierre con los ajustes solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-08-08",
+      "texto": "08/08/2025 el área de contratación realiza la devolución del formato, indicando realizar ajustes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-08-22",
+      "texto": "Se programa reunión para el día 22/08/2025, con la finalidad de acordar los ajustes solicitados por el área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-08-22",
+      "texto": "22/08/2025 se realizó reunión con el área de contratación en la cual sugieren indicar en el formato de cierre todos los supervisores y/o subdirectores de Gestión Corporativa desde el año 2019 hasta la fecha. Esta información sugieren solicitarla al área de talento humano.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-08-22",
+      "texto": "22/08/2025 se envía correo al área de talento humano solicitando información de los subdirectores nacionales de Gestión Corporativa desde el año 2019 hasta la fecha y la información correspondiente a estos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-09-04",
+      "texto": "04/09/2025 el área de talento humano remite información sin embargo se presentan inconsistencias en los periodos de los supervisores.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-09-10",
+      "texto": "10/09/2025 se solicita aclaración de la información al área de talento humano vía correo electrónico.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-09-23",
+      "texto": "23/09/2025 talento humano remite la información solicitada.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-09-24",
+      "texto": "24/09/2025 se solicita claridad al área de talento humano respecto a la información suministrada debido a que existe cruce en las fechas de ingreso y egreso suministradas.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-10-14",
+      "texto": "14/10/2025 se reitera al área de talento humano claridad respecto a la información suministrada debido a que existe cruce en las fechas de ingreso y egreso suministradas.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-10-17",
+      "texto": "17/10/2025 el área de talento humano de manera verbal informa que no tiene información clara con respecto a las fechas de ingreso y salida de los profesionales que ejercieron el cargo de Coordinador del grupo de infraestructura y mantenimiento. En ese sentido, se cita a reunión con el área de contratación y talento humano para el día 22/10/2025.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-10-22",
+      "texto": "22/10/2025 se realizó reunión con el área de contratación informando que no se cuenta con la fecha exacta de ingreso y egreso de los Coordinadores del GIM y que talento humano informó que no tiene información clara con respecto a estas fechas. En ese sentido, el área de contratación solicitó que se le remitiera a ellos los correos que se había enviado a talento humano para ellos solicitar también esta información.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-10-22",
+      "texto": "22/10/2025 se remite al área de contratación los correos enviados por el GIM a talento humano.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-10-22",
+      "texto": "22/10/2025 por el área de contratación se remite reiteración al área de talento humano.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-11-24",
+      "texto": "24/11/2025 se remite Acta de Cierre al área de contratación con los ajustes solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-11-27",
+      "texto": "27/11/2025, el área de contratación devuelve el formato para ajustar fechas de los coordinadores de infraestructura y mantenimiento.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-12-01",
+      "texto": "1/12/2025, se remite al área de contratación para revisión el formato ajustado con las fechas de ingreso y egreso de los coordinadores de infraestructura que remitió el área de talento humano.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-12-02",
+      "texto": "02/12/2025, el área de contratación devuelve el acta de cierre con observaciones.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-12-02",
+      "texto": "02/12/2025, se solicita al grupo de presupuesto la información por la cual el área de contratación realizó la devolución del acta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-12-09",
+      "texto": "09/12/2025, el grupo de presupuesto remitió la información correspondiente a la liberación de saldo de este contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-12-09",
+      "texto": "09/12/2025, se remite al área de contratación acta de cierre para revisión, con la información remitida por el grupo de presupuesto.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-12-13",
+      "texto": "13/12/2025, el área de contratación remite acta de cierre para firma del coordinador de insfraestructura y el ordenador del gasto.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-12-19",
+      "texto": "19/12/2025, se remite acta de cierre para firma del coordinador del GIM.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1539-2019",
+      "fecha": "2025-12-22",
+      "texto": "22/12/2025, se remite acta de cierre para firma del subdirector Nacional de Gestión Corporativa.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "fecha": "2025-07-16",
+      "texto": "16/07/2025. Se radico en contratación el acta de liquidación con los soportes correspondientes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "fecha": "2025-07-24",
+      "texto": "24/07/2025. La Dirección de Contratación realizo observaciones al acta desde el Grupo de Infraestructura se solicitó una mesa de trabajo para resolver en conjunto las inquietudes presentadas.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "fecha": "2025-08-13",
+      "texto": "13/08/2025 se adelantó la mesa de trabajo con la Dirección de Contratación, se realizaron ajustes al acta de liquidación y se generaron compromisos en ambas partes con fecha final de subsanación el 20 de agosto 2025.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "fecha": "2025-08-29",
+      "texto": "29/08/2025 se envió el oficio de solicitud de ajuste de la póliza a la aseguradora. El corredor de seguros informó que ya fue remitida, por lo cual estamos a la espera del envío de la póliza para radicar nuevamente en Contratos con las subsanaciones correspondientes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "fecha": "2025-09-18",
+      "texto": "18/09/2025 se radico en contratos el documento con las subsanaciones y el envío de la póliza actualizada, estamos pendientes del cargue de la misma en SECOP por parte del proveedor para aprobación de contratos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "fecha": "2025-09-30",
+      "texto": "30/09/2025 El proveedor realizo el cargue de la póliza en SECOP para aprobación por parte de la ESAP.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "fecha": "2025-10-16",
+      "texto": "16/10/2025 la Dirección de Contratación remite el acta aprobada para vistos buenos por parte del Grupo de Infraestructura.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1311-2019",
+      "fecha": "2025-10-20",
+      "texto": "20/10/2025 se remitió documento para firma de contratación con los vistos buenos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "fecha": "2025-07-16",
+      "texto": "16/07/2025 Se recibió desde el área de financiera los soportes de los pagos. Se está revisando la documentación cargada en SECOP para contar con todos los soportes pertinentes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "fecha": "2025-07-25",
+      "texto": "25/07/2025 Se remite proyección del Acta de Cierre del contrato para revisión del abogado Álvaro Pareja.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "fecha": "2025-07-30",
+      "texto": "30/07/2025 Álvaro Pareja radica al área de contratación para la primera revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "fecha": "2025-08-15",
+      "texto": "15/08/2025 el área de contratación remite acta con observaciones. Sin embargo, sólo hasta el 22 de agosto me fue trasladado a mi como responsable dicho correo, las observaciones se están subsanando toda vez que algunas requieren la consecución de documentos con los que no contamos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "fecha": "2025-08-19",
+      "texto": "19/08/2025 se reitera a contratación el estado de respuesta de la revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "fecha": "2025-09-10",
+      "texto": "10/09/2025 se carga en la plataforma SECOP el Plan de Pagos y a su vez se envía Acta de Cierre subsanada al área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "fecha": "2025-10-01",
+      "texto": "1/10/2025 se solicitó información sobre el estado del cierre del presente contrato sin tener respuesta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-758-2022",
+      "fecha": "2025-10-20",
+      "texto": "20/10/2025 se reitera la solicitud sobre el estado de cierre del contrato. El mismo día contratación indica que el Acta de Cierre se encuentra en revisión del asesor Jaime de la SNGC. Jaime indica que se encuentra en revisión y le dará trámite a la mayor brevedad.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "fecha": null,
+      "texto": "Se proyecta borrador para acta, se solicita información a tesorería para verificar plan de pagos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "fecha": "2025-07-18",
+      "texto": "18/07/2025 De acuerdo con la información recolectada se cita mesa de trabajo en infraestructura con el abogado Carrasquilla el día para ajustar el documento de acta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "fecha": "2025-07-18",
+      "texto": "18/07/2025, debido a la notificación de aceptación de la demanda interpuesta por el contratista Diseños y Construcciones S.A.S. contra la Escuela Superior de Administración Pública – ESAP, y siguiendo directrices del abogado Hernán Carrasquilla, se suspenden las actividades relacionadas con el proceso de liquidación hasta tanto se adelanten las acciones correspondientes frente a dicha demanda, la cual entre otras pretensiones se solicita “Que sea Liquidado Judicialmente el Contrato de Obra No. BOG No. 769 DE 2022 junto con el recibo final de obra.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "fecha": "2025-08-06",
+      "texto": "6/8/2025 Se programa mesa de trabajo con jurídica el para apoyo en la respuesta a la demanda interpuesta por el contratista.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "fecha": null,
+      "texto": "De acuerdo como la mesa con jurídica se realiza cargue de información para la respuesta a la demanda la cual es compartida con el abogado Javier Orlando Cortez Gómez y Hernán Carrasquilla quienes están elaborando el documento.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-769-2022",
+      "fecha": null,
+      "texto": "Dado el proceso de demanda en curso, se pierde competencia para realizar el trámite, El grupo de infraestructura realizo los trámites administrativos hasta su competencia.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-07-16",
+      "texto": "16/7/2025 se solicitó información de pagos SIIF.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-07-18",
+      "texto": "18/7/2025 se envía a Álvaro para radicar para radicar en contratación con los debidos soportes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-07-29",
+      "texto": "29/7/2025 En mesa conjunta nos informan que enviemos correo a financiera solicitando balance presupuestal con el fin de identificar saldos a favor o en contra de ESAP.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-08-11",
+      "texto": "11/8/2025 Se programa reunión Helena Hernández para verificación y envío a Radicar a contratos el 14/8/25.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-08-21",
+      "texto": "21/08/2025 Se solicita al contratista por email subir al SECOP las planillas de parafiscales de acuerdo con solicitud de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-10-17",
+      "texto": "17/10/2025 se solicitó a contratación información de pasos a seguir ya que el contratista no se puesto en contacto ni ha subido los documentos solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-10-16",
+      "texto": "16/10/2025 Se solicito a contratación pasos a seguir ya que se envió email al contratista para que suba los documentos al SECOP y no ha habido respuesta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-11-07",
+      "texto": "7/11/2025 desde GIM se sube documentos a SECOP se solicita mesa de trabajo para radicar a contratos y se espera que sea antes del día 14/11/2025.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-946-2022",
+      "fecha": "2025-11-26",
+      "texto": "26/11/2025 Se envía e-mail de respuesta a la abogada Laura Pinzon con las subsanaciones de supervisores con el fin de seguir el trámite,",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": null,
+      "texto": "Se realizó la solicitud de información referente a los pagos, adicional a esto se realiza la búsqueda de información frente a los soportes de cada informe aprobado para pago. La proyección del oficio se está desarrollando conforme con la información suministrada por SECOP. Se solicito a tesorería los soportes que autorizaron el pago para dar continuidad al trámite y envió a contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-07-17",
+      "texto": "17/07/2025 Se realiza él envió para revisión del Abogado Álvaro Pareja.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-07-30",
+      "texto": "30/07/2025 se remitió por parte del Abogado Álvaro Pareja a contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-08-11",
+      "texto": "11/08/2025 remitió la oficina de contratación observaciones frente al acta de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-08-14",
+      "texto": "14/08/2025 se realizó el envío del acta de liquidación ajustado acorde con lo solicitado a la oficina de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": null,
+      "texto": "A la fecha no se han generado observaciones adicionales o comunicación por parte de la oficina de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-08-26",
+      "texto": "26/08/2025 se realizó la consulta a contratación con la finalidad e revisar el estado de avance, el mismo día nos respondió Helena Hernández indicando que ya estaba en revisión de la Abogada Stefanía Pinzón.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-08-28",
+      "texto": "28/08/2025 se escribió nuevamente a contratación para revisar el avance.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-08-28",
+      "texto": "28/08/2025 se recibieron las siguientes instrucciones: -Se requiere el certificado de existencia y representación legal con fecha de expedición no mayor a 30 días, con el fin de corroborar el nombre e identificación del representante legal. -Se solicita aceptar las cuentas presentadas por el contratista en la plataforma SECOP II. - Es necesario validar los comentarios consignados en el acta de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-08-29",
+      "texto": ". 29/08/2025 se realizó el ajuste al formato Excel Acta de liquidación, se envió para firma del subdirector el oficio en el cual se solicita a la ampliación de la póliza a la empresa de seguros del estado S.A de igual forma se solicitó documentación actualizada a la empresa EL TRIUNFO S.A.S. a la fecha 29/08/2025 estamos a la espera del oficio firmado para enviar nuevamente a contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-09-09",
+      "texto": ". 9/09/2025 el envío del oficio autorizado para autorización de actualización de pólizas a la empresa.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-09-17",
+      "texto": ". 17/09/2025 se realizó una reiteración por segunda vez indicando la importancia de actualización de pólizas para liquidación del contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-09-19",
+      "texto": ". 19/09/2025 se realizó una reiteración por tercera vez indicando la importancia de actualización de pólizas para liquidación del contrato. En vista de no recibir respuesta por parte del proveedor el día 23-09-2025 se realiza envío a la dirección de contratación solicitando un paso a seguir debido a que no ha sido posible el contacto con la empresa.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-09-29",
+      "texto": ". 29/09/2025 se recibe por parte de la Dirección de Contratación la autorización para proceder con firmas en el acta de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-10-02",
+      "texto": ". 02/10/2025 se adjunta acta de liquidación del contrato para firma del ordenador del gasto, en simultaneo se solicitó el día.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-10-15",
+      "texto": ". 15/10/2025 firmas del área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-10-27",
+      "texto": ". 27/10/2025 Se realizó él envió del acta de liquidación para firma de la empresa de fumigaciones el triunfo S.A.S., se reitero la necesidad de firma.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-11-05",
+      "texto": ". 5/11/2025 a la fecha no se ha recibido respuesta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-11-11",
+      "texto": ". 11/11/2025 se establece comunicación con la empresa y manifiesta un nuevo contacto para la firma de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": "2025-11-24",
+      "texto": "24/11/2025 se realiza el envio a la Oficina de Contratación con el acta de liquidación firmada",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1174-2023",
+      "fecha": null,
+      "texto": "Se establece comunicación con la abogada Laura Pinzón a fin de indicar que las polizas no seran cambiadas por la empresa, ella indica que dentro del acta se dejara una nota donde se indique lo mencionado, adicional la abogada menciona que verificara si el acta debe ser firmada nuevamente debido a que hubo un cambio de subdirector.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": null,
+      "texto": "La interventoría ya realizo el acta de liquidación, se tiene un problema con las pólizas por lo cual se solicitó al área de contratación la aceptación de estas para poder continuar con el proceso.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-07-22",
+      "texto": "22/07/2025, se encuentra en proceso de firmas del acta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-07-24",
+      "texto": "24/07/2025, se remite acta de liquidación junto con la documentación al doctor Álvaro Pareja para su revisión y posibles ajustes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-07-28",
+      "texto": "28/07/2025, se radica en contratación para revisión y posibles ajustes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-09-05",
+      "texto": "05/09/2025, el área de contratación envía acta de liquidación solicitando ajustes: -Adjuntar el Registro Presupuestal (RP) inicial y su respectiva adición. -Adjuntar el certificado de existencia y representación legal con una vigencia no superior a 30 días. -Tramitar la ampliación de la póliza correspondiente para efectos de la liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-10-02",
+      "texto": ". 02/10/2025, se remite acta de inicio al área de contratación con ajustes y documentos solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-10-14",
+      "texto": ".14/10/2025, se recibe de contratación solicitud de ajustes. -Agradecemos proceder con la carga de la póliza en SECOP para su respectiva aprobación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-10-16",
+      "texto": ".16/10/2025, se remite al área de contratación ajustes solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-10-27",
+      "texto": ". 27/10/2025, se recibe por parte del área de contratación la versión final del acta de liquidación para las respectivas firmas.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-10-29",
+      "texto": ". 29/10/2025, se recibe por parte del contratista el acta de liquidación firmada, el mismo día esta supervisión remite a contratación el acta con los vistos buenos del área.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1835-2023",
+      "fecha": "2025-11-05",
+      "texto": ". 05/11/2025, se remite reiteración al área de contratación la cual manifiesta que está surtiendo los filtros de aprobación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "fecha": null,
+      "texto": "Ya se tiene lista la información y el acta de liquidación, se está a la espera de liquidar la consultoría para poder liquidar el presente.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "fecha": "2025-07-22",
+      "texto": "22/07/2025, se encuentra en proceso de firmas del acta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "fecha": "2025-08-19",
+      "texto": "19/08/2025, se está a la espera del ajuste de observaciones para proceder a generar el acta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1836-2023",
+      "fecha": null,
+      "texto": "Una vez publicado en SECOP la liquidación del contrato de consultoría BOG. 1835 del 2023 se procederá a radicar la liquidación del presente contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-07-14",
+      "texto": "Se tendrá mesa de trabajo el lunes 14/07/2025 con la Dirección de Contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": null,
+      "texto": "Se remiten los últimos pagos al contratista DRV para que los cargue al SECOP.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-07-21",
+      "texto": "21/07/2025, se remite oficio para actualización de pólizas a Subdirección corporativa para revisión y firma del Ing. Darío.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": null,
+      "texto": "Está pendiente por parte de Contratación archivo en el Excel con valores ( Plan de pago) con el fin de comparar valores con los que reporto la interventoría.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-07-23",
+      "texto": "23/07/2025, se envió oficio para la actualización de pólizas del contratista.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": null,
+      "texto": "Contratación envía correo con el reporte de pagos para compararlo con el reporte de la interventoría.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-07-24",
+      "texto": "24/07/2025, Interventoría según documento que envió contratación está revisando el plan de pagos para comparar con la información suministrada anteriormente.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-07-29",
+      "texto": "29/07/2025, se envía correo a la interventoría con el fin de programar una segunda mesa de trabajo con el fin de subsanar las observaciones realizadas por el área de contratación en reunión del 14 de julio.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-08-11",
+      "texto": "11/08/2025, Interventoría envía correo al contratista para programar mesa de trabajo la semana del 11 al 15 de agosto, pero no se ha pronunciado para definir la fecha y hora.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-08-19",
+      "texto": "19/08/2025, se envía correo a la interventoría con el fin de programar mesa de trabajo para la subsanación de observaciones realizadas por el área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-08-21",
+      "texto": "21/08/2025, se realiza reunión entre interventoría y contratista con el fin de definir las fechas para atender las post ventas pendientes de lo cual se enviar un correo para programar dicha visita, también se enviará documento con el fin que se aclare el tema del tiempo del cubrimiento de las pólizas.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-08-26",
+      "texto": "26/08/2025, se envía correo al Dr. Álvaro con asunto cobertura de pólizas para revisión y fines pertinentes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-08-10",
+      "texto": "10/08/2025, se envió correo a contratación solicitando el cargue del CDP y RP del año 2024 en la plataforma SECOP II.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-09-11",
+      "texto": "11/09/2025, se envió correo con la ampliación de la póliza para revisión y aprobación por parte del área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-09-15",
+      "texto": "15/09/2025, se recibe correo por parte del área de contratación con observaciones sobre el plan de pagos subidos en el SECOP II y sobre la cobertura de la póliza.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-09-15",
+      "texto": "15/09/2025, se envía correo al contratista con copia a la interventoría con el fin que amplíen la cobertura de la póliza según observaciones del área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-09-15",
+      "texto": "15/09/2025, se remite correo al contratista DRV indicándole sobre el cargue en debida forma de los pagos según indicaciones del área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-09-15",
+      "texto": "15/09/2025, se remite correo solicitando de informar si la documentación subida a la plataforma SECOP II por parte del contratista DRV INGENIERIA y remiten correo informado que se debe volver a cargar según instrucciones dadas por el área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-09-24",
+      "texto": "24/09/2025, se remite correo a contratación con el fin que revisen la póliza actualizada por el contratista DRV.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-10-01",
+      "texto": "1/10/2025, se envía correo al contratista solicitándole subir los pagos correctamente así mismos se le solicita revisar los valores del acta de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-10-03",
+      "texto": "3/10/2025, se había concertado reunión entre contratista, interventoría, área de contratación y grupo de infraestructura pero el contratista argumento que no podía asistir a la reunión, por tal motivo está pendiente la confirmación para programar reunión el día 14 de octubre a las 11 am.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-10-14",
+      "texto": "14/10/2025, se realiza reunión presencial entre el área de contratación, interventoría y contratista con el fin de aclarar dudas del acta de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-10-30",
+      "texto": "30/10/2025, se realiza reunión entre interventoría y contratista con el fin de revisar facturas que habían tenido observaciones.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-11-10",
+      "texto": "7 – 10/11/2025 de noviembre se aprobaron los 81 pagos del contratista DRV en SECOP II.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-11-11",
+      "texto": "11/11/2025 se recibe correo por parte del área de contratación con el acta de liquidación final y realizan dos observaciones las cuales se revisan y se le solicita al área de contratación mediante aclaración sobre la primera observación toda vez que los informes del contratista se encuentran cargados de acuerdo con la duración del contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1842-2023",
+      "fecha": "2025-11-11",
+      "texto": "11/11/2025, mediante correo se remite el acta de liquidación final a la interventoría para su revisión así como la segunda observación realizada por el área de contratación sobre solicitar al contratista el certificado de representación legal actualizado.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-07-08",
+      "texto": "8/7/25, se envía solicitud de reporte de pagos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-07-10",
+      "texto": "10/7/25 envían reporte de pagos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-07-11",
+      "texto": "11/7/25 se envía acta de cierre y documentos adjuntos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-07-29",
+      "texto": "29/7/ 2025 En mesa conjunta nos informan que enviemos correo a finaciera solicitando balance presupuestal con el fin de identificar saldos a favor o en contra de ESAP.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-07-16",
+      "texto": "16/7/25, envían comentarios desde contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-10-17",
+      "texto": "17/10/2025 se solicitó a contratación información de pasos a seguir ya que el contratista no se puesto en contacto ni ha subido los documentos solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-07-18",
+      "texto": "18/7/25, se envía acta con los ajustes solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-08-12",
+      "texto": "12/8/25, se realizan ajustes y se cita a la abogada Helena Hernández.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-08-14",
+      "texto": "14/8/25, verificación antes de radicación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-11-07",
+      "texto": "7/11/2025 se subió a SECOP información desde GIM se solicita mesa de trabajo para radicar a contratos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-11-13",
+      "texto": "13/11/2025 Se envia e-mail a la abogada Daniela Gómez con las subsanaciones con el fin de seguir el trámite, pendiente respuesta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1588-2019",
+      "fecha": "2025-11-26",
+      "texto": "26/11/25D, Daniela aprueba y pasa a D.Helena",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "fecha": "2025-07-11",
+      "texto": "11/07/2025, se radico en contratación el acta de cierre con los soportes correspondientes, contratación devuelve con observaciones.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "fecha": "2025-08-26",
+      "texto": "26/08/2025, se recibió por parte del área de Contratos el documento con observaciones. Desde el Grupo de Infraestructura se están atendiendo dichas observaciones con el fin de radicar nuevamente el documento.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "fecha": "2025-09-17",
+      "texto": "17/09/2025, se remitió a la Dirección de Contratación el acta de cierre con los ajustes correspondientes, en atención a las observaciones realizadas. Así mismo, se informa que los documentos mencionados en el acta fueron cargados en la plataforma SECOP II.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "fecha": "2025-10-17",
+      "texto": "17/10/2025, la Dirección de Contratación remite el acta aprobada para vistos buenos por parte del Grupo de Infraestructura.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "fecha": "2025-10-20",
+      "texto": "20/10/2025, el Grupo de Infraestructura remite acta con vistos buenos a la Dirección de Contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1579-2019",
+      "fecha": "2025-11-05",
+      "texto": "5/11/2025, La Dirección de Contratación remite acta de cierre y notificación de cierre en SECOP II.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-07-08",
+      "texto": "8/7/2025, se envía solicitud de reporte de pagos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-07-10",
+      "texto": "10/7/2025, envían reporte de pagos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-07-11",
+      "texto": "11/7/2025, se envía acta de cierre y documentos adjuntos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-07-28",
+      "texto": "28/7/2025, mesa de trabajo con Abogada contratos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-07-15",
+      "texto": "15/7/2025, envían comentarios desde contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-07-16",
+      "texto": "16/7/2025, se envía acta con ajuste solicitados, contratación da respuesta faltan ajustes por realizar, se programa mesa de trabajo.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-10-17",
+      "texto": "17/10/2025, se solicitó a contratación información de pasos a seguir ya que el contratista no se puesto en contacto ni ha subido los documentos solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-08-11",
+      "texto": "11/8/2025 se realizan ajustes y se cita a abogada Helena Hernández para verificación antes de radicar el 14/8/25.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-11-07",
+      "texto": "7/11/25 se subió información a SECOP desde Gim se solicita mesa de trabajo se corrige cronología de supervisores en el acta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-763-2022",
+      "fecha": "2025-11-26",
+      "texto": "26/11/25 D, Daniela aprueba y pasa a D.Helena",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "fecha": "2025-07-15",
+      "texto": "El proceso se encuentra en el área de contratación para su revisión y posibles observaciones, radicado el 15/07/2025, contratación devuelve con observaciones.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "fecha": "2025-07-21",
+      "texto": "21/07/2025, el área de contratación devuelve el acta del trámite dado que el contrato BOG 764 - 2022 se encuentra para cierre del expediente contractual, por lo tanto, debe diligenciarse el Formato CÓDIGO: BS*FO*051.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "fecha": "2025-07-28",
+      "texto": "28/07/2025, se remite acta de cierre al doctor Álvaro para su revisión y posibles ajustes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "fecha": "2025-07-29",
+      "texto": "29/07/2025, se remite acta de cierre al área de contratación para revisión y posibles ajustes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "fecha": "2025-08-12",
+      "texto": "12/08/2025, se solicita balance presupuestal al área financiera.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "fecha": "2025-08-13",
+      "texto": "13/08/2025, se envía balance presupuestal al área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-764-2022",
+      "fecha": "2025-11-11",
+      "texto": "11/11/2025, se reitera a contratación el trámite pendiente de respuesta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2024-11-06",
+      "texto": "6/11/2024, se proyecta el acta de liquidación del contrato 777*2022 inicial.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": null,
+      "texto": "12/2024 se realiza reparto en la oficina de contratación se asigna a Daniela Gómez el trámite.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2024-12-17",
+      "texto": "17/12/2024, se reitera correo a la abogada Daniela Gómez para que dé respuesta a la proyección de acta de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-01-20",
+      "texto": "20/01/2025, subsanadas las observaciones hechas por contratación se envía acta de liquidación al contratista para firma y aporte de documentos para liquidar, incluida la solicitud de ampliación de la póliza de cumplimiento.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-01-20",
+      "texto": "20/01/2025, el contratista subsana observaciones y remite póliza firmada para liquidación, no envía pólizas actualizadas.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-01-20",
+      "texto": "20/01/2025, se remite acta a contratación firmada por el contratista, no cuenta con pólizas actualizadas.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-01-21",
+      "texto": "21/01/2025, solicita el contratista fecha para ampliación de póliza de cumplimiento.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-01-22",
+      "texto": "22/01/2025, se le indica al contratista que debe ampliar mínimo un mes para poder liquidar.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-11-24",
+      "texto": "24/11/2025, se le remite información a la contratista enviada por la oficina de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-03-27",
+      "texto": "27/03/2025, se le reitera al contratista actualizar pólizas para liquidar el contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-04-14",
+      "texto": "14/04/2025, se reciben nuevas pólizas actualizadas, pero con observaciones.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-04-16",
+      "texto": "16/04/2025, se envían pólizas a contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-04-22",
+      "texto": "22/04/2025, se le informa al contratista que debe actualizar documentos vencidos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-04-22",
+      "texto": "22/04/2025, el contratista allega documentos faltantes pero la póliza sigue desactualizada.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-04-22",
+      "texto": "22/04/2025, se envían documentos a contratación, no se allega la póliza actualizada ya que el contratista no la ha anexado.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-04-23",
+      "texto": "23/04/2025, el anterior supervisor del contrato 777*2022 el señor NESTOR GACHARNÁ MIKAN envía un informe de entrega del cargo en los siguientes términos... teniendo en cuenta el Informe de entrega (adjunto) del cargo de provisionalidad “PROFESIONAL ESPECIALIZADO, CÓDIGO 2028, GRADO 19” del profesional Néstor Javier Gacharná Mikán. Respuesta al oficio 190.8.780.60*270, me permito solicitarle amablemente la suspensión del trámite de liquidación del contrato 777*2022 hasta tanto se constaten tales circunstancias para tenerlas en cuenta o no dentro de la liquidación",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-05-07",
+      "texto": "7/05/2025, se le informa al contratista del informe presentado por el antiguo supervisor y se le indica ... Remito correo enviado desde el área de contratación para que por favor se de respuesta de MANERA URGENTE a los interrogantes presentados por el señor NESTOR GACHARNÁ frente a la liquidación del contrato 777*2022 ya que solo se tenían dos (2) días para responder y aportar los anexos correspondientes dada la premura del tiempo y la posible pérdida de competencia para liquidar el contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-05-13",
+      "texto": "13/05/2025, se reitera al contratista ante la negativa a dar respuesta al informe que... Les recomiendo nuevamente la respuesta de manera urgente a los interrogantes presentados por el señor NESTOR GACHARNÁ para proceder con el trámite de liquidación del contrato 777 de 2022.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-06-05",
+      "texto": "5/06/2025, presentan respuesta de los señores de RAELJA INGENIERÍA SAS, relacionada con la liquidación del contrato 777*2022.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-06-09",
+      "texto": "9/06/2025, se envía esta respuesta al área de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-06-10",
+      "texto": "10/06/2025, la abogada de contratación requiere actualización de documentos y pólizas actualizadas para liquidar el contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-06-10",
+      "texto": "10/06/2025, se le hace saber al contratista lo que debe hacer llegar a la ESAP para poder liquidar el contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-06-12",
+      "texto": "12/06/2025, ante la negativa de RAELJA se reitera correo.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-06-16",
+      "texto": "16/06/2025, ante la negativa de RAELJA se reitera correo.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-06-16",
+      "texto": "16/06/2025, RAELJA allega documentación para liquidar no adjunta pólizas actualizadas.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-777-2022",
+      "fecha": "2025-06-16",
+      "texto": "16/06/2025, se envía la información a contratación. aa) 16/06/2025, contratación requiere actualizar documentos faltantes. bb) 17/06/2025, se le informa al contratista para que subsane. cc) 18/06/2025, contratación requiere más documentos e información actualizada. dd) 18/06/2025, ante la inactividad del proceso de liquidación se propone una mesa de trabajo para el 20 de junio 2025. ee) 19/06/2025, se reitera al contratista que requiere allegar información de su parte para poder liquidar. ff) 20/06/2025, se realiza mesa de trabajo y se reitera la obligación del contratista para que actualice información y actualice las pólizas correspondientes. gg) 25/06/2025, se reitera nuevamente al contratista la obligación de adjuntar información para poder liquidar. hh) 26/06/2025, contratación manifiesta... Atendiendo la trazabilidad de correos y las distintas solicitudes realizadas en el marco de la liquidación del contrato BOG* 777* 2022, de manera atenta nos permitimos reiterar que estamos atentos a los documentos y ajustes solicitados conforme las observaciones realizadas. ii) 26/06/2025, se le informa a la abogada de contratación por parte del grupo de infraestructura que...Hola Daniela cordial saludo, pese a los correos enviados al contratista no hemos recibido información se subsanación de observaciones y/o actualización de documentos del contratista ni la póliza actualizada y cargada en la plataforma SECOP II. jj) 27/06/2025, se pierde competencia para liquidar por parte de la oficina de contratación. kk) 2/07/2025, RAELJA me envía vía WhatsApp una póliza supuestamente actualizada, pero al verificar la fecha del amparo de cumplimiento no cumple con las condiciones ni con el plazo exigido por la ley para liquidar el contrato ya que a la fecha no estaba vigente para realizar el trámite como lo exige la norma. ll) 15/07/2025, en conversación sostenida con la abogada de contratación indica que ya no se puede liquidar el contrato, por lo tanto, hay que proyectar acta de cierre. mm) 14/08/2025, se remite acta de cierre a contratación. nn) 9/09/2025, Acta de cierre firmada por el ordenador del gasto y publicada en SECOP. AP.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-08-25",
+      "texto": "25/08/2025, se solicita a la interventoría el envío del borrador del Acta de Liquidación adelantada por ellos, junto con los informes de supervisión para proceder con el consolidado de la documentación y remitir así a revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-09-08",
+      "texto": "08/09/2025, se proyecta Acta de Liquidación y se envía a revisión del abogado del GIM el 8 de septiembre de 2025.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-09-10",
+      "texto": "10/09/2025, se remite al área de contratación para primera revisión del Acta de Liquidación (se adjuntan los soportes correspondientes).",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-10-01",
+      "texto": "1/10/2025, informan desde el área de contratación que, por el presunto incumplimiento al contrato, la liquidación se encuentra suspendida, hasta tanto se resuelva la respectiva Actuación Administrativa Sancionatoria.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-10-16",
+      "texto": "16/10/2025, el área de contratación remite el Acta con observaciones las cuales se encuentran en subsanación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-10-17",
+      "texto": "17/10/2025, se remite comunicación vía correo electrónico a la interventoría solicitando el ajuste del plan de pagos por parte del contratista de obra en la plataforma SECOP II.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-10-20",
+      "texto": "20/10/2025, en atención a una de las observaciones del Acta, se procede a rechazar el plan de pagos cargado por el proveedor en SECOP II, toda vez que se encuentra errado y debe ser cargado nuevamente por este y ser consecuente con los pagos realmente efectuados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-10-20",
+      "texto": "20/10/2025, se solicita vía correo electrónico al Grupo de Presupuesto el balance final del contrato, ya que fue unas observaciones de Contratos, una vez se cuente con esta información se remitirá nuevamente el acta al Grupo de Contratos para su validación final.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-11-07",
+      "texto": "7/11/2025, se remite documento a la interventoría para su validación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-11-10",
+      "texto": "10/11/2025, interventoría remite acta a contratista de obra para la firma, igualmente se solicitó al contratista el ajuste del plan de pagos en el SECOP.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-11-18",
+      "texto": "18/11/2025, se remite acta firmada por Interventoria y Contratista d e obra a la Direccion de Contratacion.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1844-2023",
+      "fecha": "2025-11-19",
+      "texto": "19/11/2025, la Direccion de Contratacion informa que el contrato quedo liquidado y el acta fue devidamente publicada en el SECOP.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "fecha": "2025-07-01",
+      "texto": "01/07/2025, radicado a contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "fecha": "2025-07-15",
+      "texto": "15/07/2025, según mesa de trabajo con contratación se envía solicitud de ampliación de pólizas al contratista (pendiente por parte del consorcio A&O oficio enviado por la entidad el 17/07/2025). • Entidad ya hizo rechazo de plan de pagos. • Una vez se tengan pólizas actualizadas se debe remitir paquete completo a la abogada Daniela Gómez.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "fecha": null,
+      "texto": "Se realiza mesa de trabajo y están pendiente de realizar ajustes solicitados. • A la fecha el contratista no ha enviado pólizas actualizadas para continuar con el proceso.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "fecha": "2025-08-13",
+      "texto": "13/08/2025, se carga actualización de pólizas por parte del contratista y corrección del plan de pagos, se notifica a contratación de dichos ajustes, y se está a la espera de la revisión para continuar el trámite.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "fecha": "2025-08-20",
+      "texto": "20/08/2025, la abogada del proceso solicita al contratista modificación de la fecha de cobertura de la póliza, se está a la espera de dicha póliza para continuar el trámite.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "fecha": "2025-08-29",
+      "texto": "29/08/2025, el contratista carga pólizas según requerimiento y se envía correo de notificación a la abogada del proceso con soporte de cargue en SECOP II.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "fecha": "2025-09-10",
+      "texto": "10/09/2025, se remiten ajustes a contratación de acuerdo con las nuevas pólizas actualizadas, sin embargo, el trámite no puede continuar hasta tanto no se ajusten los registros presupuestales del contrato dado que existe una imprecisión en el valor contractual y el valor que reporta a financiera. • 23/09/2025, El área de presupuestos envía aclaración sobre diferencia de valores en RP , la cual se remite igualmente a la abogada del proceso. • 17/10/2025, Se realiza mesa de trabajo con el área de contratación para exponer a detalle la información enviada por el área de presupuestos, de esta manera se remite para aprobación del área según las claridades en la mesa en la misma fecha.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1846-2023",
+      "fecha": "2025-10-29",
+      "texto": "29/10/2025, El proceso está terminado por el GIM y aprobado por contratación, pero no se puede firmar el cierre dado que por ser un contrato de interventoría y al contener cuatro contratistas de los cuales solo uno esta liquidado, hasta que todos los contratos de obra no estén liquidados no se puede firmas esta liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "fecha": "2025-06-19",
+      "texto": "19/06/2025, se remitió al abogado.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "fecha": "2025-07-09",
+      "texto": "9/07/2025, se envía a contratación y se da un alcance a este envío con las correcciones pertinentes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "fecha": "2025-07-17",
+      "texto": "17/07/2025, contratación devolvió documentación para realizar ajustes pertinentes. Se solicitó a COPCON mediante correo electrónico la actualización de pólizas para el año 2025 y el cargue de la documentación pertinente en la plataforma SECOP II.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "fecha": "2025-09-11",
+      "texto": "11/09/2025, nuevamente se envía correo a COPCON con la solicitud de ampliación de las fechas de vigencia en las pólizas hasta el 31 de diciembre de 2025 de acuerdo con lo solicitado por el abogado de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "fecha": "2025-09-15",
+      "texto": "15/09/2025, se recibe póliza actualizada por parte de COPCON (16/10/25). Se envía documentación al abogado Álvaro Pareja con las correcciones solicitadas por contratación para seguir el trámite pertinente.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "fecha": "2025-10-21",
+      "texto": "21/10/2025, es devuelto por el Dr. Pareja para corrección de fechas de la póliza.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "fecha": "2025-11-11",
+      "texto": "11/11/2025, se envía documentación al Dr. Pareja con las correcciones pertinentes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-958-2024",
+      "fecha": "2025-11-20",
+      "texto": "20/11/2025 Se envío a contratación con copia a SNGC documentación ajustada para seguir el tramite pertinente.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-07-18",
+      "texto": "18/7/2025, correo enviado a tesorería para reporte de pagos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-07-22",
+      "texto": "22/7/2025, se recibe SIFF.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-08-01",
+      "texto": "1/8/2025, se envió email a financiera solicitando balance presupuestal.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-08-03",
+      "texto": "3/8/2025, se envía a revisión por Álvaro",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-08-11",
+      "texto": "11/8/2025, se ajustan revisión y se citó a abogada Helena Hernández antes de radicar a contratos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-09-10",
+      "texto": "10/09/2025, se envió a contratos sin embargo no ha habido retroalimentación por parte del contratista desde el 10 septiembre 2025.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-11-07",
+      "texto": "7-11-2025, se subió desde infraestructura los documentos disponibles a SECOP.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-11-11",
+      "texto": "11-11-2025, se le solicito al contratista vía correo la debida atención al proceso de liquidación de dicho contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-737-2020",
+      "fecha": "2025-11-12",
+      "texto": "12/11/2025, aprobado por el abogado Pedro Pablo lo pasa a Abogada Helena de contratación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-06-10",
+      "texto": "10/06/2025, se radico para revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-07-03",
+      "texto": "3/07/2025, se recibieron observaciones del abogado de contratos Abogado a cargo Carlos Andrés Martínez Landinez.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-07-04",
+      "texto": "04/07/2025, se remitió subsanación de observaciones el día. Abogado a cargo del área de contratos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-07-23",
+      "texto": "23/07/2025, se reitera solicitud con contratos nuevamente.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-07-24",
+      "texto": "24/07/2025, el abogado Carlos Martínez remite para revisión al abogado Andrés Mejía.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-08-13",
+      "texto": "13/08/2025, se recibieron observaciones por parte del abogado Carlos Martínez Landinez al Acta de Liquidación , las cuales se están atendiendo.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-08-22",
+      "texto": "22/08/2025, se remitió al proveedor oficio para actualización de pólizas y así continuar con el trámite correspondiente de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-09-08",
+      "texto": "8/09/2025, se remite al área de contratos la subsanación a la documentación toda vez que se recibió la misma por parte del proveedor.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-10-15",
+      "texto": "15/10/2025 el abogado solicita que se apruebe el plan de pagos en SECOP II, sin embargo, el proveedor cargó el mismo de manera errada, por lo que el mismo día se procedió a rechazar el mismo. A la espera de que el proveedor cargue el Plan de Pagos correctamente para dar continuidad al trámite.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-11-07",
+      "texto": "7/11/2025, se reitera al proveedor realizar el cargue del plan de pagos subsanado para dar continuidad al trámite de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-11-18",
+      "texto": "18/11/2025, la interventoría le reitera al contratista que se haga el cargue del Plan de pagos en SECOP II, para continuar con el trámite de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-11-19",
+      "texto": "19/11/2025, el contratista remite nuevamente el Plan de pagos, el cual se encuentra en verificación toda vez que existe una diferencia en centavos en uno de los pagos que debe sustentarse de manera precisa en el Acta de Liquidación y en SECOP II",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-12-01",
+      "texto": "01/12/2025 se aprueba el plan de pagos y se remite acta de liquidación al área de contratación para dar continuidad al trámite.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1843-2023",
+      "fecha": "2025-12-15",
+      "texto": "el 15/12/2025 el abpgado indica que se legalizó la liquicadión y el cierre del contrato en la plataforma SECOP II",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "fecha": "2025-07-17",
+      "texto": "17/07/2025, se solicito estado de cuenta a tesorería.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "fecha": "2025-07-18",
+      "texto": "18/07/2025, se recibe estado de cuenta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "fecha": null,
+      "texto": "En proceso de consecución de documentación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-383-2020",
+      "fecha": null,
+      "texto": "Se elaborará el acta de cierre por parte de infraestructura por perdida de competencia.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-07-28",
+      "texto": "28/07/2025, se solicita lineamientos el a la Dirección de contratos toda vez que del acta remitida se evidencia lo siguiente: 1.El plazo para la fecha de Liquidación al parecer concluía el 15/06/2025. 2.El acta adjunta, registra para firma de Ernesto Carlos Molina quien ya no funge como supervisor y funcionario del GIM.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-07-29",
+      "texto": "29/07/2025, contratos remite respuesta indicando que se debe adelantar Acta de Cierre.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-07-30",
+      "texto": "30/07/2025, se remite Acta de Cierre para primera revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-08-04",
+      "texto": "4/08/2025, se solicitó la relación de pagos a la oficina financiera.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-08-06",
+      "texto": "6/08/2025, se remiten los pagos por la oficina financiera.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-08-19",
+      "texto": "19/08/2025, el acta de cierre pasa a aprobación ya que no se remiten más observaciones, a la espera de su aprobación y devolución por parte de la Dirección de Contratos a fin de obtener firma del supervisor.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-08-28",
+      "texto": "28/08/2025, acta de cierre en firma del Subdirector.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-08-29",
+      "texto": "29/08/2025, se envía a contratación Acta de Cierre suscrita para continuar con el cierre del contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-594-2022",
+      "fecha": "2025-09-01",
+      "texto": "1/09/2025, fue publicado en SECOP y se cerró el proceso.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "fecha": "2025-07-17",
+      "texto": "17/07/2025, se remite a Montería el Formato de liquidación del Convenio derivado estructurado desde 2024 para validación de su vigencia",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "fecha": "2025-11-11",
+      "texto": "11-11-2025, no existe respuesta alguna por parte de la alcaldía de Montería para este trámite se enviara a contratación el requerimiento de cierre de expediente.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1220-2023",
+      "fecha": null,
+      "texto": "se radico en oficina de contratacion para acta de cierre unilateral.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-07-15",
+      "texto": "15/07/2025, se recibió información del contrato desde el área de contratos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-07-16",
+      "texto": "16/07/2025, se recibió desde el área de financiera los soportes de los pagos realizados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-07-22",
+      "texto": "22/07/2025, se remite para revisión del abogado Álvaro Pareja.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-07-23",
+      "texto": "23/07/2025, se remite al área de contratación para revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-07-28",
+      "texto": "28/07/2025, se recibe por parte del área de contratación el Acta de cierre con observaciones.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-07-31",
+      "texto": "31/07/2025, se remite documento subsanado.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-08-12",
+      "texto": "12/08/2025, se realiza mesa de trabajo para atender nuevas observaciones.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-08-15",
+      "texto": "15/08/2025, se remite Acta subsanada para proceder con los vistos buenos correspondientes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-09-08",
+      "texto": "08/09/2025, se recibió acta avalada y se encuentra en procesos de recolección de firmas se envía a Diego Rodriguez para su firma.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-09-12",
+      "texto": "12/09/2025, se remitió al área de contratación el ACTA FIRMADA para dar continuidad al trámite.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-244-2016",
+      "fecha": "2025-09-24",
+      "texto": "24/09/2025, envían desde el área de contratación, soporte del cierre del contrato y cargue en la plataforma SECOP I.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "fecha": "2025-07-17",
+      "texto": "17/07/2025, se solicito estado de cuenta a tesorería.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "fecha": "2025-07-18",
+      "texto": "18/07/2025, se recibe estado de cuenta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "fecha": null,
+      "texto": "En proceso de consecución de documentación",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "fecha": "2025-07-29",
+      "texto": "29/07/2025, se solicitó documentación al área de contratación Dr. Hernando Mejía y se recibe documentación para revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-588-2019",
+      "fecha": null,
+      "texto": "Se elaborará el acta de cierre por parte de infraestructura por perdida de competencia.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-07-31",
+      "texto": "31/072025, se remite al área de infraestructura el requerimiento de liquidación del presente contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "5025-08-01",
+      "texto": "01/08/5025, se solicitó a tesorería los pagos realizados a este contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-08-01",
+      "texto": "01/08/2025, tesorería da respuesta informando los pagos que se han realizado en el presente contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-08-11",
+      "texto": "11/08/2025, se remite para revisión del abogado Álvaro Pareja, el formato de liquidación del presente contrato.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-08-13",
+      "texto": "13/08/2025, Álvaro Pareja remite el formato de liquidación con observaciones para subsanar.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-08-14",
+      "texto": "14/08/2025, se remite al abogado Álvaro Pareja el formato de liquidación con los ajustes requeridos.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-08-14",
+      "texto": "14/08/2025, el abogado Álvaro Pareja remite a contratación formato de liquidación para revisión.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-09-09",
+      "texto": "09/09/2025, el área de contratación remite el formato de liquidación con ajustes para subsanar.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-09-18",
+      "texto": "18/09/2025, se solicita al proveedor certificado de existencia y representación legal del contratista con una vigencia no superior a 30 días y remitir póliza ampliada junto con el pago de esta.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-09-19",
+      "texto": "19/09/2025, se remite al área de contratación, abogada Rocío Angarita, el formato de liquidación con todos los ajustes realizados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-10-14",
+      "texto": "14/10/2025, se solicita al área de contratación, abogada Rocío Angarita, el estado de revisión del formato de liquidación.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-10-22",
+      "texto": "22/10/2025, se solicita al área de contratación, abogada Rocío Angarita, el estado de revisión del formato de liquidación. - B21",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-11-12",
+      "texto": "12/11/2025, el área de contratos envia formatos solicitando la corrección de nuevos ajustes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-11-26",
+      "texto": "26/11/2025, se remite al area de contratos formato con los ajustes solicitados.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2025-12-19",
+      "texto": "19/12/2025 el área de contratación devuelve acta de liquidacion con ajustes.",
+      "origen": "observacion"
+    },
+    {
+      "contrato": "BOG-1190-2024",
+      "fecha": "2055-12-22",
+      "texto": "22/12/2055, se remite al área de contratación acta de liquidación corregida de acuerdo a los ajustes solicitados.",
+      "origen": "observacion"
+    }
+  ]
+}

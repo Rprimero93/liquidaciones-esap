@@ -6,8 +6,9 @@
 - [x] **Fase 0 — Setup de contexto.** `docs/` mínimo viable (`00_README`, `01_INDEX`, `06_IMPLEMENTATION`, `07_PROGRESO_RESUMEN`) y fila en `INVENTARIO_Web.md`. Con Git en la bóveda.
   - Criterio: los 4 docs existen y reflejan las decisiones de descubrimiento; la fila del inventario existe. **Cumplido.**
 
-- [ ] **Fase 1 — Extracción de datos.** Script `extraer_excel.py` (openpyxl, solo lectura) que genera `data/seed.json` normalizado: contratos, catálogo de pasos y alertas, avances por contrato y bitácora (observación/nota inicial).
+- [x] **Fase 1 — Extracción de datos.** Script `extraer_excel.py` (openpyxl, solo lectura) que genera `data/seed.json` normalizado: contratos, catálogo de pasos y alertas, avances por contrato y bitácora (observación/nota inicial).
   - Criterio: `seed.json` incluye todos los contratos de la hoja `Contratos` (los sin tarjeta, marcados como tal); la prueba compara contra el Excel el número de contratos y el avance por contrato, con conteos leídos de los datos.
+  - **Cumplido: sí** — 26 contratos (25 con tarjeta, `BOG-759-2022` marcado sin tarjeta), 0 tarjetas sin cruzar, 284 entradas de bitácora; `pytest pruebas` 13/13 (contratos, cruce de tarjetas, avance = valor calculado por Excel en cada contrato, estructura, bitácora, fechas, seed al día).
 
 - [ ] **Fase 2 — Estructura y estilo.** Base de la app con Sidebar, tokens + `minimalista-corporativo`, capa de datos (semilla + `localStorage`) y navegación por `#ruta`.
   - Criterio: las 3 rutas cargan desde la Sidebar, el estilo activo es el minimalista y los datos se leen de la semilla; 0 errores de consola.
