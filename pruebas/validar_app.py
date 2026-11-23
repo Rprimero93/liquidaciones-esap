@@ -34,9 +34,16 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
 
+class TestServer(http.server.ThreadingHTTPServer):
+    # Atiende en paralelo y con cola amplia: el navegador pide muchos CSS/JS a la vez y el
+    # TCPServer de un hilo (cola de 5) rechazaba conexiones de vez en cuando (ERR_CONNECTION_REFUSED)
+    request_queue_size = 64
+    daemon_threads = True
+
+
 def serve():
     handler = partial(QuietHandler, directory=str(ROOT))
-    httpd = socketserver.TCPServer(("127.0.0.1", 0), handler)
+    httpd = TestServer(("127.0.0.1", 0), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     return httpd
 
@@ -63,7 +70,7 @@ def phase2(page, label):
     href = page.eval_on_selector("#style-link", "el => el.getAttribute('href')")
     check(f"{label}: estilo activo minimalista", href.endswith(STYLE), href)
     bg = page.evaluate("getComputedStyle(document.body).backgroundColor")
-    check(f"{label}: fondo del estilo aplicado", bg == "rgb(255, 255, 255)", bg)
+    check(f"{label}: fondo de página gris claro (Cotizaciones_simple)", bg == "rgb(245, 247, 250)", bg)
 
     # Sidebar: íconos al tamaño del token, botón de reapertura oculto, cerrar/reabrir funciona
     icon = page.evaluate("""(() => {
@@ -739,6 +746,33 @@ TRIGGER_LOOK_JS = "e => (" + FIELD_LOOK_JS + ")(e.shadowRoot.querySelector('.tri
 HOST_BORDER_JS = "e => getComputedStyle(e).borderTopWidth"
 
 
+def table_checks(page, label):
+    """Estilo Cotizaciones_simple: tarjetas blancas, encabezado de tabla, columnas alineadas y cebra."""
+    goto_route(page, "consulta")
+    page.wait_for_selector("[data-list='contratos'] a[data-id]")
+    page.mouse.move(0, 0)
+    cards = page.eval_on_selector_all(".card", "els => [...new Set(els.map(e => getComputedStyle(e).backgroundColor))]")
+    side = page.eval_on_selector("ds-sidebar", "e => getComputedStyle(e.shadowRoot.querySelector('.sidebar')).backgroundColor")
+    check(f"{label}: tarjetas y menú blancos", cards == ["rgb(255, 255, 255)"] and side == "rgb(255, 255, 255)", f"{cards} {side}")
+    zebra = page.eval_on_selector_all("[data-list='contratos'] li > a", "els => els.slice(0, 2).map(e => getComputedStyle(e).backgroundColor)")
+    check(f"{label}: cebra en filas pares", zebra[0] != zebra[1] and "221, 252, 255" in zebra[1], str(zebra))
+    if label != "escritorio":
+        hidden = not page.is_visible(".table-head")
+        check(f"{label}: sin encabezado de tabla en móvil", hidden)
+        return
+    head = page.eval_on_selector(".table-head", """e => { const s = getComputedStyle(e);
+        return [s.backgroundColor, s.borderBottomWidth, s.borderBottomColor, s.textTransform, s.color]; }""")
+    accent = page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()")
+    ratio = contrast(head[4], head[0])
+    check(f"{label}: encabezado de tabla estilo Cotizaciones", head[0] == "rgb(221, 252, 255)" and head[1] == "2px"
+          and head[3] == "uppercase" and ratio >= 7, f"{head}; contraste {ratio:.2f}; acento {accent}")
+    cols = page.evaluate("""(() => {
+        const h = [...document.querySelectorAll('.table-head > span')].map(s => s.getBoundingClientRect());
+        const r = [...document.querySelector("[data-list='contratos'] li > a").children].map(s => s.getBoundingClientRect());
+        return h.map((b, i) => Math.round(Math.abs(b.left - r[i].left) + Math.abs(b.right - r[i].right))); })()""")
+    check(f"{label}: columnas alineadas con el encabezado", all(d <= 1 for d in cols), f"desfase {cols}")
+
+
 def field_checks(page, label):
     goto_route(page, "consulta")
     page.wait_for_selector("input[data-filter='q']")
@@ -798,6 +832,8 @@ def hover_checks(page, label):
     check_hover(page, label, "fila de la consulta", page.locator("[data-list='contratos'] a[data-id]").first,
                 css("[data-list='contratos'] a[data-id]", "backgroundColor"),
                 css("[data-list='contratos'] a[data-id] .list-sub", "color"))
+    even = "[data-list='contratos'] li:nth-child(2) > a"
+    check_hover(page, label, "fila de la cebra", page.locator(even), css(even, "backgroundColor"), css(f"{even} .list-sub", "color"))
     dd = page.locator("ds-dropdown[data-filter='estado']")
     dd.evaluate("e => e.scrollIntoView({block: 'center'})")
     dd.locator(".trigger").click()
@@ -817,6 +853,7 @@ def phase5_and_hover(page, label):
     phase5(page, label)
     hover_checks(page, label)
     field_checks(page, label)
+    table_checks(page, label)
 
 
 PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5_and_hover}

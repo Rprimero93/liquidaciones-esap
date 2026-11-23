@@ -13,6 +13,17 @@
   /* Fondo de hover: azul 10 % ("azulClaro") de la marca ESAP (Kit_Marca_ESAP/kit/marca.json).
      Sobre él el texto va en --color-text (14,6:1); el acento (6,35:1) no llega a 7:1. */
   --color-hover: #E6F0F7;
+
+  /* Fondo de página, tarjetas y tablas tomados de Cotizaciones_simple (styles.css):
+     página gris claro y tarjetas blancas con borde, esquinas de 16 px y sombra con tinte verde azulado */
+  --app-bg: #F5F7FA;
+  --card-bg: #FFFFFF;
+  --card-border: #E0E4EA;
+  --card-shadow: 0 1px 4px rgba(3, 120, 124, .08), 0 1px 2px rgba(0, 0, 0, .04);
+  --table-head-bg: #DDFCFF;
+  --table-head-line: var(--color-accent);
+  --table-head-text: #025558;          /* el #03787C de la referencia da 4,9:1; este, 7,96:1 */
+  --table-zebra: rgba(221, 252, 255, .25);
 }
 
 /* [hidden] debe ganarle al display de los componentes (:host { display: ... }) */
@@ -20,7 +31,7 @@
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  background: var(--app-bg);
   color: var(--color-text);
   font-family: var(--font-family-base);
   font-size: var(--font-size-md);
@@ -102,11 +113,17 @@ ds-sidebar > a[aria-current="page"] {
 
 /* Tarjetas */
 .card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
   padding: var(--spacing-stack-md);
+}
+/* El menú lateral con el mismo aspecto de tarjeta blanca */
+ds-sidebar::part(sidebar) {
+  background: var(--card-bg);
+  border-color: var(--card-border);
+  box-shadow: var(--card-shadow);
 }
 .card-title { margin: 0; font-size: var(--font-size-lg); }
 .empty { text-align: center; color: var(--color-text-muted); }
@@ -219,7 +236,10 @@ ds-sidebar > a[aria-current="page"] {
 
 /* Lista de contratos */
 .list { list-style: none; margin: 0; padding: 0; }
-.list li + li { border-top: 1px solid var(--color-border); }
+.list li + li { border-top: 1px solid var(--card-border); }
+/* Cebra suave (Cotizaciones_simple); el hover de abajo la reemplaza con el azul claro ESAP */
+.list li:nth-child(even) > .list-link { background: var(--table-zebra); }
+.list li > .list-link { transition: background-color 120ms ease; }
 .list-link {
   display: grid;
   grid-template-columns: minmax(9rem, auto) 1fr auto;
@@ -229,7 +249,7 @@ ds-sidebar > a[aria-current="page"] {
   color: inherit;
   text-decoration: none;
 }
-.list-link:hover { background: var(--color-hover); }
+.list li > .list-link:hover { background: var(--color-hover); } /* misma especificidad que la cebra: gana por ir después */
 .list-link:hover .list-sub, .list-link:hover .list-meta { color: var(--color-text); }
 .list-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
 .list-main { font-weight: var(--font-weight-medium); }
@@ -495,7 +515,31 @@ ds-sidebar > a[aria-current="page"] {
 .level[data-level="proximo"] { background: var(--status-warn-bg); color: var(--status-warn-text); }
 .level[data-level="en-plazo"] { background: var(--status-ok-bg); color: var(--status-ok-text); }
 .level[data-level="sin-fecha"] { color: var(--color-text-muted); }
-.deadline-list { box-shadow: none; padding: 0; max-height: 560px; overflow-y: auto; background: var(--color-bg); }
+.deadline-list { box-shadow: none; padding: 0; max-height: 560px; overflow-y: auto; border-radius: var(--radius-md); }
+
+/* Tabla de la Consulta (estilo Cotizaciones_simple): encabezado cian con línea de acento,
+   títulos en mayúsculas pequeñas; las filas comparten la misma rejilla de columnas */
+.table-card { padding: 0; overflow: hidden; }
+.table-head,
+.table-card .list-link {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr) calc(9.5 * var(--font-size-sm)) 4rem;
+  gap: var(--spacing-inline-md);
+  align-items: center;
+  padding: var(--spacing-stack-sm) var(--spacing-stack-md);
+}
+.table-head {
+  background: var(--table-head-bg);
+  border-bottom: 2px solid var(--table-head-line);
+  color: var(--table-head-text);
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.table-head .th-num, .table-card .list-pct { text-align: right; }
+.table-head .th-center, .table-card .cell-status { text-align: center; }
 
 /* Avisos: la pila la posiciona la app, no el Core */
 .toast-stack {
@@ -519,6 +563,10 @@ ds-sidebar > a[aria-current="page"] {
   .app ds-sidebar::part(head) { flex-basis: 100%; }
   .list-link { grid-template-columns: 1fr auto; }
   .list-sub { grid-column: 1 / -1; grid-row: 2; white-space: normal; }
+  /* Tabla de la Consulta en móvil: sin encabezado; número + estado + avance arriba, contratista abajo */
+  .table-head { display: none; }
+  .table-card .list-link { grid-template-columns: 1fr auto auto; }
+  .table-card .list-sub { grid-column: 1 / -1; grid-row: 2; }
   .filters { grid-template-columns: 1fr; }
   .ficha-cols { grid-template-columns: 1fr; }
   .dash-cols { grid-template-columns: 1fr; }

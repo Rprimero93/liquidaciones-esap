@@ -54,10 +54,8 @@ function row(c) {
         <span class="list-sub">${escapeHtml(c.contratista)}
           ${step ? `<small class="list-meta">Etapa: ${escapeHtml(step.nombre)}</small>` : ''}
         </span>
-        <span class="list-end">
-          <span class="chip" data-status="${status}">${store.statusName(status)}</span>
-          <span class="list-pct">${percent(store.progressOf(c.id))}</span>
-        </span>
+        <span class="cell-status"><span class="chip" data-status="${status}">${store.statusName(status)}</span></span>
+        <span class="list-pct">${percent(store.progressOf(c.id))}</span>
       </a>
     </li>`;
 }
@@ -71,7 +69,7 @@ function update(container) {
   container.querySelector('[data-total]').textContent = all.length;
   container.querySelector('[data-clear]').hidden = !(filters.q || filters.responsable || filters.estado);
   listEl.innerHTML = found.map(row).join('');
-  listEl.hidden = !found.length;
+  container.querySelector('[data-table]').hidden = !found.length; // sin filas: se oculta la tabla con su encabezado
   emptyEl.hidden = !!found.length;
   emptyEl.querySelector('p').textContent = all.length
     ? 'Ningún contrato coincide con la búsqueda y los filtros.'
@@ -105,7 +103,12 @@ export function render(container) {
       <p class="muted"><span data-count></span> de <span data-total></span> contratos</p>
       <ds-button density="compact" data-clear hidden>Limpiar filtros</ds-button>
     </div>
-    <ul class="card list" data-list="contratos"></ul>
+    <div class="card table-card" data-table>
+      <div class="table-head" aria-hidden="true">
+        <span>Contrato</span><span>Contratista / Etapa</span><span class="th-center">Estado</span><span class="th-num">Avance</span>
+      </div>
+      <ul class="list" data-list="contratos"></ul>
+    </div>
     <div class="card empty" data-empty hidden><p></p></div>
   `;
 
