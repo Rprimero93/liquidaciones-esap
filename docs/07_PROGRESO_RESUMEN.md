@@ -34,6 +34,7 @@ fases_reabiertas: 0
   - Dato a la vista con la semilla (2026-11-23): 11 de los 18 contratos sin cerrar ya pasaron su fecha de pérdida de competencia, 0 vencen en los próximos 90 días, 4 en plazo y 3 sin fecha.
   - Ajuste pedido tras el cierre (2026-11-23): los chips de nivel del semáforo pasan a ser **chips de filtro** (botones con `aria-pressed`): un clic filtra la lista, un segundo clic quita el filtro; el chip sin contratos queda deshabilitado; el filtro se conserva al volver de la ficha; contador "N de M contratos sin cerrar". Validación: `python pruebas/validar_app.py` 158/158.
   - Ajuste pedido tras el cierre (2026-11-23): en "Avance por responsable", el nombre (enlace) o cualquier parte de su fila lleva a la Consulta filtrada solo por ese responsable (limpia búsqueda y estado previos; `consulta.showResponsible()`). Validación: 162/162, dos corridas seguidas.
+  - Ajuste pedido tras el cierre (2026-11-23): la tarjeta "Cerrados" pasa a "Estados" con tres cifras en fila (Cerrados / Paralizados / En trámite) a la misma altura que las cifras de las otras tarjetas (opción elegida por Ricardo entre "en fila" y "en columna"); cada cifra abre la Consulta filtrada por ese estado (`consulta.showStatus()`). En escritorio (≥ 1100 px) la tarjeta toma 1,5 del ancho de las demás. Validación: 175/175 (incluye alineación y altura igual de las 4 tarjetas).
 - Fase 6 (Respaldo): **pendiente**.
 
 ## Bloqueos

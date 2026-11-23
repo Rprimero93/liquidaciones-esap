@@ -10,6 +10,13 @@ export const title = 'Consulta';
 
 const filters = { q: '', responsable: '', estado: '' };
 
+/** Deja la consulta filtrada solo por un estado (lo usa el tablero antes de navegar). */
+export function showStatus(status) {
+  filters.q = '';
+  filters.responsable = '';
+  filters.estado = status;
+}
+
 /** Deja la consulta filtrada solo por un responsable (lo usa el tablero antes de navegar). */
 export function showResponsible(name) {
   filters.q = '';

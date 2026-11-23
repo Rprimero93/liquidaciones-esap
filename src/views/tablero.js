@@ -6,7 +6,11 @@
 import * as store from '../js/store.js';
 import { href } from '../js/router.js';
 import { date, escapeHtml, percent } from '../js/format.js';
-import { showResponsible } from './consulta.js';
+import { showResponsible, showStatus } from './consulta.js';
+
+// Estados que se muestran como cifras en la tarjeta "Estados" (cada una abre la consulta filtrada)
+const STATUS_KPIS = ['cerrado', 'paralizado', 'en-tramite'];
+const STATUS_PLURAL = { cerrado: 'Cerrados', paralizado: 'Paralizados', 'en-tramite': 'En trámite' };
 
 export const title = 'Tablero';
 
@@ -29,10 +33,16 @@ function kpis() {
         <strong class="kpi-value">${percent(store.generalProgress())}</strong>
         <span class="kpi-note">Promedio de los ${withCard} contratos con seguimiento</span>
       </article>
-      <article class="card kpi" data-kpi="cerrados">
-        <span class="kpi-label">Cerrados</span>
-        <strong class="kpi-value">${count('cerrado')}</strong>
-        <span class="kpi-note">${count('paralizado')} paralizados · ${count('en-tramite')} en trámite</span>
+      <article class="card kpi" data-kpi="estados">
+        <span class="kpi-label">Estados</span>
+        <div class="kpi-split">
+          ${STATUS_KPIS.map((s) => `
+            <a class="kpi-part" href="${href('consulta')}" data-status-link="${s}"
+              aria-label="${count(s)} ${STATUS_PLURAL[s].toLowerCase()}: ver en Consulta">
+              <strong class="kpi-value">${count(s)}</strong>
+              <span class="kpi-note">${STATUS_PLURAL[s]}</span>
+            </a>`).join('')}
+        </div>
       </article>
       <article class="card kpi" data-kpi="vencidos">
         <span class="kpi-label">Competencia vencida</span>
@@ -174,6 +184,10 @@ export function render(container) {
   bindTooltip(container);
   bindLevels(container);
   bindResponsibleLinks(container);
+  // Cifras de la tarjeta Estados → Consulta filtrada por ese estado
+  container.querySelectorAll('[data-status-link]').forEach((a) => {
+    a.addEventListener('click', () => showStatus(a.dataset.statusLink));
+  });
   // Arranca la animación en el siguiente cuadro (las barras parten en ancho 0)
   requestAnimationFrame(() => requestAnimationFrame(() => container.querySelector('[data-bars]')?.classList.add('is-in')));
 }

@@ -431,8 +431,18 @@ def phase5(page, label):
     today = date.fromisoformat(page.evaluate(
         "(() => { const d = new Date(); return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-'); })()"))
 
-    closed = sum(status(c) == "cerrado" for c in SEED["contratos"])
-    check(f"{label}: KPI cerrados", page.text_content("[data-kpi='cerrados'] .kpi-value").strip() == str(closed), str(closed))
+    # Tarjeta Estados: tres cifras en fila, al mismo nivel que las cifras de las otras tarjetas
+    for est in ("cerrado", "paralizado", "en-tramite"):
+        n = sum(status(c) == est for c in SEED["contratos"])
+        got = page.text_content(f"[data-status-link='{est}'] .kpi-value").strip()
+        check(f"{label}: KPI {est}", got == str(n), f"{got} vs {n}")
+    tops = page.eval_on_selector_all("[data-kpi='estados'] .kpi-value", "els => els.map(e => Math.round(e.getBoundingClientRect().top))")
+    check(f"{label}: cifras de Estados en una misma fila", len(set(tops)) == 1, str(tops))
+    if label == "escritorio":
+        ref = page.eval_on_selector("[data-kpi='contratos'] .kpi-value", "e => Math.round(e.getBoundingClientRect().top)")
+        heights = page.eval_on_selector_all(".kpi-row > .kpi", "els => els.map(e => Math.round(e.getBoundingClientRect().height))")
+        check(f"{label}: cifras de Estados alineadas con las otras tarjetas", tops[0] == ref and len(set(heights)) == 1,
+              f"{tops[0]} vs {ref}; alturas {heights}")
     dl = deadlines(today)
     overdue = sum(r[2] == "vencido" for r in dl)
     check(f"{label}: KPI competencia vencida", page.text_content("[data-kpi='vencidos'] .kpi-value").strip() == str(overdue), str(overdue))
@@ -489,6 +499,17 @@ def phase5(page, label):
         got_resp, got_est, got_q, rows = consulta_state()
         check(f"{label}: clic en {'nombre' if target == '.bar-link' else 'barra'} de '{resp}' filtra la consulta",
               got_resp == resp and got_est == "" and got_q == "" and rows == expected(resp=resp), f"{len(rows)} contratos")
+    # Clic en una cifra de la tarjeta Estados → Consulta filtrada solo por ese estado
+    for est in ("cerrado", "paralizado", "en-tramite"):
+        goto_route(page, "consulta")
+        page.wait_for_selector("[data-list='contratos'] a[data-id]")
+        page.locator("input[data-filter='q']").fill("bog")
+        goto_route(page, "tablero")
+        page.click(f"[data-status-link='{est}']")
+        page.wait_for_function("location.hash === '#/consulta'", timeout=5000)
+        got_resp, got_est, got_q, rows = consulta_state()
+        check(f"{label}: cifra {est} filtra la consulta", got_est == est and got_resp == "" and got_q == ""
+              and rows == expected(est=est), f"{len(rows)} contratos")
     page.locator("[data-clear]").click()
     goto_route(page, "tablero")
     page.wait_for_selector("[data-deadlines] a[data-id]")
@@ -534,6 +555,10 @@ def phase5(page, label):
     check(f"{label}: filtro del semáforo se conserva al volver", kept
           and page.locator("[data-deadlines] a[data-id]").count() == overdue)
     page.click("[data-level-filter='vencido']")
+    # Captura con las barras ya completas (esperar a que termine la animación, con tope)
+    page.wait_for_function("""[...document.querySelectorAll('[data-bars] .bar')].every(b =>
+        Math.abs(b.getBoundingClientRect().width - b.parentElement.getBoundingClientRect().width * Number(b.dataset.value)) < 1)""",
+                           timeout=10000)
     page.screenshot(path=str(SHOTS / f"fase5_{label}_tablero.png"), full_page=True)
 
     # Movimiento reducido: sin animación
