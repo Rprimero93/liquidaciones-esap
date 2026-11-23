@@ -110,6 +110,8 @@ ds-sidebar > a[aria-current="page"] {
 /* Tarjeta con varias cifras en fila: cada cifra queda al mismo nivel que la de las otras tarjetas */
 .kpi-split { display: flex; gap: var(--spacing-inline-md); }
 .kpi-part .kpi-note { white-space: nowrap; }
+/* Solo en la tarjeta Estados: cada cifra centrada sobre su descripción */
+.kpi-part { align-items: center; text-align: center; }
 /* En escritorio, la tarjeta Estados (3 cifras) toma más ancho que las demás */
 @media (min-width: 1100px) {
   .kpi-row { grid-template-columns: 1fr 1fr 1.5fr 1fr; }
