@@ -4,6 +4,17 @@
  */
 *, *::before, *::after { box-sizing: border-box; }
 
+/* Tokens propios de la app: colores de estado (el estilo no los define).
+   Texto/fondo con contraste >= 7:1, mismo umbral del sistema (verificado en validar_app.py). */
+:root {
+  --status-ok-text: #14532D;      --status-ok-bg: #E7F3EC;
+  --status-warn-text: #6B3E00;    --status-warn-bg: #FCF1DE;
+  --status-danger-text: #7F1D1D;  --status-danger-bg: #FCE8E8;
+}
+
+/* [hidden] debe ganarle al display de los componentes (:host { display: ... }) */
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   background: var(--color-bg);
@@ -113,7 +124,67 @@ ds-sidebar > a[aria-current="page"] {
 .list-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
 .list-main { font-weight: var(--font-weight-medium); }
 .list-sub { color: var(--color-text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.list-end { font-variant-numeric: tabular-nums; }
+.list-end {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline-sm);
+  font-variant-numeric: tabular-nums;
+}
+.list-pct { min-width: 3.5rem; text-align: right; }
+.list-meta {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Chip de estado */
+.chip {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  padding: 0 var(--space-3);
+  white-space: nowrap;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+}
+.chip[data-status="cerrado"] { background: var(--status-ok-bg); color: var(--status-ok-text); }
+.chip[data-status="paralizado"] { background: var(--status-danger-bg); color: var(--status-danger-text); }
+.chip[data-status="en-tramite"] { background: var(--status-warn-bg); color: var(--status-warn-text); }
+.chip[data-status="sin-seguimiento"] { color: var(--color-text-muted); }
+
+/* Filtros de la consulta */
+.filters {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr;
+  gap: var(--grid-gutter);
+  align-items: end;
+  margin-bottom: var(--spacing-stack-md);
+}
+.field { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.field-label { font-size: var(--font-size-sm); color: var(--color-text-muted); font-weight: var(--font-weight-medium); }
+.field input {
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-inline-sm) var(--spacing-inline-md);
+  min-height: var(--target-size-comfort);
+}
+.field input:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.field ds-dropdown {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+.result-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline-md);
+  margin-bottom: var(--spacing-stack-xs);
+}
+.result-bar p { margin: var(--spacing-stack-xs) 0; }
 
 /* Datos de la ficha */
 .facts {
@@ -145,4 +216,5 @@ ds-sidebar > a[aria-current="page"] {
   .app ds-sidebar::part(links) { flex-basis: 100%; }
   .list-link { grid-template-columns: 1fr auto; }
   .list-sub { grid-column: 1 / -1; grid-row: 2; white-space: normal; }
+  .filters { grid-template-columns: 1fr; }
 }

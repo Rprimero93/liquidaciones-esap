@@ -14,8 +14,9 @@
   - Criterio: las 3 rutas cargan desde la Sidebar, el estilo activo es el minimalista y los datos se leen de la semilla; 0 errores de consola.
   - **Cumplido: sí** — `python pruebas/validar_app.py 2` 36/36 en escritorio y celular emulado: estilo activo, 3 rutas desde la Sidebar, ficha por enlace y por URL directa, ruta desconocida → tablero, conteos y avance general (70,3 %) leídos de la semilla, Sidebar (íconos, cerrar/reabrir, una fila en móvil), 0 errores de consola.
 
-- [ ] **Fase 3 — Consulta.** Lista de contratos con búsqueda (número, contratista) y filtros (responsable, estado) con Dropdown.
+- [x] **Fase 3 — Consulta.** Lista de contratos con búsqueda (número, contratista) y filtros (responsable, estado) con Dropdown.
   - Criterio: búsqueda y filtros, solos y combinados, reducen la lista correctamente; conteo leído de los datos; estados vacíos correctos.
+  - **Cumplido: sí** — `python pruebas/validar_app.py` 82/82 (fases 2 y 3, escritorio + celular emulado): búsqueda por número (con y sin espacios/guiones), por contratista sin tildes, sin resultados; filtro por responsable individual (incluidos los de celdas combinadas) y por cada estado, solos y combinados, contra lo esperado calculado desde la semilla; estado vacío, limpiar filtros, filtros conservados al volver de la ficha, contraste de chips ≥ 7:1, 0 errores de consola.
 
 - [ ] **Fase 4 — Ficha del contrato.** Stepper de 12 pasos, 4 alertas, bitácora con fecha, fechas editables con Datepicker, enlace a SECOP, Toast al guardar.
   - Criterio: marcar pasos recalcula el avance; los cambios persisten al recargar; la bitácora conserva el historial.

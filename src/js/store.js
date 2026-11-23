@@ -92,3 +92,44 @@ export function generalProgress() {
 export function logOf(id) {
   return state.bitacora.filter((b) => b.contrato === id);
 }
+
+// --- Datos derivados (no se guardan: se calculan de los avances) ---
+
+/** Responsables individuales: la celda del Excel a veces junta varios ("A y B", "A - B", "A, B"). */
+export function responsiblesOf(c) {
+  return (c.responsable || '')
+    .split(/\s*,\s*|\s+y\s+|\s+-\s+/)
+    .map((name) => name.trim())
+    .filter(Boolean);
+}
+
+export function allResponsibles() {
+  const names = new Set(state.contratos.flatMap(responsiblesOf));
+  return [...names].sort((a, b) => a.localeCompare(b, 'es'));
+}
+
+const PARALYZED_ALERT = 1; // "Proceso paralizado por falta de información"
+
+export const STATUSES = [
+  { id: 'en-tramite', nombre: 'En trámite' },
+  { id: 'paralizado', nombre: 'Paralizado' },
+  { id: 'cerrado', nombre: 'Cerrado' },
+  { id: 'sin-seguimiento', nombre: 'Sin seguimiento' },
+];
+
+/** Estado derivado: sin tarjeta > 12/12 pasos > alerta de paralizado activa > en trámite. */
+export function statusOf(id) {
+  const progress = progressOf(id);
+  if (progress === null) return 'sin-seguimiento';
+  if (progress === 1) return 'cerrado';
+  const paralyzed = itemsOf(id, 'alerta').some((a) => a.item === PARALYZED_ALERT && a.hecho);
+  return paralyzed ? 'paralizado' : 'en-tramite';
+}
+
+export const statusName = (status) => STATUSES.find((s) => s.id === status)?.nombre || status;
+
+/** Etapa actual: primer paso sin marcar (null si no hay tarjeta o ya cerró). */
+export function currentStep(id) {
+  const pending = itemsOf(id, 'paso').filter((r) => !r.hecho).sort((a, b) => a.item - b.item)[0];
+  return pending ? state.pasos.find((p) => p.id === pending.item) : null;
+}

@@ -2,6 +2,7 @@
 import '../components/sidebar/sidebar.core.js';
 import '../components/button/button.core.js';
 import '../components/toast/toast.core.js';
+import '../components/dropdown/dropdown.core.js';
 import * as store from './store.js';
 import { start } from './router.js';
 import * as tablero from '../views/tablero.js';

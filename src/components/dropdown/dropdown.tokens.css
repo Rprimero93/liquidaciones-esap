@@ -1,0 +1,19 @@
+/**
+ * Tokens de componente — Dropdown (docs/05_BACKEND.md §1.3).
+ * Capa ESTRUCTURAL — var() sobre tokens/semantic.css/primitive.css, salvo
+ * --dropdown-panel-max-height: dimensión propia del componente, sin
+ * equivalente en la escala compartida (mismo criterio que --toast-max-width
+ * de la Fase 10). El color/blur/sombra vienen de la capa VISUAL
+ * (src/styles/*.css) vía dropdown.core.js, igual que Button/Toast/Stepper.
+ */
+:root {
+  --dropdown-trigger-padding-inline: var(--spacing-inline-md);
+  --dropdown-trigger-padding-block: var(--spacing-inline-sm);
+  --dropdown-trigger-gap: var(--spacing-inline-sm);
+
+  --dropdown-panel-padding: var(--spacing-inline-xs);
+  --dropdown-panel-max-height: 240px;
+
+  --dropdown-option-padding-inline: var(--spacing-inline-sm);
+  --dropdown-option-padding-block: var(--spacing-inline-xs);
+}

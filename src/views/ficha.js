@@ -19,7 +19,7 @@ export function render(container, id) {
   lastId = c.id;
   container.innerHTML = `
     <article class="card" data-contrato="${escapeHtml(c.id)}">
-      <h2 class="card-title">${escapeHtml(c.numero)}</h2>
+      <h2 class="card-title">${escapeHtml(c.id)}</h2>
       <p class="muted">${escapeHtml(c.contratista)}</p>
       <dl class="facts">
         <div><dt>Responsable</dt><dd>${escapeHtml(c.responsable) || '—'}</dd></div>

@@ -1,6 +1,6 @@
 ---
-fase_actual: 2
-estado_resumen: "Fase 2 cerrada (estructura y estilo) — Fase 3 por iniciar"
+fase_actual: 3
+estado_resumen: "Fase 3 cerrada (consulta) — Fase 4 por iniciar"
 tolerancias_excedidas: 0
 fases_reabiertas: 0
 ---
@@ -19,7 +19,12 @@ fases_reabiertas: 0
 - Fase 2 (Estructura y estilo): **completa** (2026-11-23) — `src/index.html` + `js/` (`app`, `store`, `router`, `format`) + `views/` (`tablero`, `consulta`, `ficha`, con contenido base) + `styles/app.css`; tokens, estilo y Sidebar/Button/Toast copiados de Design_System_Core. Validación: `python pruebas/validar_app.py 2` 36/36 (escritorio + celular emulado).
   - `store.js` es la única puerta a los datos: `localStorage` manda sobre la semilla; la insignia del encabezado muestra el origen.
   - Hallazgos en `<ds-sidebar>` de Design_System_Core (no se editó la referencia — Regla 3): (1) `::slotted(a) svg` no es un selector válido y los íconos salían sin tamaño → resuelto en `app.css`; (2) `display` de `.sidebar`/`.icon-button` anula `[hidden]` (el botón de reapertura se veía siempre y "cerrar" no ocultaba el menú) → parche comentado en la copia local; (3) `--color-accent-surface` no existe en `minimalista-corporativo` → el activo se marca desde `app.css`. Candidatos a llevar a Design_System_Core.
-- Fase 3 (Consulta): **pendiente**.
+- Fase 3 (Consulta): **completa** (2026-11-23) — búsqueda sin tildes (número, contratista, responsable), filtros por responsable y estado con `<ds-dropdown>`, chips de estado, etapa actual por contrato, filtros conservados al volver de la ficha. Validación: `python pruebas/validar_app.py` 82/82.
+  - **Estado derivado** (la columna Estado del Excel está vacía en los 26): Sin seguimiento (sin tarjeta) > Cerrado (12/12) > Paralizado (alerta 1 activa) > En trámite. Resultado en la semilla: 12 en trámite, 5 paralizados, 8 cerrados, 1 sin seguimiento. Etapa actual = primer paso sin marcar.
+  - Responsables separados de las celdas combinadas (", ", " y ", " - "): 14 individuales. Se calcula en `store.js`; la semilla queda fiel al Excel.
+  - Tokens propios de la app para colores de estado (`--status-*`, el estilo no los trae), contraste verificado ≥ 7:1.
+  - Hallazgo en `<ds-dropdown>` de Design_System_Core: `.panel { display: flex }` anula el `display: none` de un popover cerrado → el panel cerrado quedaba fijo en pantalla tapando los clics de la lista. Parche comentado en la copia local; mismo patrón que el `[hidden]` de la Sidebar (Fase 2). Candidato a llevar a Design_System_Core.
+- Fase 4 (Ficha del contrato): **pendiente**.
 
 ## Bloqueos
 
@@ -27,4 +32,4 @@ fases_reabiertas: 0
 
 ## Siguiente paso
 
-Fase 3 — búsqueda (número, contratista) y filtros (responsable, estado) con Dropdown en la Consulta.
+Fase 4 — ficha con Stepper de 12 pasos, 4 alertas, bitácora con fecha, fechas editables (Datepicker), enlace a SECOP y Toast al guardar.

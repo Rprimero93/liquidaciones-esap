@@ -6,7 +6,9 @@ Uso:  python pruebas/validar_app.py [fase]      (por defecto, todas las fases co
 """
 import http.server
 import json
+import re
 import socketserver
+import unicodedata
 import sys
 import threading
 from functools import partial
@@ -121,7 +123,139 @@ def phase2(page, label):
     page.screenshot(path=str(SHOTS / f"fase2_{label}_tablero.png"), full_page=True)
 
 
-PHASES = {"2": phase2}
+# --- Fase 3: réplica en Python de la lógica de consulta, para calcular lo esperado ---
+
+def norm(text):
+    text = unicodedata.normalize("NFD", str(text or ""))
+    text = "".join(ch for ch in text if unicodedata.category(ch) != "Mn")
+    return re.sub(r"\s+", " ", text.lower()).strip()
+
+
+def responsibles(c):
+    return [n.strip() for n in re.split(r"\s*,\s*|\s+y\s+|\s+-\s+", c["responsable"] or "") if n.strip()]
+
+
+def status(c):
+    rows = [a for a in SEED["avances"] if a["contrato"] == c["id"]]
+    steps = [a for a in rows if a["tipo"] == "paso"]
+    if not steps:
+        return "sin-seguimiento"
+    if all(a["hecho"] for a in steps):
+        return "cerrado"
+    paralyzed = any(a["tipo"] == "alerta" and a["item"] == 1 and a["hecho"] for a in rows)
+    return "paralizado" if paralyzed else "en-tramite"
+
+
+def expected(q="", resp="", est=""):
+    out = []
+    for c in SEED["contratos"]:
+        if resp and resp not in responsibles(c):
+            continue
+        if est and status(c) != est:
+            continue
+        if q:
+            hay = norm(" ".join([c["numero"], c["contratista"], c["responsable"]]))
+            compact = norm(q).replace(" ", "").replace("-", "")
+            if norm(q) not in hay and compact not in c["id"].lower().replace("-", ""):
+                continue
+        out.append(c["id"])
+    return out
+
+
+def listed(page):
+    return page.eval_on_selector_all("[data-list='contratos'] a[data-id]", "els => els.map(e => e.dataset.id)")
+
+
+def pick(page, name, value):
+    dd = page.locator(f"ds-dropdown[data-filter='{name}']")
+    dd.locator(".trigger").click()
+    dd.locator(f".option[data-value='{value}']").click()
+
+
+def contrast(fg, bg):
+    def lum(rgb):
+        vals = [int(v) / 255 for v in re.findall(r"\d+", rgb)[:3]]
+        lin = [v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4 for v in vals]
+        return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
+    a, b = sorted([lum(fg), lum(bg)], reverse=True)
+    return (a + 0.05) / (b + 0.05)
+
+
+def phase3(page, label):
+    goto_route(page, "consulta")
+    page.wait_for_selector("[data-list='contratos'] a[data-id]")
+    total = len(SEED["contratos"])
+    check(f"{label}: consulta inicia con todos", len(listed(page)) == total, f"{len(listed(page))}/{total}")
+
+    # Opciones del filtro de responsable = responsables individuales + "Todos"
+    names = sorted({n for c in SEED["contratos"] for n in responsibles(c)}, key=norm)
+    opts = page.locator("ds-dropdown[data-filter='responsable'] .option").count()
+    check(f"{label}: responsables separados en el filtro", opts == len(names) + 1, f"{opts} vs {len(names) + 1}")
+
+    search = page.locator("input[data-filter='q']")
+    # Búsqueda por número (con el número escrito con espacios en el Excel) y sin tildes
+    spaced = next((c for c in SEED["contratos"] if " " in c["numero"]), SEED["contratos"][0])
+    num = re.findall(r"\d{3,}", spaced["numero"])[0]
+    accented = next(c for c in SEED["contratos"] if norm(c["contratista"]) != c["contratista"].lower())
+    word = next(w for w in accented["contratista"].split() if norm(w) != w.lower())
+    for q in (num, spaced["id"], norm(word), "zzzz-sin-resultado"):
+        search.fill(q)
+        got, exp = listed(page), expected(q=q)
+        check(f"{label}: búsqueda '{q}'", got == exp, f"{len(got)} vs {len(exp)}")
+    empty_ok = page.is_visible("[data-empty]") and not page.is_visible("[data-list='contratos']")
+    check(f"{label}: estado vacío sin coincidencias", empty_ok)
+    page.locator("[data-clear]").click()
+    check(f"{label}: limpiar filtros restaura todo", len(listed(page)) == total and search.input_value() == "")
+
+    # Responsable que aparece dentro de una celda combinada
+    combined = next(c for c in SEED["contratos"] if len(responsibles(c)) > 1)
+    resp = responsibles(combined)[-1]
+    pick(page, "responsable", resp)
+    got, exp = listed(page), expected(resp=resp)
+    check(f"{label}: filtro responsable '{resp}'", got == exp and combined["id"] in got, f"{len(got)} vs {len(exp)}")
+
+    # Cada estado, combinado con el responsable y solo
+    for est in ("en-tramite", "paralizado", "cerrado", "sin-seguimiento"):
+        pick(page, "estado", est)
+        got, exp = listed(page), expected(resp=resp, est=est)
+        check(f"{label}: responsable + estado {est}", got == exp, f"{len(got)} vs {len(exp)}")
+    pick(page, "responsable", "")
+    for est in ("en-tramite", "paralizado", "cerrado", "sin-seguimiento"):
+        pick(page, "estado", est)
+        got, exp = listed(page), expected(est=est)
+        check(f"{label}: estado {est}", got == exp, f"{len(got)} vs {len(exp)}")
+    count = page.text_content("[data-count]")
+    check(f"{label}: conteo visible = filas", count == str(len(listed(page))), count)
+
+    # Contraste de los chips de estado
+    pick(page, "estado", "")
+    for est in ("en-tramite", "cerrado", "paralizado"):
+        if not page.locator(f".chip[data-status='{est}']").count():
+            continue
+        fg, bg = page.eval_on_selector(f".chip[data-status='{est}']",
+                                       "e => [getComputedStyle(e).color, getComputedStyle(e).backgroundColor]")
+        ratio = contrast(fg, bg)
+        check(f"{label}: contraste chip {est} >= 7:1", ratio >= 7, f"{ratio:.2f}")
+
+    # Paneles cerrados no ocupan pantalla (no tapan clics de la lista)
+    pick(page, "estado", "cerrado")
+    hidden_panels = page.evaluate("""[...document.querySelectorAll('ds-dropdown')]
+        .every(d => d.shadowRoot.querySelector('.panel').getBoundingClientRect().height === 0)""")
+    check(f"{label}: paneles cerrados del Dropdown ocultos", hidden_panels)
+
+    # Los filtros se conservan al abrir una ficha y volver
+    before = listed(page)
+    page.locator("[data-list='contratos'] a[data-id] >> nth=0").click()
+    page.wait_for_selector("[data-contrato]")
+    page.click("ds-sidebar a[data-route='consulta']")
+    page.wait_for_selector("[data-list='contratos'] a[data-id]")
+    shown = page.locator("ds-dropdown[data-filter='estado']").evaluate("e => e.value")
+    check(f"{label}: filtros se conservan al volver de la ficha", listed(page) == before and shown == "cerrado")
+    page.screenshot(path=str(SHOTS / f"fase3_{label}_consulta.png"), full_page=True)
+    page.locator("[data-clear]").click()
+
+
+PHASES = {"2": phase2, "3": phase3}
 
 
 def run(browser, url, label, phases, **ctx):
