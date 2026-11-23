@@ -764,7 +764,7 @@ def table_checks(page, label):
         return [s.backgroundColor, s.borderBottomWidth, s.borderBottomColor, s.textTransform, s.color]; }""")
     accent = page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()")
     ratio = contrast(head[4], head[0])
-    check(f"{label}: encabezado de tabla estilo Cotizaciones", head[0] == "rgb(221, 252, 255)" and head[1] == "2px"
+    check(f"{label}: encabezado de tabla en azul ESAP", head[0] == "rgb(4, 71, 122)" and head[1] == "2px" and head[2] == "rgb(6, 101, 174)"
           and head[3] == "uppercase" and ratio >= 7, f"{head}; contraste {ratio:.2f}; acento {accent}")
     cols = page.evaluate("""(() => {
         const h = [...document.querySelectorAll('.table-head > span')].map(s => s.getBoundingClientRect());

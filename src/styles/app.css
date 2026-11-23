@@ -20,9 +20,11 @@
   --card-bg: #FFFFFF;
   --card-border: #E0E4EA;
   --card-shadow: 0 1px 4px rgba(3, 120, 124, .08), 0 1px 2px rgba(0, 0, 0, .04);
-  --table-head-bg: #DDFCFF;
-  --table-head-line: var(--color-accent);
-  --table-head-text: #025558;          /* el #03787C de la referencia da 4,9:1; este, 7,96:1 */
+  /* Encabezado de tabla en azul ESAP (Kit_Marca_ESAP): fondo azul oscuro, texto blanco (9,6:1)
+     y línea inferior en azul ESAP; el azul principal con texto blanco da 6,0:1 y no llega a 7:1 */
+  --table-head-bg: #04477A;            /* ESAP azulOscuro */
+  --table-head-line: #0665AE;          /* ESAP azul */
+  --table-head-text: #FFFFFF;
   --table-zebra: rgba(221, 252, 255, .25);
 }
 
