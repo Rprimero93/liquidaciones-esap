@@ -3,7 +3,7 @@ tecnologia: Web
 tipo: entregable
 proyecto: Liquidaciones_ESAP
 estado: pendiente
-estado_resumen: "Fase 5 cerrada (tablero) — Fase 6 (respaldo) por iniciar"
+estado_resumen: "Fase 7 cerrada (validación integral) — Fase 8 (publicación en GitHub Pages) por iniciar"
 stack: "HTML/CSS/JS vanilla + Design_System_Core (minimalista-corporativo) + localStorage; extracción con Python (openpyxl)"
 descripcion: "Micro app web de seguimiento de la liquidación de contratos ESAP (12 pasos, alertas, pérdida de competencia, bitácora, SECOP), migrada desde liquidacion.xlsm"
 aliases: [Liquidaciones_ESAP]
@@ -62,7 +62,10 @@ Se versiona en el repositorio de la bóveda (Regla 12, caso 1).
 
 - Extracción: prueba que compara `seed.json` contra el Excel (mismos contratos, mismo avance por contrato), con los conteos leídos de los datos.
 - App: Playwright con el Edge del sistema, escritorio y celular emulado (preferencias de `INVENTARIO_Web.md`).
+  - `python pruebas/validar_app.py` — verificaciones por fase (2 a 6).
+  - `python pruebas/recorrido.py` — recorrido de punta a punta como usuario (Fase 7), con cifras esperadas calculadas en Python.
+- Enlaces SECOP: `python -m pytest pruebas` incluye el cruce de `scripts/consultar_secop.py` (sin red) y la tabla `data/secop.json`.
 
 ## Riesgos
 
-- **Datos reales:** nombres de contratistas, responsables y valores. Si se publica en GitHub Pages, hace falta repo propio (Regla 12, caso 3) y datos anonimizados. Se decide al terminar la Fase 7.
+- **Datos reales publicados (riesgo aceptado por Ricardo, 2026-11-23):** se publicarán en GitHub Pages con los datos reales completos — nombres de responsables, bitácora interna, contratistas y valores quedan públicos y en el historial de Git. Reemplaza la decisión de la Fase 0 (datos anonimizados); detalle en `06` (Fase 7).

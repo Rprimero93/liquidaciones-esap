@@ -1,6 +1,6 @@
 ---
-fase_actual: 6
-estado_resumen: "Fase 6 cerrada (respaldo) — Fase 7 por iniciar"
+fase_actual: 7
+estado_resumen: "Fase 7 cerrada (validación integral) — Fase 8 (publicación en GitHub Pages) por iniciar"
 tolerancias_excedidas: 0
 fases_reabiertas: 0
 ---
@@ -61,10 +61,14 @@ fases_reabiertas: 0
   - Ajuste pedido (2026-11-23): en la ficha, el círculo de los **pasos completados** se rellena con el mismo azul claro (`--color-hover`, `#DDF0FF`) vía `::part(circle)`; borde y check siguen en acento (6,3:1, sobre el 3:1 de un ícono). El paso actual y los pendientes no cambian. Validación: 296/296, 2 corridas. Luego, a pedido de Ricardo, el relleno pasa al cian claro de Cotizaciones_simple `#DDFCFF` (token propio `--step-done-fill`; check en acento 6,8:1); el hover sigue en `#DDF0FF`. Validación: 296/296, 2 corridas.
   - Ajuste pedido (2026-11-23) — **excepción de estilo del proyecto: píldoras de estado con tonos vivos.** Las píldoras (Consulta, ficha) y las etiquetas del semáforo se veían opacas; a partir de una imagen de referencia de Ricardo (píldoras de fondo claro saturado y texto saturado del mismo tono) se compararon 3 variantes en una vista previa y se eligió la **B, texto saturado con contraste AA**: En trámite `#C2410C` sobre `#FFEDD5` (4,52:1), Paralizado `#B91C1C` sobre `#FEE2E2` (5,30:1), Cerrado `#15803D` sobre `#DCFCE7` (4,57:1) y Sin seguimiento / Sin fecha `#4B5563` sobre `#EEF0F3` (6,62:1, token nuevo `--status-none-*`); texto en seminegrita. Descartadas: A (fondo vivo con texto oscuro, ≥ 7:1, menos vivo) y C (réplica exacta, ~3:1, no cumple). Se baja el umbral de 7:1 a 4,5:1 (mínimo WCAG AA) **solo** para estas píldoras. Validación: 300/300, 2 corridas (contraste AA de los 4 estados y de las etiquetas del semáforo).
 
+- Fase 7 (Validación integral): **completa** (2026-11-23) — `pruebas/recorrido.py`: recorrido encadenado como usuario (tablero → clic en Paralizados → Consulta filtrada → búsqueda sin guiones → ficha → completar etapa, apagar alerta de paralizado, cambiar fecha en el calendario, agregar observación → tablero recalculado → recarga → exportar, restablecer, importar → solo teclado), con captura por paso (`capturas/fase7_*`). Las cifras esperadas salen de un modelo en Python sobre los datos (semilla o semilla editada), no de la app. Validación: recorrido 54/54, `validar_app.py` 300/300 y `pytest` 18/18, 3 corridas seguidas en verde.
+  - **Decisión de publicación** (Ricardo): GitHub Pages con los **datos reales completos**, en lugar de anonimizados como se había dejado en la Fase 0. Riesgo presentado y aceptado: quedan públicos, también en el historial de Git, los nombres de los 14 responsables, la bitácora interna, contratistas personas naturales y valores. Detalle en `06`.
+  - Hallazgo (no bloquea): en la ficha, cuando el nombre de un paso completado ocupa dos líneas, la línea punteada hacia el siguiente paso se ve cortada (solo un punto bajo el círculo; visto en celular en los pasos 2, 5 y 7). Es del conector del Stepper; se revisa aparte.
+
 ## Bloqueos
 
 - Ninguno.
 
 ## Siguiente paso
 
-Fase 7 — validación integral (Playwright + Edge, escritorio y celular emulado); al cerrar, decidir la publicación en GitHub Pages (repo propio + datos anonimizados).
+Fase 8 — publicación en GitHub Pages con los datos reales (espejo por `git subtree split` en un repo de Rprimero93; el repo lo crea Ricardo; el `git push` se aprueba en el momento).
