@@ -16,6 +16,21 @@ export const title = 'Tablero';
 
 const BAR_STAGGER_MS = 120; // retardo entre barras
 
+// Anillo de progreso (gráfico radial): pista completa + arco del valor, que arranca arriba
+const RING_R = 40;
+const RING_C = 2 * Math.PI * RING_R;
+
+function ring(value) {
+  return `
+    <div class="ring" style="--p:${value};--c:${RING_C.toFixed(2)}">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="ring-track" cx="50" cy="50" r="${RING_R}"></circle>
+        <circle class="ring-value" cx="50" cy="50" r="${RING_R}" data-value="${value}"></circle>
+      </svg>
+      <strong class="kpi-value ring-label">${percent(value)}</strong>
+    </div>`;
+}
+
 function kpis() {
   const all = store.contracts();
   const withCard = all.filter((c) => c.tiene_tarjeta).length;
@@ -28,10 +43,10 @@ function kpis() {
         <strong class="kpi-value">${all.length}</strong>
         <span class="kpi-note">${withCard} con seguimiento</span>
       </article>
-      <article class="card kpi" data-kpi="avance">
+      <article class="card kpi kpi-ring-card" data-kpi="avance" tabindex="0" aria-describedby="tip-avance">
         <span class="kpi-label">Avance general</span>
-        <strong class="kpi-value">${percent(store.generalProgress())}</strong>
-        <span class="kpi-note">Promedio de los ${withCard} contratos con seguimiento</span>
+        ${ring(store.generalProgress())}
+        <div class="tooltip kpi-tip" id="tip-avance" role="tooltip">Promedio de los ${withCard} contratos con seguimiento</div>
       </article>
       <article class="card kpi" data-kpi="estados">
         <span class="kpi-label">Estados</span>
@@ -189,5 +204,8 @@ export function render(container) {
     a.addEventListener('click', () => showStatus(a.dataset.statusLink));
   });
   // Arranca la animación en el siguiente cuadro (las barras parten en ancho 0)
-  requestAnimationFrame(() => requestAnimationFrame(() => container.querySelector('[data-bars]')?.classList.add('is-in')));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    container.querySelector('[data-bars]')?.classList.add('is-in');
+    container.querySelector('.ring')?.classList.add('is-in');
+  }));
 }

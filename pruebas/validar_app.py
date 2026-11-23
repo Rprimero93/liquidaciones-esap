@@ -431,6 +431,33 @@ def phase5(page, label):
     today = date.fromisoformat(page.evaluate(
         "(() => { const d = new Date(); return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-'); })()"))
 
+    # Tarjeta Avance general: anillo con el valor al centro; la descripción solo al pasar el cursor / tocar
+    gp = general_progress()
+    page.wait_for_function("""(() => { const c = document.querySelector('.ring-value'); const C = 2 * Math.PI * 40;
+        return Math.abs(parseFloat(getComputedStyle(c).strokeDashoffset) - C * (1 - Number(c.dataset.value))) < 0.5; })()""",
+                           timeout=5000)
+    arc = page.eval_on_selector(".ring-value", "c => 1 - parseFloat(getComputedStyle(c).strokeDashoffset) / (2 * Math.PI * 40)")
+    check(f"{label}: anillo de avance general proporcional", abs(arc - gp) < 0.005, f"{arc:.3f} vs {gp:.3f}")
+    ring_box = page.eval_on_selector(".ring", "e => e.getBoundingClientRect().toJSON()")
+    lbl_box = page.eval_on_selector(".ring-label", "e => { const r = document.createRange(); r.selectNodeContents(e); return r.getBoundingClientRect().toJSON(); }")
+    centered = (abs((lbl_box["x"] + lbl_box["width"] / 2) - (ring_box["x"] + ring_box["width"] / 2)) < 2
+                and abs((lbl_box["y"] + lbl_box["height"] / 2) - (ring_box["y"] + ring_box["height"] / 2)) < 3)
+    check(f"{label}: porcentaje en el centro del anillo", centered)
+    tip_op = lambda: page.eval_on_selector("#tip-avance", "e => getComputedStyle(e).opacity")
+    check(f"{label}: descripción oculta sin cursor", tip_op() == "0")
+    card = page.locator("[data-kpi='avance']")
+    if label == "escritorio":
+        card.hover()
+    else:
+        card.tap()
+    page.wait_for_function("getComputedStyle(document.getElementById('tip-avance')).opacity === '1'", timeout=3000)
+    tip_text = page.text_content("#tip-avance").strip()
+    with_card = sum(c["tiene_tarjeta"] for c in SEED["contratos"])
+    check(f"{label}: descripción al {'pasar el cursor' if label == 'escritorio' else 'tocar'}",
+          tip_text == f"Promedio de los {with_card} contratos con seguimiento", tip_text)
+    page.mouse.move(0, 0)
+    page.evaluate("document.activeElement.blur()")
+
     # Tarjeta Estados: tres cifras en fila, al mismo nivel que las cifras de las otras tarjetas
     for est in ("cerrado", "paralizado", "en-tramite"):
         n = sum(status(c) == est for c in SEED["contratos"])
