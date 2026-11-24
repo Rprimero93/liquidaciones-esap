@@ -32,14 +32,15 @@ git filter-branch -f \
   -- main >/dev/null
 rm -rf .git/refs/original  # respaldo de filter-branch: no se publica
 
-# Control de privacidad, sobre todo el historial que se publica (no solo la última versión)
-if git log --all --format='%ae%n%ce' | grep -qv "^$EMAIL$"; then
+# Control de privacidad sobre todo el historial de main (lo que se empuja), no solo la última versión;
+# no se usa --all: la copia conserva la rama temporal sin filtrar, que no se publica
+if git log main --format='%ae%n%ce' | grep -qv "^$EMAIL$"; then
   echo "Control de privacidad: FALLA, queda un correo distinto del noreply en los commits"; exit 1
 fi
-if git log --all -p | grep -qi 'loscoches\.com\.co'; then
+if git log main -p | grep -qi 'loscoches\.com\.co'; then
   echo "Control de privacidad: FALLA, el correo corporativo aparece en el contenido publicado"; exit 1
 fi
-if git log --all --name-only --format= | grep -qiE '\.(xlsx|xlsm|xls)$'; then
+if git log main --name-only --format= | grep -qiE '\.(xlsx|xlsm|xls)$'; then
   echo "Control de privacidad: FALLA, la copia lleva un archivo de Excel"; exit 1
 fi
 echo "Control de privacidad: OK (solo correo noreply, sin correo corporativo ni Excel)"
