@@ -56,7 +56,7 @@ Desde la carpeta del proyecto: `python -m http.server 8000` y abrir `http://loca
 
 ## Git
 
-Se versiona en el repositorio de la bóveda (Regla 12, caso 1).
+Se versiona en el repositorio de la bóveda (Regla 12, caso 1). Además se publica un **espejo** en GitHub (Fase 8): `bash scripts/publicar_github.sh` (`--dry-run` para ensayar) hace `git subtree split` de esta carpeta, cambia el correo de autor/committer por `Rprimero93@users.noreply.github.com`, quita las cachés de Python, aborta si la copia lleva el correo corporativo o un Excel, y empuja a `main` de `Rprimero93/liquidaciones-esap` (remoto con el usuario `Rprimero93@`: la cuenta de Git por defecto del equipo es otra). No hay `.git` anidado: la bóveda sigue siendo la fuente de verdad. `index.html` y `.nojekyll` de la raíz son para GitHub Pages.
 
 ## Pruebas
 

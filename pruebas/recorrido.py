@@ -5,7 +5,7 @@ cambia en una vista se comprueba en las demás. Las cifras esperadas se calculan
 modelo propio sobre los datos (la semilla o la semilla con las ediciones del recorrido), nunca se
 leen de la app.
 
-Uso:  python pruebas/recorrido.py
+Uso:  python pruebas/recorrido.py [--url https://rprimero93.github.io/liquidaciones-esap]
 """
 import copy
 import json
@@ -307,15 +307,20 @@ def run(browser, url, label, **ctx):
 
 def main():
     SHOTS.mkdir(exist_ok=True)
-    httpd = va.serve()
-    url = f"http://127.0.0.1:{httpd.server_address[1]}/src/index.html#/tablero"
+    # --url <dirección>: corre contra la app publicada (ej. GitHub Pages) en lugar del servidor local
+    args = sys.argv[1:]
+    remote = args[args.index("--url") + 1] if "--url" in args else None
+    httpd = None if remote else va.serve()
+    url = (remote.rstrip("/") + "/src/index.html#/tablero") if remote         else f"http://127.0.0.1:{httpd.server_address[1]}/src/index.html#/tablero"
+    print(f"Recorrido contra {url}")
     with sync_playwright() as p:
         browser = p.chromium.launch(channel="msedge")
         run(browser, url, "escritorio", viewport={"width": 1440, "height": 900})
         run(browser, url, "movil", viewport={"width": 390, "height": 844},
             is_mobile=True, has_touch=True, device_scale_factor=2)
         browser.close()
-    httpd.shutdown()
+    if httpd:
+        httpd.shutdown()
     failed = [r for r in va.results if not r[1]]
     print(f"\n{len(va.results) - len(failed)}/{len(va.results)} verificaciones del recorrido OK")
     sys.exit(1 if failed else 0)
