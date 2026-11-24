@@ -80,7 +80,13 @@ def navbar_checks(page, label):
     for route in ("tablero", "consulta", "ficha", "respaldo"):
         page.locator(f"ds-sidebar a[data-route='{route}']").tap()
         page.wait_for_selector(f"ds-sidebar a[data-route='{route}'][aria-current='page']", timeout=5000)
-        page.wait_for_timeout(400)  # la píldora se expande con transición (300 ms)
+        try:  # la píldora se expande con transición: esperar al estado final (tope 2 s), no un tiempo fijo
+            page.wait_for_function("""route => [...document.querySelectorAll('ds-sidebar > a')].every(a => {
+                const l = a.querySelector('.nav-label'), on = a.dataset.route === route;
+                return on ? getComputedStyle(l).opacity === '1' && l.getBoundingClientRect().width > 20
+                          : l.getBoundingClientRect().width === 0; })""", arg=route, timeout=2000)
+        except Exception:
+            pass  # el check de abajo reporta la falla
         st = page.eval_on_selector_all("ds-sidebar > a", """els => els.map(e => { const l = e.querySelector('.nav-label');
             return [e.dataset.route, Math.round(l.getBoundingClientRect().width), getComputedStyle(l).opacity,
                     getComputedStyle(e).backgroundColor, getComputedStyle(e).color, e.scrollWidth <= e.clientWidth + 1]; })""")
@@ -92,7 +98,7 @@ def navbar_checks(page, label):
               f"activa {active[1:5]}; contraste {contrast(active[4], active[3]):.2f}")
     # El final de la página queda por encima de la barra al bajar del todo
     page.evaluate("window.scrollTo(0, document.documentElement.scrollHeight)")
-    page.wait_for_timeout(200)
+    page.wait_for_function("Math.ceil(scrollY + innerHeight) >= document.documentElement.scrollHeight - 1", timeout=2000)
     gap = page.evaluate(f"""(() => {{ const bar = {sr}.querySelector('.sidebar').getBoundingClientRect();
         const last = document.querySelector('#view').getBoundingClientRect(); return bar.top - last.bottom; }})()""")
     check(f"{label}: la navbar no tapa el final del contenido", gap >= 0, f"{gap:.0f}px")
@@ -802,7 +808,11 @@ def table_checks(page, label):
     cards = page.eval_on_selector_all(".card", "els => [...new Set(els.map(e => getComputedStyle(e).backgroundColor))]")
     side = page.eval_on_selector("ds-sidebar", "e => getComputedStyle(e.shadowRoot.querySelector('.sidebar')).backgroundColor")
     check(f"{label}: tarjetas y menú blancos", cards == ["rgb(255, 255, 255)"] and side == "rgb(255, 255, 255)", f"{cards} {side}")
-    page.wait_for_timeout(300)  # si el cursor estaba sobre una fila, su fondo vuelve con transición (120 ms)
+    try:  # si el cursor estaba sobre una fila, su fondo vuelve con transición: esperar al final (tope 2 s)
+        page.wait_for_function("""[...document.querySelectorAll("[data-list='contratos'] li > a")]
+            .every(a => ['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)'].includes(getComputedStyle(a).backgroundColor))""", timeout=2000)
+    except Exception:
+        pass  # el check de abajo reporta la falla
     # Tabla de la Consulta toda en blanco: sin cebra, filas separadas por una línea de 1 px
     rows = page.eval_on_selector_all("[data-list='contratos'] li", """els => els.map((li, i) => [
         getComputedStyle(li.querySelector(':scope > a')).backgroundColor, i ? getComputedStyle(li).borderTopWidth : '1px'])""")
