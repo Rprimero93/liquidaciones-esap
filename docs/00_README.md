@@ -2,8 +2,9 @@
 tecnologia: Web
 tipo: entregable
 proyecto: Liquidaciones_ESAP
-estado: pendiente
-estado_resumen: "Fase 8 cerrada — publicada en https://rprimero93.github.io/liquidaciones-esap/ ; falta el cierre del proyecto"
+estado: completo
+revisar_uso: 2026-12-23
+estado_resumen: "Cerrado (2026-11-23) — publicado en https://rprimero93.github.io/liquidaciones-esap/"
 stack: "HTML/CSS/JS vanilla + Design_System_Core (minimalista-corporativo) + localStorage; extracción con Python (openpyxl)"
 descripcion: "Micro app web de seguimiento de la liquidación de contratos ESAP (12 pasos, alertas, pérdida de competencia, bitácora, SECOP), migrada desde liquidacion.xlsm"
 aliases: [Liquidaciones_ESAP]
@@ -69,3 +70,18 @@ Se versiona en el repositorio de la bóveda (Regla 12, caso 1). Además se publi
 ## Riesgos
 
 - **Datos reales publicados (riesgo aceptado por Ricardo, 2026-11-23):** se publicarán en GitHub Pages con los datos reales completos — nombres de responsables, bitácora interna, contratistas y valores quedan públicos y en el historial de Git. Reemplaza la decisión de la Fase 0 (datos anonimizados); detalle en `06` (Fase 7).
+
+## Lecciones aprendidas
+
+_Cierre del 2026-11-23. Mini-retro de proceso: sin observaciones del usuario. Detalle por fase en `07_PROGRESO_RESUMEN.md`._
+
+1. **El estilo se definió tarde.** Hubo 23 ajustes visuales después de cerrar fases (hover, píldoras, campos, cebra, navbar, KPIs), varios rehechos. En una app con interfaz, fijar al principio las referencias visuales, la paleta y la regla de contraste (pasó a preferencia de Web).
+2. **Datos:** semilla extraída del Excel, una sola puerta (`store.js`), `localStorage` y respaldo JSON con sobre (`formato`/`version`). Lo verificado afuera va en una tabla aparte (`secop.json`) que manda sobre el dato del Excel sin entrar al estado guardado ni al respaldo: sirve con los datos ya guardados sin restablecer.
+3. **Validación:** las cifras esperadas salen de un modelo propio en Python, nunca de la app; el recorrido encadenado (Fase 7) prueba lo que las verificaciones por fase no ven (pasó a preferencia de Web). En la prueba: servidor de varios hilos y esperar a que las transiciones terminen, no tiempos fijos.
+4. **Design_System_Core en copia local:** se ajusta por fuera con `::part` y con parches comentados `var(--x, original)`, sin tocar el componente. Aparecieron 3 defectos del Core; 2 coinciden con Asistente_SGI (ver § Consumidores de Design_System_Core).
+5. **SECOP:** los datos abiertos de datos.gov.co (SECOP II `jbjy-vk9h` filtrado por NIT, SECOP I `f789-7hwg`) permiten verificar los enlaces de forma reproducible; SECOP II bloquea la automatización (403 y CAPTCHA), así que el contenido del proceso lo revisa el usuario.
+6. **Publicación:** espejo con `git subtree split`, correo noreply y control de privacidad sobre la rama que se envía (no `--all`: la copia conserva la rama temporal sin filtrar). Publicar datos reales fue una decisión explícita del usuario con el riesgo presentado y registrado.
+
+## Uso real
+
+_Revisiones después de entregar (fecha, si se usa, qué funcionó, qué faltó) — `03_TRD.md` § Herramientas y entregables._

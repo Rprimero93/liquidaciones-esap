@@ -1,6 +1,6 @@
 ---
 fase_actual: 8
-estado_resumen: "Fase 8 cerrada (publicada en GitHub Pages) — todas las fases cerradas; falta el cierre del proyecto"
+estado_resumen: "Proyecto cerrado (2026-11-23) — publicado en GitHub Pages"
 tolerancias_excedidas: 0
 fases_reabiertas: 0
 ---
@@ -74,4 +74,4 @@ fases_reabiertas: 0
 
 ## Siguiente paso
 
-Cierre del proyecto (skill `cierre-proyecto`: mini-retro, lecciones, propuesta de inventarios). Pendientes fuera de fase: conector del Stepper cortado con nombres de dos líneas (hallazgo de la Fase 7) y los candidatos para Design_System_Core.
+**Proyecto cerrado** (2026-11-23, `cierre-proyecto`): mini-retro sin observaciones; lecciones en `00_README.md` § Lecciones aprendidas; inventarios (`INVENTARIO_Web`, `INVENTARIO_MAESTRO`, `INVENTARIO_COMPONENTES`), consumidores de Design_System_Core y Kit_Marca_ESAP y 2 preferencias nuevas de Web actualizados. Antes de cerrar se quitaron 3 esperas fijas de las pruebas (preferencia de Web). Revisión de uso: 2026-12-23. Pendientes fuera de fase: conector del Stepper cortado con nombres de dos líneas (hallazgo de la Fase 7) y los candidatos para Design_System_Core.
