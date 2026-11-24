@@ -19,6 +19,12 @@
      (#E6F0F7), que se veía opaco. Sobre él el texto va en --color-text (14,5:1); el acento (6,3:1)
      no llega a 7:1. También es el fondo del enlace activo del menú. */
   --color-hover: #DDF0FF;
+  /* Navbar inferior del celular: píldora activa en el azul de hover con texto azul oscuro ESAP (8,2:1) */
+  --navbar-active-bg: var(--color-hover);
+  --navbar-active-text: #04477A;
+  --navbar-height: 60px;
+  --navbar-gap: 12px;
+  --navbar-motion: 300ms cubic-bezier(.2, .8, .2, 1);
 
   /* Fondo de página, tarjetas y tablas tomados de Cotizaciones_simple (styles.css):
      página gris claro y tarjetas blancas con borde, esquinas de 16 px y sombra con tinte verde azulado */
@@ -659,24 +665,53 @@ a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2
 
 /* Móvil: la Sidebar pasa a barra horizontal (mismo corte que sidebar.core.js) */
 @media (max-width: 768px) {
-  :root { --sidebar-link-padding-inline: var(--spacing-inline-sm); }
-  .app { flex-direction: column; align-items: stretch; gap: var(--spacing-group); }
-  .app ds-sidebar::part(sidebar) { position: static; }
-  /* Enlaces en su propia fila, uno al lado del otro */
-  .app ds-sidebar::part(links) { flex-basis: 100%; }
-  /* Con 4 enlaces (Respaldo, Fase 6) no caben en fila con ícono al lado: ícono sobre el texto, mismo ancho */
-  .app ds-sidebar > a {
-    flex: 1 1 0;
-    min-width: 0;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--space-1);
-    padding-inline: var(--space-1);
-    font-size: var(--font-size-sm);
-    text-align: center;
+  .app { flex-direction: column; align-items: stretch; gap: var(--spacing-group);
+    /* espacio abajo para que la barra fija no tape el final de la página */
+    padding-bottom: calc(var(--navbar-height) + 2 * var(--navbar-gap) + env(safe-area-inset-bottom, 0px)); }
+  /* Navbar inferior (referencia: video navbar.mp4 de Ricardo): barra blanca flotante con solo íconos;
+     la pestaña activa se expande en una píldora azul con ícono y texto. Sin marca ni botones de
+     contraer/cerrar: en celular el menú siempre está visible (anula [hidden] y collapsed del Core) */
+  .app ds-sidebar::part(head),
+  .app ds-sidebar::part(reopen-button) { display: none; }
+  .app ds-sidebar::part(sidebar) {
+    display: flex;
+    position: fixed;
+    left: var(--navbar-gap);
+    right: var(--navbar-gap);
+    bottom: calc(var(--navbar-gap) + env(safe-area-inset-bottom, 0px));
+    top: auto;
+    width: auto;
+    z-index: 20;
+    padding: var(--space-2);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgb(15 23 42 / 0.14);
   }
-  /* Encabezado a todo el ancho: ‹ a la izquierda, × a la derecha y la marca centrada */
-  .app ds-sidebar::part(head) { flex-basis: 100%; }
+  .app ds-sidebar::part(links) { flex: 1; flex-wrap: nowrap; justify-content: space-around; gap: var(--space-1); }
+  .app ds-sidebar > a {
+    flex-direction: row;
+    gap: 0;
+    min-height: 44px;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    transition: background-color var(--navbar-motion), color var(--navbar-motion), gap var(--navbar-motion);
+  }
+  .app ds-sidebar > a .nav-label {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width var(--navbar-motion), opacity var(--navbar-motion);
+  }
+  .app ds-sidebar > a[aria-current="page"] {
+    gap: var(--space-2);
+    background: var(--navbar-active-bg);
+    color: var(--navbar-active-text);
+  }
+  .app ds-sidebar > a[aria-current="page"] > svg { color: var(--navbar-active-text); }
+  .app ds-sidebar > a[aria-current="page"] .nav-label { max-width: 8em; opacity: 1; }
+  /* Los avisos flotantes suben por encima de la barra */
+  .toast-stack { bottom: calc(var(--navbar-height) + 2 * var(--navbar-gap) + env(safe-area-inset-bottom, 0px)); }
   .list-link { grid-template-columns: 1fr auto; }
   .list-sub { grid-column: 1 / -1; grid-row: 2; white-space: normal; }
   /* Tabla de la Consulta en móvil: sin encabezado; número + estado + avance arriba, contratista abajo */
@@ -692,4 +727,9 @@ a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2
   .log-form { grid-template-columns: 1fr; }
   .log li { grid-template-columns: 1fr auto; }
   .log-text { grid-column: 1 / -1; grid-row: 2; }
+}
+
+/* Sin animación del navbar con movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  :root { --navbar-motion: 0s; }
 }

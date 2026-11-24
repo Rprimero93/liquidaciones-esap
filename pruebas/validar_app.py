@@ -65,6 +65,43 @@ def goto_route(page, route):
                            ".getAttribute('aria-current') === 'page'", timeout=5000)
 
 
+def navbar_checks(page, label):
+    """Celular: navbar inferior fija (video navbar.mp4); solo la pestaña activa muestra su texto en una píldora."""
+    sr = "document.querySelector('ds-sidebar').shadowRoot"
+    bar = page.evaluate(f"""(() => {{ const r = {sr}.querySelector('.sidebar').getBoundingClientRect();
+        const s = getComputedStyle({sr}.querySelector('.sidebar'));
+        return {{ top: r.top, bottom: r.bottom, left: r.left, right: r.right, pos: s.position,
+                 head: {sr}.querySelector('.head').getBoundingClientRect().height }}; }})()""")
+    vw, vh = page.evaluate("[innerWidth, innerHeight]")
+    check(f"{label}: navbar fija abajo, dentro de la pantalla y sin encabezado", bar["pos"] == "fixed"
+          and 0 < vh - bar["bottom"] <= 24 and bar["left"] >= 8 and vw - bar["right"] >= 8 and bar["head"] == 0, str(bar))
+    tops = page.eval_on_selector_all("ds-sidebar > a", "els => els.map(e => Math.round(e.getBoundingClientRect().top))")
+    check(f"{label}: 4 pestañas en una sola fila", len(tops) == 4 and len(set(tops)) == 1, str(tops))
+    for route in ("tablero", "consulta", "ficha", "respaldo"):
+        page.locator(f"ds-sidebar a[data-route='{route}']").tap()
+        page.wait_for_selector(f"ds-sidebar a[data-route='{route}'][aria-current='page']", timeout=5000)
+        page.wait_for_timeout(400)  # la píldora se expande con transición (300 ms)
+        st = page.eval_on_selector_all("ds-sidebar > a", """els => els.map(e => { const l = e.querySelector('.nav-label');
+            return [e.dataset.route, Math.round(l.getBoundingClientRect().width), getComputedStyle(l).opacity,
+                    getComputedStyle(e).backgroundColor, getComputedStyle(e).color, e.scrollWidth <= e.clientWidth + 1]; })""")
+        active = next(s for s in st if s[0] == route)
+        others = [s for s in st if s[0] != route]
+        ok = (active[1] > 20 and active[2] == "1" and active[3] == HOVER_BG and contrast(active[4], active[3]) >= 7
+              and all(o[1] == 0 for o in others) and all(s[5] for s in st))
+        check(f"{label}: navbar con '{route}' activa en píldora azul y texto ≥ 7:1", ok,
+              f"activa {active[1:5]}; contraste {contrast(active[4], active[3]):.2f}")
+    # El final de la página queda por encima de la barra al bajar del todo
+    page.evaluate("window.scrollTo(0, document.documentElement.scrollHeight)")
+    page.wait_for_timeout(200)
+    gap = page.evaluate(f"""(() => {{ const bar = {sr}.querySelector('.sidebar').getBoundingClientRect();
+        const last = document.querySelector('#view').getBoundingClientRect(); return bar.top - last.bottom; }})()""")
+    check(f"{label}: la navbar no tapa el final del contenido", gap >= 0, f"{gap:.0f}px")
+    page.evaluate("window.scrollTo(0, 0)")
+    # Accesibilidad: los textos ocultos siguen en el árbol (nombre accesible de cada pestaña)
+    names = page.eval_on_selector_all("ds-sidebar > a", "els => els.map(e => e.textContent.trim())")
+    check(f"{label}: cada pestaña conserva su nombre accesible", names == ["Tablero", "Consulta", "Ficha", "Respaldo"], str(names))
+
+
 def phase2(page, label):
     # Estilo activo
     href = page.eval_on_selector("#style-link", "el => el.getAttribute('href')")
@@ -83,30 +120,23 @@ def phase2(page, label):
     nav = "document.querySelector('ds-sidebar').shadowRoot.querySelector('.sidebar')"
     visible = lambda sel: page.evaluate(f"{sel}.getBoundingClientRect().width > 0")
     check(f"{label}: botón de reapertura oculto con el menú abierto", not visible(reopen))
-    # Encabezado del menú: contraer a la izquierda, marca centrada entre los botones, cerrar a la derecha
-    head = page.evaluate("""(() => { const sr = document.querySelector('ds-sidebar').shadowRoot;
-        const box = s => sr.querySelector(s).getBoundingClientRect();
-        const c = box('.collapse'), x = box('.close'), b = box('.brand');
-        const r = document.createRange(); r.selectNodeContents(sr.querySelector('.brand'));
-        const t = r.getBoundingClientRect();
-        return { order: c.right <= b.left && b.right <= x.left,
-                 centerDiff: Math.abs((t.left + t.right) / 2 - (c.right + x.left) / 2) }; })()""")
-    check(f"{label}: encabezado del menú ‹ Liquidaciones ×", head["order"] and head["centerDiff"] < 2,
-          f"desfase del centro {head['centerDiff']:.1f}px")
-    page.evaluate("document.querySelector('ds-sidebar').shadowRoot.querySelector('.close').click()")
-    check(f"{label}: cerrar oculta el menú", not visible(nav) and visible(reopen))
-    page.evaluate(f"{reopen}.click()")
-    check(f"{label}: reabrir muestra el menú", visible(nav) and not visible(reopen))
-    if label == "movil":
-        tops = page.eval_on_selector_all("ds-sidebar > a", "els => els.map(e => Math.round(e.getBoundingClientRect().top))")
-        check(f"{label}: enlaces en una sola fila", len(set(tops)) == 1, str(tops))
-        # Con 4 enlaces: ícono sobre el texto, todos del mismo ancho y sin texto desbordado
-        links = page.eval_on_selector_all("ds-sidebar > a", """els => els.map(e => ({ w: Math.round(e.getBoundingClientRect().width),
-            over: e.scrollWidth > e.clientWidth, stacked: e.querySelector('svg').getBoundingClientRect().bottom
-            <= e.getBoundingClientRect().top + e.getBoundingClientRect().height / 2 + 2 }))""")
-        check(f"{label}: enlaces del menú parejos (ícono sobre el texto)", len(links) == 4
-              and len({l["w"] for l in links}) == 1 and not any(l["over"] for l in links)
-              and all(l["stacked"] for l in links), str(links[0]))
+    if label == "escritorio":
+        # Encabezado del menú: contraer a la izquierda, marca centrada entre los botones, cerrar a la derecha
+        head = page.evaluate("""(() => { const sr = document.querySelector('ds-sidebar').shadowRoot;
+            const box = s => sr.querySelector(s).getBoundingClientRect();
+            const c = box('.collapse'), x = box('.close'), b = box('.brand');
+            const r = document.createRange(); r.selectNodeContents(sr.querySelector('.brand'));
+            const t = r.getBoundingClientRect();
+            return { order: c.right <= b.left && b.right <= x.left,
+                     centerDiff: Math.abs((t.left + t.right) / 2 - (c.right + x.left) / 2) }; })()""")
+        check(f"{label}: encabezado del menú ‹ Liquidaciones ×", head["order"] and head["centerDiff"] < 2,
+              f"desfase del centro {head['centerDiff']:.1f}px")
+        page.evaluate("document.querySelector('ds-sidebar').shadowRoot.querySelector('.close').click()")
+        check(f"{label}: cerrar oculta el menú", not visible(nav) and visible(reopen))
+        page.evaluate(f"{reopen}.click()")
+        check(f"{label}: reabrir muestra el menú", visible(nav) and not visible(reopen))
+    else:
+        navbar_checks(page, label)
 
     # Símbolo ESAP a la izquierda del título: cargado, ≥ 32 px, sin deformar, con área de protección
     sym = page.eval_on_selector(".brand-symbol", """e => { const r = e.getBoundingClientRect();
