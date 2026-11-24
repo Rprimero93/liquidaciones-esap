@@ -146,7 +146,7 @@ def phase2(page, label):
 
     # Símbolo ESAP a la izquierda del título: cargado, ≥ 32 px, sin deformar, con área de protección
     sym = page.eval_on_selector(".brand-symbol", """e => { const r = e.getBoundingClientRect();
-        const t = document.getElementById('page-title').getBoundingClientRect();
+        const t = document.querySelector('.page-head h1').getBoundingClientRect();  // bloque antetítulo + título
         return { loaded: e.complete && e.naturalWidth > 0, w: r.width, h: r.height, right: r.right, titleLeft: t.left,
                  midDiff: Math.abs((r.top + r.height / 2) - (t.top + t.height / 2)), alt: e.alt }; }""")
     ratio_ok = abs(sym["w"] / sym["h"] - 512 / 467) < 0.03   # proporción del viewBox del símbolo
@@ -154,6 +154,16 @@ def phase2(page, label):
     check(f"{label}: símbolo ESAP junto al título", sym["loaded"] and sym["h"] >= 32 and ratio_ok
           and sym["right"] <= sym["titleLeft"] - clearance and sym["midDiff"] < 4 and sym["alt"] == "ESAP",
           f"{sym['w']:.0f}x{sym['h']:.0f}, separación {sym['titleLeft'] - sym['right']:.1f} ≥ {clearance:.1f}")
+
+    # Antetítulo con el tema de la app sobre el título, visible en escritorio y celular, contraste ≥ 7:1
+    eb = page.eval_on_selector(".page-head h1 .eyebrow", """e => { const r = e.getBoundingClientRect();
+        const t = document.getElementById('page-title').getBoundingClientRect(); const s = getComputedStyle(e);
+        return { text: e.textContent.trim(), visible: r.width > 0 && r.height > 0, above: r.bottom <= t.top + 1,
+                 color: s.color, bg: getComputedStyle(document.body).backgroundColor,
+                 h1: document.querySelector('.page-head h1').textContent.replace(/\\s+/g, ' ').trim() }; }""")
+    check(f"{label}: antetítulo «Liquidación de contratos» sobre el título", eb["text"] == "Liquidación de contratos"
+          and eb["visible"] and eb["above"] and contrast(eb["color"], eb["bg"]) >= 7 and eb["h1"].startswith("Liquidación de contratos"),
+          f"{eb['text']}; contraste {contrast(eb['color'], eb['bg']):.2f}; h1 «{eb['h1']}»")
 
     # Favicon ESAP: declarado y servido (SVG + PNG de respaldo)
     icons = page.eval_on_selector_all("link[rel='icon']", "els => els.map(e => e.href)")

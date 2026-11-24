@@ -120,6 +120,19 @@ ds-sidebar > a[aria-current="page"] > svg { color: var(--color-accent); }
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
 }
+/* Antetítulo: el tema de la app ("Liquidación de contratos") sobre el título de cada vista,
+   en mayúsculas pequeñas y azul oscuro ESAP (#04477A sobre la página #F5F7FA = 8,8:1) */
+.page-head h1 > span { display: block; }
+.page-head h1 .eyebrow {
+  margin-bottom: 2px;
+  font-family: var(--font-family-base, inherit);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navbar-active-text);
+  line-height: 1.2;
+}
 
 .badge {
   font-size: var(--font-size-sm);
