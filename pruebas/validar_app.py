@@ -65,6 +65,52 @@ def goto_route(page, route):
                            ".getAttribute('aria-current') === 'page'", timeout=5000)
 
 
+def header_ink(page):
+    """Filas con tinta (píxeles distintos del fondo) del símbolo, del título y del subtítulo, cada uno
+    medido con los otros dos ocultos, en px relativos a la parte superior del encabezado."""
+    import io
+    from PIL import Image
+    hide = {"sym": "#page-title,.eyebrow{color:transparent!important}",
+            "title": ".brand-symbol{opacity:0!important} .eyebrow{color:transparent!important}",
+            "eye": ".brand-symbol{opacity:0!important} #page-title{color:transparent!important}"}
+    out = {}
+    for name, css in hide.items():
+        page.evaluate("""css => { document.getElementById('ink-css')?.remove();
+            const s = document.createElement('style'); s.id = 'ink-css'; s.textContent = css; document.head.append(s); }""", css)
+        box = page.eval_on_selector(".page-brand", "e => e.getBoundingClientRect().toJSON()")
+        img = Image.open(io.BytesIO(page.screenshot(clip={"x": box["x"], "y": box["y"] - 20,
+                                                          "width": box["width"], "height": box["height"] + 24}))).convert("RGB")
+        k = img.width / box["width"]
+        bg = img.getpixel((img.width - 1, 0))
+        rows = [y for y in range(img.height)
+                if any(sum(abs(a - b) for a, b in zip(img.getpixel((x, y)), bg)) > 40 for x in range(0, img.width, 2))]
+        out[name] = (min(rows) / k - 20, max(rows) / k - 20) if rows else None
+    page.evaluate("document.getElementById('ink-css')?.remove()")
+    return out
+
+
+def header_ink_checks(page, label):
+    """Título y subtítulo dentro del alto del DIBUJO del símbolo (±1,5 px), el título en una línea y sin
+    recortar; en la ficha, que tiene el título más largo. En celular también a 360 px de ancho."""
+    goto_route(page, f"ficha/{SEED['contratos'][0]['id']}")
+    page.wait_for_selector(".page-head h1 .eyebrow")
+    widths = [None] if label == "escritorio" else [None, 360]
+    original = page.viewport_size
+    for w in widths:
+        if w:
+            page.set_viewport_size({"width": w, "height": original["height"]})
+        ink = header_ink(page)
+        fit = page.eval_on_selector("#page-title", """t => ({ lines: Math.round(t.getBoundingClientRect().height
+            / parseFloat(getComputedStyle(t).lineHeight)), clipped: t.scrollWidth > t.clientWidth + 1 })""")
+        (s0, s1), (t0, _), (_, e1) = ink["sym"], ink["title"], ink["eye"]
+        tag = f"{label}{f' a {w} px' if w else ''}"
+        check(f"{tag}: título y subtítulo dentro del alto del símbolo", abs(t0 - s0) <= 1.5 and abs(e1 - s1) <= 1.5
+              and fit["lines"] == 1 and not fit["clipped"],
+              f"símbolo {s0:.1f}–{s1:.1f}; título desde {t0:.1f}; subtítulo hasta {e1:.1f}; {fit}")
+    if original:
+        page.set_viewport_size(original)
+
+
 def navbar_checks(page, label):
     """Celular: navbar inferior fija (video navbar.mp4); solo la pestaña activa muestra su texto en una píldora."""
     sr = "document.querySelector('ds-sidebar').shadowRoot"
@@ -146,28 +192,25 @@ def phase2(page, label):
 
     # Símbolo ESAP a la izquierda del título: cargado, ≥ 32 px, sin deformar, con área de protección
     sym = page.eval_on_selector(".brand-symbol", """e => { const r = e.getBoundingClientRect();
-        const t = document.querySelector('.page-head h1').getBoundingClientRect();  // bloque antetítulo + título
+        const t = document.querySelector('.page-head h1').getBoundingClientRect();  // bloque título + subtítulo
         return { loaded: e.complete && e.naturalWidth > 0, w: r.width, h: r.height, right: r.right, titleLeft: t.left,
                  midDiff: Math.abs((r.top + r.height / 2) - (t.top + t.height / 2)), alt: e.alt }; }""")
     ratio_ok = abs(sym["w"] / sym["h"] - 512 / 467) < 0.03   # proporción del viewBox del símbolo
     clearance = sym["h"] * 75.86 / 467                       # área de protección = diámetro de un círculo
-    # El símbolo mide lo mismo que el bloque antetítulo + título (±3 px) y queda centrado con él
-    block_h = page.eval_on_selector(".page-head h1", "e => e.getBoundingClientRect().height")
-    check(f"{label}: símbolo a la altura del antetítulo y el título", abs(sym["h"] - block_h) <= 3,
-          f"símbolo {sym['h']:.0f}px, bloque {block_h:.0f}px")
     check(f"{label}: símbolo ESAP junto al título", sym["loaded"] and sym["h"] >= 32 and ratio_ok
           and sym["right"] <= sym["titleLeft"] - clearance and sym["midDiff"] < 4 and sym["alt"] == "ESAP",
           f"{sym['w']:.0f}x{sym['h']:.0f}, separación {sym['titleLeft'] - sym['right']:.1f} ≥ {clearance:.1f}")
 
-    # Antetítulo con el tema de la app sobre el título, visible en escritorio y celular, contraste ≥ 7:1
+    # Subtítulo con el tema de la app debajo del título, visible en escritorio y celular, contraste ≥ 7:1
     eb = page.eval_on_selector(".page-head h1 .eyebrow", """e => { const r = e.getBoundingClientRect();
         const t = document.getElementById('page-title').getBoundingClientRect(); const s = getComputedStyle(e);
-        return { text: e.textContent.trim(), visible: r.width > 0 && r.height > 0, above: r.bottom <= t.top + 1,
+        return { text: e.textContent.trim(), visible: r.width > 0 && r.height > 0, below: r.top >= t.bottom - 1,
                  color: s.color, bg: getComputedStyle(document.body).backgroundColor,
                  h1: document.querySelector('.page-head h1').textContent.replace(/\\s+/g, ' ').trim() }; }""")
-    check(f"{label}: antetítulo «Liquidación de contratos» sobre el título", eb["text"] == "Liquidación de contratos"
-          and eb["visible"] and eb["above"] and contrast(eb["color"], eb["bg"]) >= 7 and eb["h1"].startswith("Liquidación de contratos"),
+    check(f"{label}: subtítulo «Liquidación de contratos» debajo del título", eb["text"] == "Liquidación de contratos"
+          and eb["visible"] and eb["below"] and contrast(eb["color"], eb["bg"]) >= 7 and eb["h1"].endswith("Liquidación de contratos"),
           f"{eb['text']}; contraste {contrast(eb['color'], eb['bg']):.2f}; h1 «{eb['h1']}»")
+    header_ink_checks(page, label)
 
     # Favicon ESAP: declarado y servido (SVG + PNG de respaldo)
     icons = page.eval_on_selector_all("link[rel='icon']", "els => els.map(e => e.href)")

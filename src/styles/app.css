@@ -123,18 +123,35 @@ ds-sidebar > a[aria-current="page"] > svg { color: var(--color-accent); }
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
 }
-/* Antetítulo: el tema de la app ("Liquidación de contratos") sobre el título de cada vista,
-   en mayúsculas pequeñas y azul oscuro ESAP (#04477A sobre la página #F5F7FA = 8,8:1) */
-.page-head h1 > span { display: block; }
+/* Título de la vista y, debajo, el tema de la app ("Liquidación de contratos"), en mayúsculas pequeñas
+   y azul oscuro ESAP (#04477A sobre la página #F5F7FA = 8,8:1). Los dos caben dentro del alto del
+   DIBUJO del símbolo (no de su caja de 67 px; el dibujo va de ~10,5 a ~56 px): el bloque baja 8 px y
+   mide 49 px, con el título arriba y el subtítulo abajo (space-between), así la tinta del título empieza
+   en el círculo superior y la del subtítulo termina con las letras E·S·A·P aunque el título cambie de
+   tamaño (medido por píxeles; validar_app.py lo comprueba en escritorio, celular y 360 px). */
+.page-brand { align-items: flex-start; }
+.page-head h1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 49px;
+  margin-top: 8px;
+  min-width: 0;
+}
+.page-head h1 > span { display: block; line-height: 1; }
+/* En celular el título se ajusta al ancho para caber en una línea ("Ficha del contrato" no cabía
+   a 32 px en 390 ni a 28 px en 360); puntos suspensivos solo como último recurso */
+@media (max-width: 768px) {
+  #page-title { font-size: clamp(20px, 7vw, 2rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .page-head h1 .eyebrow { font-size: clamp(11px, 3.6vw, var(--font-size-sm)); white-space: nowrap; }
+}
 .page-head h1 .eyebrow {
-  margin-bottom: 2px;
   font-family: var(--font-family-base, inherit);
   font-size: var(--font-size-sm);
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--navbar-active-text);
-  line-height: 1.2;
 }
 
 .badge {

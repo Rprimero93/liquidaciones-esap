@@ -72,6 +72,8 @@ fases_reabiertas: 0
 
 - **Ajuste posterior al cierre** (2026-11-23, marcador `ajuste_en_curso`, ya retirado): con el antetítulo, el símbolo ESAP de 48 px se veía chico (su dibujo ocupa ~68 % de la caja: ~32 px visibles frente a un bloque de texto de 67 px) y flotaba entre las dos líneas. Se compararon 4 variantes sobre la app real (actual, símbolo alto, línea divisoria, antetítulo arriba) y Ricardo eligió la **B: símbolo a la altura del bloque antetítulo + título (67 px)**, separación 14 px (área de protección a ese tamaño ≈ 10,9 px). Validación: `validar_app.py` 306/306 (2 corridas; verificación nueva: símbolo de la misma altura que el bloque, ±3 px) y recorrido 54/54.
 
+- **Ajuste posterior al cierre** (2026-11-23, marcador `ajuste_en_curso`, ya retirado): a pedido de Ricardo (con una captura marcada), el título y «LIQUIDACIÓN DE CONTRATOS» quedan **dentro del alto del dibujo del símbolo** y el tema pasa **debajo** del título (antes era antetítulo y sobresalía por arriba; el título bajaba de las letras E·S·A·P). El bloque de texto mide 49 px y baja 8 px, con el título arriba y el subtítulo abajo (`space-between`), así la alineación no depende del tamaño del título. En celular el título se ajusta al ancho (`clamp`, 20–32 px) y el subtítulo también (11–14 px), en una línea: «Ficha del contrato» se partía en dos a 390 y 360 px. La alineación se midió por píxeles (tinta de cada pieza con las otras ocultas): ±1 px en escritorio, 390, 360 y 320 px. Validación: `validar_app.py` 307/307, 2 corridas (verificación nueva por píxeles en escritorio, celular y 360 px; sale la que comparaba la caja del símbolo con el bloque), recorrido 54/54 y `pytest` 18/18.
+
 ## Bloqueos
 
 - Ninguno.
