@@ -252,8 +252,9 @@ ds-sidebar::part(sidebar) {
 /* Lista de contratos */
 .list { list-style: none; margin: 0; padding: 0; }
 .list li + li { border-top: 1px solid var(--card-border); }
-/* Cebra suave (Cotizaciones_simple); el hover de abajo la reemplaza con el azul claro ESAP */
-.list li:nth-child(even) > .list-link { background: var(--table-zebra); }
+/* Cebra suave (Cotizaciones_simple) en la lista del semáforo; el hover de abajo la reemplaza.
+   La tabla de la Consulta va toda en blanco y separa las filas solo con la línea (pedido de Ricardo) */
+.list:not([data-list='contratos']) li:nth-child(even) > .list-link { background: var(--table-zebra); }
 .list li > .list-link { transition: background-color 120ms ease; }
 .list-link {
   display: grid;

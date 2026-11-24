@@ -765,20 +765,20 @@ HOST_BORDER_JS = "e => getComputedStyle(e).borderTopWidth"
 
 
 def table_checks(page, label):
-    """Estilo Cotizaciones_simple: tarjetas blancas, encabezado de tabla, columnas alineadas y cebra."""
+    """Estilo Cotizaciones_simple: tarjetas blancas, encabezado de tabla, columnas alineadas; tabla sin cebra."""
     goto_route(page, "consulta")
     page.wait_for_selector("[data-list='contratos'] a[data-id]")
     page.mouse.move(0, 0)
     cards = page.eval_on_selector_all(".card", "els => [...new Set(els.map(e => getComputedStyle(e).backgroundColor))]")
     side = page.eval_on_selector("ds-sidebar", "e => getComputedStyle(e.shadowRoot.querySelector('.sidebar')).backgroundColor")
     check(f"{label}: tarjetas y menú blancos", cards == ["rgb(255, 255, 255)"] and side == "rgb(255, 255, 255)", f"{cards} {side}")
-    try:  # si el cursor estaba sobre una fila, su fondo vuelve con transición: esperar al color final
-        page.wait_for_function("getComputedStyle(document.querySelectorAll(\"[data-list='contratos'] li > a\")[1])"
-                               ".backgroundColor.includes('221, 252, 255')", timeout=2000)
-    except Exception:
-        pass  # el check de abajo reporta la falla
-    zebra = page.eval_on_selector_all("[data-list='contratos'] li > a", "els => els.slice(0, 2).map(e => getComputedStyle(e).backgroundColor)")
-    check(f"{label}: cebra en filas pares", zebra[0] != zebra[1] and "221, 252, 255" in zebra[1], str(zebra))
+    page.wait_for_timeout(300)  # si el cursor estaba sobre una fila, su fondo vuelve con transición (120 ms)
+    # Tabla de la Consulta toda en blanco: sin cebra, filas separadas por una línea de 1 px
+    rows = page.eval_on_selector_all("[data-list='contratos'] li", """els => els.map((li, i) => [
+        getComputedStyle(li.querySelector(':scope > a')).backgroundColor, i ? getComputedStyle(li).borderTopWidth : '1px'])""")
+    bgs = {bg for bg, _ in rows}
+    check(f"{label}: tabla en blanco con líneas separadoras", bgs <= {"rgba(0, 0, 0, 0)", "rgb(255, 255, 255)"}
+          and all(w == "1px" for _, w in rows), f"fondos {bgs}")
     if label != "escritorio":
         hidden = not page.is_visible(".table-head")
         check(f"{label}: sin encabezado de tabla en móvil", hidden)
@@ -908,8 +908,6 @@ def hover_checks(page, label):
     check_hover(page, label, "fila de la consulta", page.locator("[data-list='contratos'] a[data-id]").first,
                 css("[data-list='contratos'] a[data-id]", "backgroundColor"),
                 css("[data-list='contratos'] a[data-id] .list-sub", "color"))
-    even = "[data-list='contratos'] li:nth-child(2) > a"
-    check_hover(page, label, "fila de la cebra", page.locator(even), css(even, "backgroundColor"), css(f"{even} .list-sub", "color"))
     dd = page.locator("ds-dropdown[data-filter='estado']")
     dd.evaluate("e => e.scrollIntoView({block: 'center'})")
     dd.locator(".trigger").click()
