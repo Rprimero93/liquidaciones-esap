@@ -151,6 +151,10 @@ def phase2(page, label):
                  midDiff: Math.abs((r.top + r.height / 2) - (t.top + t.height / 2)), alt: e.alt }; }""")
     ratio_ok = abs(sym["w"] / sym["h"] - 512 / 467) < 0.03   # proporción del viewBox del símbolo
     clearance = sym["h"] * 75.86 / 467                       # área de protección = diámetro de un círculo
+    # El símbolo mide lo mismo que el bloque antetítulo + título (±3 px) y queda centrado con él
+    block_h = page.eval_on_selector(".page-head h1", "e => e.getBoundingClientRect().height")
+    check(f"{label}: símbolo a la altura del antetítulo y el título", abs(sym["h"] - block_h) <= 3,
+          f"símbolo {sym['h']:.0f}px, bloque {block_h:.0f}px")
     check(f"{label}: símbolo ESAP junto al título", sym["loaded"] and sym["h"] >= 32 and ratio_ok
           and sym["right"] <= sym["titleLeft"] - clearance and sym["midDiff"] < 4 and sym["alt"] == "ESAP",
           f"{sym['w']:.0f}x{sym['h']:.0f}, separación {sym['titleLeft'] - sym['right']:.1f} ≥ {clearance:.1f}")

@@ -70,6 +70,8 @@ fases_reabiertas: 0
 
 - **Ajuste posterior al cierre del proyecto** (2026-11-23, marcador `ajuste_en_curso` en `00_README.md`, ya retirado): la app no decía en ningún lado que el tema es la liquidación de contratos (en celular, la navbar ocultó la marca del menú). Se agregó un **antetítulo «Liquidación de contratos»** sobre el título de cada página, junto al símbolo ESAP, en escritorio y celular: mayúsculas pequeñas en azul oscuro ESAP `#04477A` (8,95:1 sobre el fondo de la página); va dentro del `<h1>`, así el lector de pantalla lee «Liquidación de contratos Tablero». Opción elegida por Ricardo entre antetítulo, título compuesto y barra superior solo en celular. Validación: `validar_app.py` 304/304 (2 corridas; verificación nueva del antetítulo y el centrado del símbolo con el bloque del título), recorrido 54/54 y `pytest` 18/18.
 
+- **Ajuste posterior al cierre** (2026-11-23, marcador `ajuste_en_curso`, ya retirado): con el antetítulo, el símbolo ESAP de 48 px se veía chico (su dibujo ocupa ~68 % de la caja: ~32 px visibles frente a un bloque de texto de 67 px) y flotaba entre las dos líneas. Se compararon 4 variantes sobre la app real (actual, símbolo alto, línea divisoria, antetítulo arriba) y Ricardo eligió la **B: símbolo a la altura del bloque antetítulo + título (67 px)**, separación 14 px (área de protección a ese tamaño ≈ 10,9 px). Validación: `validar_app.py` 306/306 (2 corridas; verificación nueva: símbolo de la misma altura que el bloque, ±3 px) y recorrido 54/54.
+
 ## Bloqueos
 
 - Ninguno.

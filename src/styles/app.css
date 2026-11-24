@@ -112,8 +112,11 @@ ds-sidebar > a[aria-current="page"] > svg { color: var(--color-accent); }
 /* Símbolo ESAP a la izquierda del título: el SVG trae margen interno (el dibujo ocupa ~68 % del
    alto), así que 48 px de archivo dejan el dibujo a la altura del título (mínimo de marca: 32 px).
    Ancho proporcional (nunca deformar) y 12 px de separación, más que el área de protección (≈ 7,8 px) */
-.page-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.brand-symbol { height: 48px; width: auto; flex-shrink: 0; }
+/* Símbolo ESAP a la altura del bloque antetítulo + título (67 px): el dibujo ocupa ~68 % de su caja,
+   a 48 px se veía chico frente a las dos líneas (variante B, elegida por Ricardo). Separación 14 px,
+   mayor que el área de protección de la marca a este tamaño (diámetro de un círculo ≈ 10,9 px) */
+.page-brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.brand-symbol { height: 67px; width: auto; flex-shrink: 0; }
 .page-head h1 {
   margin: 0;
   font-family: var(--font-family-heading);
