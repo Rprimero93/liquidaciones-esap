@@ -454,6 +454,17 @@ def phase4(page, label):
     check(f"{label}: pasos completados con círculo cian claro",
           all((bg == "rgb(221, 252, 255)") == (st == "completed") for st, bg in fills), str(sorted(set(map(tuple, fills)))))
     check(f"{label}: avance de la ficha", avance(page) == fmt_pct(page, done / n), avance(page))
+    # Conector continuo: de cada círculo al siguiente (±3 px), con nombres de una o dos líneas
+    gaps = page.evaluate("""() => { const st = [...document.querySelectorAll('[data-steps] ds-step')];
+        return st.slice(0, -1).map((s, i) => { const a = getComputedStyle(s, '::after'), h = s.getBoundingClientRect();
+            const c1 = s.shadowRoot.querySelector('[part~=circle]').getBoundingClientRect();
+            const c2 = st[i + 1].shadowRoot.querySelector('[part~=circle]').getBoundingClientRect();
+            const lab = s.shadowRoot.querySelector('[part~=label]');
+            return [Math.round(lab.getBoundingClientRect().height / parseFloat(getComputedStyle(lab).lineHeight)),
+                    (h.top + parseFloat(a.top)) - c1.bottom, c2.top - (h.bottom - parseFloat(a.bottom))]; }); }""")
+    bad = [i + 1 for i, (_, d, u) in enumerate(gaps) if not (-3.5 <= d <= 1 and -1 <= u <= 1)]
+    check(f"{label}: conector del Stepper de círculo a círculo", not bad,
+          f"pasos con desfase {bad}; nombres de 2 líneas: {sum(g[0] > 1 for g in gaps)}")
 
     # Marcar la etapa actual con el botón, luego deshacer desde el aviso
     page.click(f"[data-done='{first_pending}']")
