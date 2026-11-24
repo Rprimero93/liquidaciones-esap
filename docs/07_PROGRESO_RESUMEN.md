@@ -1,6 +1,6 @@
 ---
-fase_actual: 7
-estado_resumen: "Fase 7 cerrada (validación integral) — Fase 8 (publicación en GitHub Pages) por iniciar"
+fase_actual: 8
+estado_resumen: "Fase 8 cerrada (publicada en GitHub Pages) — todas las fases cerradas; falta el cierre del proyecto"
 tolerancias_excedidas: 0
 fases_reabiertas: 0
 ---
@@ -66,6 +66,7 @@ fases_reabiertas: 0
   - Ajuste pedido (2026-11-23, durante la Fase 8): la tabla de la Consulta va **toda en blanco**, sin cebra; las filas se separan solo con la línea de 1 px que ya tenían. La lista del semáforo del tablero conserva su cebra. Validación: `validar_app.py` 299/299 (se quitó la verificación de hover sobre la fila de cebra; se agregó "tabla en blanco con líneas separadoras"), 2 corridas, y recorrido 54/54.
   - Ajuste pedido (2026-11-23, durante la Fase 8) — **navbar inferior en celular** (referencia: video `navbar.mp4` de Ricardo): en pantallas ≤ 768 px el menú lateral pasa a una barra blanca flotante **fija abajo**, con esquinas de 20 px y sombra, solo con íconos; la pestaña activa se expande en una píldora con ícono y texto (fondo `#DDF0FF`, texto e ícono azul oscuro ESAP `#04477A`, 8,2:1), con transición de 300 ms (sin animación con movimiento reducido). Opciones elegidas por Ricardo: fija abajo y un solo color (no uno por pestaña). Se ocultan en celular el encabezado del menú (marca, contraer, cerrar) y el botón de reapertura; el contenido y los avisos flotantes dejan espacio para la barra. Los textos van en `<span class="nav-label">` (el oculto sigue siendo el nombre accesible). Escritorio sin cambios. Reemplaza el arreglo de la Fase 6 (ícono sobre el texto). Validación: `validar_app.py` 302/302, 2 corridas (posición fija dentro de la pantalla, 4 pestañas en fila, píldora de cada pestaña con contraste ≥ 7:1, solo la activa con texto, el final del contenido no queda tapado, nombres accesibles; encabezado/cerrar/reabrir del menú solo en escritorio), recorrido 54/54 y `pytest` 18/18.
   - Hallazgo (no bloquea): en la ficha, cuando el nombre de un paso completado ocupa dos líneas, la línea punteada hacia el siguiente paso se ve cortada (solo un punto bajo el círculo; visto en celular en los pasos 2, 5 y 7). Es del conector del Stepper; se revisa aparte.
+- Fase 8 (Publicación en GitHub Pages): **completa** (2026-11-23) — `https://rprimero93.github.io/liquidaciones-esap/` (repo público `Rprimero93/liquidaciones-esap`), con los datos reales completos (decisión de Ricardo, Fase 7). Espejo por `scripts/publicar_github.sh` (`git subtree split` + correo noreply + control de privacidad); para republicar tras un cambio: `bash scripts/publicar_github.sh`. Validación: recorrido 54/54 contra la URL publicada (escritorio y celular); la raíz redirige a la app. El control de privacidad detuvo el primer envío por revisar también la rama temporal sin filtrar: se corrigió para revisar solo `main` (nada se publicó antes).
 
 ## Bloqueos
 
@@ -73,4 +74,4 @@ fases_reabiertas: 0
 
 ## Siguiente paso
 
-Fase 8 — publicación en GitHub Pages con los datos reales (espejo por `git subtree split` en un repo de Rprimero93; el repo lo crea Ricardo; el `git push` se aprueba en el momento).
+Cierre del proyecto (skill `cierre-proyecto`: mini-retro, lecciones, propuesta de inventarios). Pendientes fuera de fase: conector del Stepper cortado con nombres de dos líneas (hallazgo de la Fase 7) y los candidatos para Design_System_Core.

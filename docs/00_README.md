@@ -3,7 +3,7 @@ tecnologia: Web
 tipo: entregable
 proyecto: Liquidaciones_ESAP
 estado: pendiente
-estado_resumen: "Fase 7 cerrada (validación integral) — Fase 8 (publicación en GitHub Pages) por iniciar"
+estado_resumen: "Fase 8 cerrada — publicada en https://rprimero93.github.io/liquidaciones-esap/ ; falta el cierre del proyecto"
 stack: "HTML/CSS/JS vanilla + Design_System_Core (minimalista-corporativo) + localStorage; extracción con Python (openpyxl)"
 descripcion: "Micro app web de seguimiento de la liquidación de contratos ESAP (12 pasos, alertas, pérdida de competencia, bitácora, SECOP), migrada desde liquidacion.xlsm"
 aliases: [Liquidaciones_ESAP]
@@ -52,7 +52,7 @@ Hallazgos que la app corrige:
 
 ## Cómo abrirla
 
-Desde la carpeta del proyecto: `python -m http.server 8000` y abrir `http://localhost:8000/src/index.html` (los módulos JS y la semilla no cargan con doble clic en el archivo).
+Publicada: `https://rprimero93.github.io/liquidaciones-esap/` (Fase 8). En local, desde la carpeta del proyecto: `python -m http.server 8000` y abrir `http://localhost:8000/src/index.html` (los módulos JS y la semilla no cargan con doble clic en el archivo).
 
 ## Git
 
